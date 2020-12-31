@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import {
-  FiClipboard, FiArchive, FiFile, FiLock, FiMail,
+  FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiSearch
 } from 'react-icons/fi';
 import { FaBirthdayCake } from 'react-icons/fa';
 
@@ -23,8 +23,7 @@ import {
 import Input from '../../components/Input';
 
 import Button from '../../components/Button';
-
-import './App.css';
+import { Background } from '../SignIn/styles';
 
 interface SignInFormData {
   email: string;
@@ -78,46 +77,26 @@ const PesquisaDeClinicas: React.FC = () => {
 
   return (
     <Container>
-      <div className="especialidade-medico">
-        <div className="container">
-          <div className="especialidade-medico content">
-            <div className="left-sidebar"><h1 className="underlined-left">Vamos começar!</h1></div>
-            <div className="right-sidebar">
-              <div className="header-wrapper">
-                <div className="header-container">
-                  <h1 className="header">Que tipo de atendimento você está procurando?</h1>
-                  <p className="sub-header"><strong>Com a carterinha do seu convênio em mãos, escolha uma das opções abaixo:</strong></p>
-                </div>
-              </div>
-              <div className="search-wrapper">
-                <div className="search-container">
-                  <div className="especialidade-medico-content">
-                    <div className="modalidade">
-                      <select className="select-box">
-                        <option className="default-option" value="0">Escolha a modalidade...</option>
-                        <option className="clinica"value="1">Atendimento na clínica</option>
-                        <option className="teleconsulta"value="2">Atendimento via teleconsulta</option>
-                        <option className="domicilio"value="3">Atendimento a domicilio</option>
-                      </select>
-                      <div className="select-arrow"></div>
-                    </div>
-                    <div className="especialidade">
-                      <button className="especialidade-button" disabled>especialidade</button>
-                    </div>
-                    <div className="clinica">
-                      <button className="clinica-button" disabled>clínica</button>
-                    </div>
-                  </div>
-                  <div className="searchbox-container">
-                    < input className="searchbox"type="text" placeholder="Procurar..."></ input>
+      <Background/>
+      <Content>
+        <AnimationContainer>
+          <div className="especialidade-medico">
+          <div className="container">
+            <div className="especialidade-medico content">
+              <div className="left-sidebar"><h1 className="underlined-left">Vamos começar!</h1></div>
+              <div className="right-sidebar">
+                <div className="header-wrapper">
+                  <div className="header-container">
+                    <h1 className="header">Que tipo de atendimento você está procurando?</h1>
+                    <p className="sub-header"><strong>Com a carterinha do seu convênio em mãos, escolha uma das opções abaixo:</strong></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
+        </AnimationContainer>
+      </Content>
     </Container>
 
   );

@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import {
-  FiClipboard, FiArchive, FiFile, FiLock, FiMail,
+  FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft,
 } from 'react-icons/fi';
 import { FaBirthdayCake } from 'react-icons/fa';
 
@@ -23,6 +23,7 @@ import {
 import Input from '../../components/Input';
 
 import Button from '../../components/Button';
+import { Background } from '../SignIn/styles';
 
 interface SignInFormData {
   email: string;
@@ -80,11 +81,11 @@ const CadastroDeMedicos: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Cadastrar médico</h1>
 
-            <Input name="nome" icon={FiClipboard} placeholder="Digite o nome completo do médico" />
+            <Input name="nome" icon={FiClipboard} placeholder="Nome completo"/>
 
-            <Input name="email" type="email" icon={FiMail} placeholder="Digite o e-mail do médico" />
+            <Input name="email" type="email" icon={FiMail} placeholder="E-mail" />
 
-            <Input name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite a data de nascimento do médico" />
+            <Input name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="data de nascimento" />
 
             <Input name="cpf" icon={FiArchive} placeholder="Digite o CPF do médico" />
 
@@ -92,16 +93,22 @@ const CadastroDeMedicos: React.FC = () => {
 
             <Input name="validarIdentidade" type="file" icon={FiFile} placeholder="Envie a foto do documento de identidade do médico" />
 
-            <Input name="validarDiploma" type="file" icon={FiFile} placeholder="Envie a foto do diploma do médico" />
+            <Input id="asd" name="validarDiploma" type="file" icon={FiFile} placeholder="Envie a foto do diploma do médico" />
+
+            <label htmlFor="asd">asdasdsadasd</label>
 
             <Input name="areaAtuacao" icon={FiLock} placeholder="Digite a área de atuação do médico" />
 
             <Button type="submit">Cadastrar</Button>
+            <Link to="/">
+              <FiArrowLeft/>
+              Voltar
+            </Link>
           </Form>
 
         </AnimationContainer>
       </Content>
-
+    <Background/>
     </Container>
   );
 };

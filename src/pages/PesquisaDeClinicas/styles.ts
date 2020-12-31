@@ -3,7 +3,6 @@ import { shade } from 'polished';
 
 export const Container = styled.div`
   height: 100vh;
-
   display: flex;
   align-items: stretch;
 `;
@@ -13,18 +12,17 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 100%;
-  max-width: 100%;
+  max-width: 700px;
 `;
 
-const appearFromLeft = keyframes`
+const appearFromTop = keyframes`
   from{
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(-50px);
   }to{
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 `;
 
@@ -34,7 +32,7 @@ export const AnimationContainer = styled.div`
    align-items: center;
    justify-content: center;
 
-   animation: ${appearFromLeft} 1s;
+   animation: ${appearFromTop} 1s;
 
    form{
     margin: 80px 0;

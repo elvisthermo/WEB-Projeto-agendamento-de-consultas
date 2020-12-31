@@ -18,7 +18,7 @@ interface SignInFormData {
   password: string;
 }
 
-const SignIn: React.FC = () => {
+const SignInClinica: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
   const { signIn } = useAuth();
@@ -67,8 +67,8 @@ const SignIn: React.FC = () => {
 
       <TopNavigation>
         <div className="wrapper">
-          <div id="clinica"> <Link to="/signin/clinica">Entrar como clínica</Link></div>
-          <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
+          <div id="clinica"> <Link to="/">Entrar como paciente</Link></div>
+          <div id="pesquisa"> <Link to="/pesquisar/"><FiSearch/>Pesquisar Clínicas</Link> </div>
         </div>
       </TopNavigation>
 
@@ -77,7 +77,7 @@ const SignIn: React.FC = () => {
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu login de paciente</h1>
+            <h1>Faça seu login como clínica</h1>
             <Input
               name="email"
               icon={FiMail}
@@ -93,9 +93,9 @@ const SignIn: React.FC = () => {
             <Button type="submit">Entrar</Button>
             <a href="forgot">Esqueci minha senha</a>
           </Form>
-          <Link to="/signup">
+          <Link to="/cadastrar/clinicas">
             <FiLogIn />
-            Criar conta
+            Criar conta da clínica
           </Link>
         </AnimationContent>
       </Content>
@@ -104,4 +104,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignInClinica;

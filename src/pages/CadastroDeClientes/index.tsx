@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import {
-  FiClipboard, FiArchive, FiFile, FiLock, FiMail,
+  FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft
 } from 'react-icons/fi';
 import { FaBirthdayCake } from 'react-icons/fa';
 
@@ -94,6 +94,10 @@ const CadastroDeClientes: React.FC = () => {
             <Input name="passwordConfirmar" icon={FiLock} type="password" placeholder="Digite sua senha" />
 
             <Button type="submit">Cadastre se</Button>
+            <Link to="/">
+              <FiArrowLeft/>
+              Voltar
+            </Link>
           </Form>
 
         </AnimationContainer>
