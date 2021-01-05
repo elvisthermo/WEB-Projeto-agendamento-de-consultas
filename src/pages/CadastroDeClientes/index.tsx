@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, {useRef, useCallback, useState} from 'react';
 import {
   FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft
 } from 'react-icons/fi';
@@ -35,6 +35,12 @@ const CadastroDeClientes: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
+
+  const [cpf,setCpf] = useState("");
+  const [name,setName] = useState("");
+  const [idate,setIdade] = useState("");
+  const [endereco,setEndereco] = useState("");
+  const [grupo_de_risco,setGrupo_de_risco] = useState("");
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -79,19 +85,35 @@ const CadastroDeClientes: React.FC = () => {
           <img src={logoImg} alt="web-consultas" />
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Cadastre-se</h1>
-            <Input name="nome" icon={FiClipboard} placeholder="Digite o Nome completo" />
+            <Input
+              value={name} onChange={e=> setName(e.target.value)}
+              name="nome" icon={FiClipboard} placeholder="Digite o Nome completo" />
 
-            <Input name="emal" type="email" icon={FiMail} placeholder="Digite seu Email" />
+            <Input name="email" type="email" icon={FiMail} placeholder="Digite seu Email" />
 
-            <Input name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite sua data de nascimento" />
+            <Input
+              value={idate} onChange={e=> setIdade(e.target.value)}
+              name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite sua data de nascimento" />
 
-            <Input name="cpf" icon={FiArchive} placeholder="Digite o CPF" />
+            <Input
+              value={cpf} onChange={e=> setCpf(e.target.value)}
+              name="cpf" icon={FiArchive} placeholder="Digite o CPF" />
 
             <Input name="validarIdentidade" type="file" icon={FiFile} placeholder="envie a foto de seu documento de identidade" />
+
+            <Input
+              value={endereco} onChange={e=> setEndereco(e.target.value)}
+              name="endereco"
+              icon={FiLock} type="text" placeholder="Digite seu endereço" />
 
             <Input name="password" icon={FiLock} type="password" placeholder="Digite sua senha" />
 
             <Input name="passwordConfirmar" icon={FiLock} type="password" placeholder="Digite sua senha" />
+
+            <Input
+              value={grupo_de_risco} onChange={e=> setGrupo_de_risco(e.target.value)}
+              name="endereco"
+              icon={FiLock} type="text" placeholder="Digite seu endereço" />
 
             <Button type="submit">Cadastre se</Button>
             <Link to="/">
