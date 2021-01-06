@@ -32,6 +32,7 @@ const appearFromLeft = keyframes`
 `;
 
 export const AnimationContent = styled.div`
+  margin: auto;
   flex-direction: column;
   align-items: center;
   place-content: center;
@@ -87,7 +88,6 @@ export const Background = styled.div`
 `;
 
 export const TopNavigation = styled.div`
-  position: absolute;
   display: flex;
   align-self: start;
   width: 100%;

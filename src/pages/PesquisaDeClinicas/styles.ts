@@ -1,6 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
+import pesquisaBackgroundImg from '../../assets/pesquisa-background.jpg';
+import pesquisa2BackgroundImg from '../../assets/pesquisa2-background.jpg';
+
 export const Container = styled.div`
   height: 100vh;
   display: flex;
@@ -31,11 +34,14 @@ export const AnimationContainer = styled.div`
    flex-direction: column;
    align-items: center;
    justify-content: center;
+     height: 100%;
 
    animation: ${appearFromTop} 1s;
 
    form{
-    margin: 80px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 45px 0;
     width: 340px;
     min-width:340px;
     text-align: center;
@@ -76,3 +82,16 @@ export const AnimationContainer = styled.div`
         }
   }
 `;
+
+export const Background = styled.div`
+  flex: 1;
+  background: url(${pesquisaBackgroundImg}) no-repeat center;
+  background-size: cover;
+`;
+
+export const Background2 = styled.div`
+  flex: 1;
+  background: url(${pesquisa2BackgroundImg}) no-repeat center;
+  background-size: cover;
+`;
+

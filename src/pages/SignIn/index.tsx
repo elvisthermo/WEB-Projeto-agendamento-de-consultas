@@ -65,14 +65,15 @@ const SignIn: React.FC = () => {
   return (
     <Container>
 
+
+
+      <Content>
       <TopNavigation>
         <div className="wrapper">
           <div id="clinica"> <Link to="/signin/clinica">Entrar como clínica</Link></div>
           <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
         </div>
       </TopNavigation>
-
-      <Content>
         <AnimationContent>
           <img src={logo} alt="GoBarber" />
 
