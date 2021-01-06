@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useState} from 'react';
+import React, {useRef, useCallback, useState, FormEvent} from 'react';
 import {
   FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft
 } from 'react-icons/fi';
@@ -23,6 +23,7 @@ import {
 import Input from '../../components/Input';
 
 import Button from '../../components/Button';
+import api from "../../services/api";
 
 interface SignInFormData {
   email: string;
@@ -37,10 +38,34 @@ const CadastroDeClientes: React.FC = () => {
   const history = useHistory();
 
   const [cpf,setCpf] = useState("");
-  const [name,setName] = useState("");
-  const [idate,setIdade] = useState("");
+  const [nome,setNome] = useState("");
+  const [idade,setIdade] = useState("");
   const [endereco,setEndereco] = useState("");
   const [grupo_de_risco,setGrupo_de_risco] = useState("");
+
+
+
+  function handleAddClientes(event:FormEvent<HTMLFontElement>):void{
+    // event.preventDefault();
+
+    try {
+      api.post('/cliente/',
+        {
+          "cpf": cpf,
+          "nome": nome,
+          "idade": idade,
+          "endereco": endereco,
+          "grupo_de_risco": grupo_de_risco
+        }
+      );
+
+
+
+    } catch (err) {
+      console.log(err.response.error);
+    }
+  }
+
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -83,16 +108,16 @@ const CadastroDeClientes: React.FC = () => {
       <Content>
         <AnimationContainer>
           <img src={logoImg} alt="web-consultas" />
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <Form ref={formRef} onSubmit={handleAddClientes}>
             <h1>Cadastre-se</h1>
             <Input
-              value={name} onChange={e=> setName(e.target.value)}
+              value={nome} onChange={e=> setNome(e.target.value)}
               name="nome" icon={FiClipboard} placeholder="Digite o Nome completo" />
 
             <Input name="email" type="email" icon={FiMail} placeholder="Digite seu Email" />
 
             <Input
-              value={idate} onChange={e=> setIdade(e.target.value)}
+              value={idade} onChange={e=> setIdade(e.target.value)}
               name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite sua data de nascimento" />
 
             <Input

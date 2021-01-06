@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useState} from 'react';
+import React, {useRef, useCallback, useState, FormEvent} from 'react';
 import {
   FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft,
 } from 'react-icons/fi';
@@ -24,6 +24,7 @@ import Input from '../../components/Input';
 
 import Button from '../../components/Button';
 import { Background } from '../SignIn/styles';
+import api from "../../services/api";
 
 interface SignInFormData {
   email: string;
@@ -41,6 +42,24 @@ const CadastroDeMedicos: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
+
+  function handleAddMedicos(event:FormEvent<HTMLFontElement>):void{
+    // event.preventDefault();
+
+    try {
+      api.post('/medico/',{
+          "crm": crm,
+          "nome": nome,
+          "cpf": cpf,
+          "area_atuacao": area_atuacao
+        }
+      );
+
+    } catch (err) {
+      console.log(err.response.error);
+    }
+  }
+
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -83,7 +102,7 @@ const CadastroDeMedicos: React.FC = () => {
       <Content>
         <AnimationContainer>
           <img src={logoImg} alt="web-consultas" />
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <Form ref={formRef} onSubmit={handleAddMedicos}>
             <h1>Cadastrar médico</h1>
 
             <Input
