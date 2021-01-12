@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/.scannerwork
 .pnp.js
 
 # testing

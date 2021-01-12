@@ -1,6 +1,32 @@
+html {
+  font-size: 62.5%;
+}
+
+body, button {
+  font-size: 1rem !important;
+}
+
+.wrapper, a {
+  font-size: 1.6rem;
+}
+
 .especialidade-medico-content {
   display: flex;
   margin: 12px;
+  width: 90%;
+  max-width: 680px;
+}
+
+.especialidade-medico-content h1 {
+  font-size: 3rem;
+}
+
+.especialidade-medico-content p {
+  font-size: 1.5rem;
+}
+
+.right-sidebar {
+  padding-left: 2.0rem;
 }
 
 .tb
@@ -48,14 +74,13 @@ input[type="text"]
 {
     width: 100%;
     height: 96px;
-    font-size: 30px;
+    font-size: 3.0rem !important;
     line-height: 1;
 }
 
 input[type="text"]::placeholder
 {
-    font-size: 30px;
-
+    font-size: 3.0rem;
 }
 
 .inputo {
@@ -80,13 +105,13 @@ button
 #s-circle
 {
     position: relative;
-    top: -8px;
+    top: -0.8rem;
     left: 0;
-    width: 55px;
-    height: 55px;
+    width: 5.5rem;
+    height: 5.5rem;
     margin-top: 0;
     border-width: 15px;
-    border: 15px solid #6ce6ff;
+    border: 1.5rem solid #6ce6ff;
     background-color: transparent;
     border-radius: 50%;
     transition: 0.5s ease all;
@@ -95,11 +120,11 @@ button
 button span
 {
     position: absolute;
-    top: 68px;
-    left: 43px;
+    top: 6.8rem;
+    left: 4.3rem;
     display: block;
-    width: 25px;
-    height: 15px;
+    width: 2.5rem;
+    height: 1.5rem;
     background-color: transparent;
     border-radius: 10px;
     transform: rotateZ(52deg);
@@ -112,8 +137,8 @@ button span:before, button span:after
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 40px;
-    height: 15px;
+    width: 4.0rem;
+    height: 1.5rem;
     background-color: #6ce6ff;
     border-radius: 10px;
     transform: rotateZ(0);
@@ -122,9 +147,9 @@ button span:before, button span:after
 
 #s-cover:hover #s-circle
 {
-    top: -1px;
-    width: 67px;
-    height: 15px;
+    top: -0.1rem;
+    width: 6.7rem;
+    height: 1.5rem;
     border-width: 0;
     background-color: #6ce6ff;
     border-radius: 20px;
@@ -133,28 +158,28 @@ button span:before, button span:after
 #s-cover:hover span
 {
     top: 50%;
-    left: 56px;
-    width: 25px;
-    margin-top: -9px;
+    left: 5.6rem;
+    width: 2.5rem;
+    margin-top: -.9rem;
     transform: rotateZ(0);
 }
 
 #s-cover:hover button span:before
 {
-    bottom: 11px;
+    bottom: 1.1rem;
     transform: rotateZ(52deg);
 }
 
 #s-cover:hover button span:after
 {
-    bottom: -11px;
+    bottom: -1.1rem;
     transform: rotateZ(-52deg);
 }
 
 #s-cover:hover button span:before, #s-cover:hover button span:after
 {
-    right: -6px;
-    width: 40px;
+    right: -.6rem;
+    width: 4.0rem;
     background-color: #6ce6ff;
 }
 
@@ -183,7 +208,7 @@ ul li label{
   display: block;
   position: relative;
   font-weight: 200;
-  font-size: 1.2em;
+  font-size: 1.6em;
   padding: 17px 25px 25px 70px;
   margin: 10px auto;
   height: 30px;
@@ -199,10 +224,10 @@ ul li:hover label{
 ul li .check{
   display: block;
   position: absolute;
-  border: 5px solid #AAAAAA;
+  border: 0.5rem solid #AAAAAA;
   border-radius: 100%;
-  height: 20px;
-  width: 20px;
+  height: 2.0rem;
+  width: 2.0rem;
   top: 30px;
   left: 20px;
 	z-index: 5;
@@ -218,8 +243,8 @@ ul li .check::before {
   display: block;
 	content: '';
   border-radius: 10%;
-  height: 10px;
-  width: 10px;
+  height: 1.0rem;
+  width: 1.0rem;
   top: 5px;
 	left: 5px;
   margin: auto;
@@ -237,4 +262,31 @@ input[type=radio]:checked ~ .check::before{
 
 input[type=radio]:checked ~ label{
   color: #6ce6ff;
+}
+
+@media (max-width: 768px){
+  html {
+    font-size: 50%;
+  }
+
+  button span{
+    top: 8rem;
+}
+}
+
+@media (max-width: 479px){
+  body {
+    display: flex;
+  }
+  html {
+    font-size: 40%;
+  }
+  .especialidade-medico-content {
+    text-align: center;
+    flex-direction: column;
+  }
+
+  button span{
+    top: 9.2rem;
+  }
 }

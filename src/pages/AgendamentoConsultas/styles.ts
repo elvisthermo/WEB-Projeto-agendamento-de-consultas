@@ -41,9 +41,9 @@ export const AnimationContainer = styled.div`
    form{
     padding-left: 10px;
     padding-right: 10px;
-    margin: 45px 0;
-    width: 340px;
-    min-width:340px;
+    margin: 3.5rem 0;
+    width: 100%;
+    max-width:680px;
     text-align: center;
 
     h1{
@@ -94,4 +94,3 @@ export const Background2 = styled.div`
   background: url(${pesquisa2BackgroundImg}) no-repeat center;
   background-size: cover;
 `;
-

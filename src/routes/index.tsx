@@ -5,10 +5,12 @@ import SignIn from '../pages/SignIn';
 import SignInClinica from '../pages/SignInClinica';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
-import CadastroDeClinicas from '../pages/CadastroDeClinicas';
-import CadastroDeClientes from '../pages/CadastroDeClientes';
-import CadastroDeMedicos from '../pages/CadastroDeMedicos';
-import PesquisaDeClinicas from '../pages/PesquisaDeClinicas';
+import CadastroClinicas from '../pages/CadastroClinicas';
+import CadastroClientes from '../pages/CadastroClientes';
+import CadastroMedicos from '../pages/CadastroMedicos';
+import PesquisaClinicas from '../pages/PesquisaClinicas';
+import AgendamentoConsultas from '../pages/AgendamentoConsultas';
+import ListaConsultas from '../pages/ListaConsultas';
 import Route from './Route';
 
 
@@ -18,10 +20,13 @@ const Routes: React.FC = () => (
     <Route path="/signup" component={SignUp} />
     <Route path="/signin/clinica" component={SignInClinica} />
     <Route path="/dashboard" component={Dashboard} />
-    <Route path="/cadastrar/clinicas" exact component={CadastroDeClinicas} />
-    <Route path="/cadastrar/clientes" exact component={CadastroDeClientes} />
-    <Route path="/cadastrar/medicos" exact component={CadastroDeMedicos} />
-    <Route path="/pesquisar" exact component={PesquisaDeClinicas} />
+    <Route path="/cadastrar/clinicas" exact component={CadastroClinicas} />
+    <Route path="/cadastrar/clientes" exact component={CadastroClientes} />
+    <Route path="/cadastrar/medicos" exact component={CadastroMedicos} />
+    <Route path="/pesquisar" exact component={PesquisaClinicas} />
+    <Route path="/agendar" exact component={AgendamentoConsultas} />
+    <Route path="/listar" exact component={ListaConsultas} />
+
   </Switch>
 );
 

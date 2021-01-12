@@ -64,21 +64,18 @@ const SignIn: React.FC = () => {
   );
   return (
     <Container>
-
-
-
       <Content>
-      <TopNavigation>
-        <div className="wrapper">
-          <div id="clinica"> <Link to="/signin/clinica">Entrar como clínica</Link></div>
-          <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
-        </div>
-      </TopNavigation>
+        <TopNavigation>
+          <div className="wrapper">
+            <div id="clinica"> <Link to="/signin/clinica">Entrar como clínica</Link></div>
+            <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
+          </div>
+        </TopNavigation>
         <AnimationContent>
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu login de paciente</h1>
+            <h1>Faça seu login</h1>
             <Input
               name="email"
               icon={FiMail}

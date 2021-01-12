@@ -1,0 +1,39 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+#welcome-text h1{
+  font-size: 4.0rem;
+}
+
+tbody {}
+
+td{
+  border: 1px solid #ffff;
+  color: #312E38;
+}
+
+table {
+  font-size: 1.6rem;
+  width: 100%;
+  border-spacing: 0px;
+}
+
+
+.table-row {
+  background-color: #ffff;
+}
+
+
+/* the first 'td' within the last 'tr' of the 'tbody': */
+tbody tr:last-child td:first-child {
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+/* the last 'td' within the last 'tr' of the 'tbody': */
+tbody tr:last-child td:last-child {
+  border-radius: 0 0.3rem 0.3rem 0;
+}
