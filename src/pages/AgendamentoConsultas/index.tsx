@@ -59,12 +59,15 @@ const AgendamentoConsultas: React.FC = () => {
     api.get('/clinica/').then((response) => {
       const cleinteRepositori = response.data;
       console.log(cleinteRepositori)
-      setClinica([clinica,cleinteRepositori]);
-      console.log(clinica)
+      setClinica(cleinteRepositori);
+      //console.log(clinica)
     });
-    console.log(clinica)
+
   },[] );
 
+  console.log(clinica.map((d:Clinica) => {
+    return d.cnpj;
+  } ))
   return (
     <Container>
       <Helmet>
@@ -77,13 +80,14 @@ const AgendamentoConsultas: React.FC = () => {
         <TopNavigation>
           <div className="wrapper">
 
-            <div id="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
+            <div className  ="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
             <div id="pesquisa"><Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link></div>
           </div>
 
         </TopNavigation>
         <AnimationContainer>
-          <h1>Selecione a modalidade{teste[0]}</h1>
+          <div>{}</div>
+          <h1>Selecione a modalidade{}</h1>
           <input type="radio" id="male" name="gender" value="male"/>
           <label htmlFor="male">Teleconsulta</label>
           <input type="radio" id="female" name="gender" value="female"/>
@@ -107,9 +111,9 @@ const AgendamentoConsultas: React.FC = () => {
             </select>
 
 
-            <h1>Selecione o medico</h1>
+            <h1>Selecione o medico </h1>
             <select name="" id="">
-              {teste && teste.map((t:Medicos)=>(
+              {clinica && teste.map((t:Medicos)=>(
                 <option value="">{t.nome}</option>
               ))}
               <option value="">medico 1</option>
