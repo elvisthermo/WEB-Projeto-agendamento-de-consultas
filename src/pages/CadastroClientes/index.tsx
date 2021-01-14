@@ -45,7 +45,8 @@ const CadastroDeClientes: React.FC = () => {
 
 
 
-  function handleAddClientes(event:FormEvent<HTMLFontElement>):void{
+  async function handleAddClientes(event:FormEvent<HTMLFormElement>)
+    :Promise<void>{
     // event.preventDefault();
 
     try {
@@ -67,67 +68,67 @@ const CadastroDeClientes: React.FC = () => {
   }
 
 
-  const handleSubmit = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
-
-      const schema = Yup.object().shape({
-        email: Yup.string().required('E-mail obrigatório').email('Digite um email válido'),
-        password: Yup.string().required('Senha obrigatória'),
-      });
-
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
-
-      history.push('/dashboard');
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = validationErrors(err);
-
-        formRef.current?.setErrors(errors);
-
-        return;
-      }
-
-      addToast({
-        type: 'error',
-        title: 'Erro na autenticação',
-        description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
-      });
-    }
-  }, [signIn, addToast, history]);
+  // const handleSubmit = useCallback(async (data: SignInFormData) => {
+  //   try {
+  //     formRef.current?.setErrors({});
+  //
+  //     const schema = Yup.object().shape({
+  //       email: Yup.string().required('E-mail obrigatório').email('Digite um email válido'),
+  //       password: Yup.string().required('Senha obrigatória'),
+  //     });
+  //
+  //     await schema.validate(data, {
+  //       abortEarly: false,
+  //     });
+  //
+  //     await signIn({
+  //       email: data.email,
+  //       password: data.password,
+  //     });
+  //
+  //     history.push('/dashboard');
+  //   } catch (err) {
+  //     if (err instanceof Yup.ValidationError) {
+  //       const errors = validationErrors(err);
+  //
+  //       formRef.current?.setErrors(errors);
+  //
+  //       return;
+  //     }
+  //
+  //     addToast({
+  //       type: 'error',
+  //       title: 'Erro na autenticação',
+  //       description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+  //     });
+  //   }
+  // }, [signIn, addToast, history]);
 
   return (
     <Container>
       <Content>
         <AnimationContainer>
           <img src={logoImg} alt="web-consultas" />
-          <Form ref={formRef} onSubmit={handleAddClientes}>
+          <Form onSubmit={handleAddClientes}>
             <h1>Cadastre-se</h1>
             <Input
-              value={nome} onChange={e=> setNome(e.target.value)}
+              value={nome} onChange={(e)=> setNome(e.target.value)}
               name="nome" icon={FiClipboard} placeholder="Digite o Nome completo" />
 
             <Input name="email" type="email" icon={FiMail} placeholder="Digite seu Email" />
 
             <Input
-              value={idade} onChange={e=> setIdade(e.target.value)}
+              value={idade} onChange={(e)=> setIdade(e.target.value)}
               name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite sua data de nascimento" />
 
             <Input
-              value={cpf} onChange={e=> setCpf(e.target.value)}
+              value={cpf} onChange={(e)=> setCpf(e.target.value)}
               name="cpf" icon={FiArchive} placeholder="Digite o CPF" />
 
             <Input name="validarIdentidade" type="file" icon={FiFile} placeholder="envie a foto de seu documento de identidade" />
 
             <Input
-              value={endereco} onChange={e=> setEndereco(e.target.value)}
+              value={endereco} onChange={(e)=> setEndereco(e.target.value)}
               name="endereco"
               icon={FiLock} type="text" placeholder="Digite seu endereço" />
 
@@ -136,7 +137,7 @@ const CadastroDeClientes: React.FC = () => {
             <Input name="passwordConfirmar" icon={FiLock} type="password" placeholder="Digite sua senha" />
 
             <Input
-              value={grupo_de_risco} onChange={e=> setGrupo_de_risco(e.target.value)}
+              value={grupo_de_risco} onChange={(e)=> setGrupo_de_risco(e.target.value)}
               name="endereco"
               icon={FiLock} type="text" placeholder="Digite seu endereço" />
 

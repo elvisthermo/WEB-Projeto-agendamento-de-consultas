@@ -43,7 +43,7 @@ const CadastroDeMedicos: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
-  function handleAddMedicos(event:FormEvent<HTMLFontElement>):void{
+  function handleAddMedicos(event:FormEvent<HTMLFormElement>):void{
     // event.preventDefault();
 
     try {
@@ -59,7 +59,6 @@ const CadastroDeMedicos: React.FC = () => {
       console.log(err.response.error);
     }
   }
-
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -106,7 +105,7 @@ const CadastroDeMedicos: React.FC = () => {
             <h1>Cadastrar médico</h1>
 
             <Input
-              value={nome} onChange={e=>setnome(e.target.value)}
+              value={nome} onChange={(e)=>setnome(e.target.value)}
               name="nome" icon={FiClipboard} placeholder="Nome completo"/>
 
             <Input name="email" type="email" icon={FiMail} placeholder="E-mail" />
@@ -114,11 +113,11 @@ const CadastroDeMedicos: React.FC = () => {
             <Input name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="data de nascimento" />
 
             <Input
-              value={cpf} onChange={e=>setCpf(e.target.value)}
+              value={cpf} onChange={(e)=>setCpf(e.target.value)}
               name="cpf" icon={FiArchive} placeholder="Digite o CPF do médico" />
 
             <Input
-              value={crm} onChange={e=>setCrm(e.target.value)}
+              value={crm} onChange={(e)=>setCrm(e.target.value)}
               name="crm" icon={FiArchive} placeholder="Digite o CRM do médico" />
 
             <Input name="validarIdentidade" type="file" icon={FiFile} placeholder="Envie a foto do documento de identidade do médico" />
@@ -129,7 +128,7 @@ const CadastroDeMedicos: React.FC = () => {
 
 
             <Input
-              value={area_atuacao} onChange={e=>setArea_atuacao(e.target.value)}
+              value={area_atuacao} onChange={(e)=>setArea_atuacao(e.target.value)}
               name="areaAtuacao" icon={FiLock} placeholder="Digite a área de atuação do médico" />
 
             <Button type="submit">Cadastrar</Button>

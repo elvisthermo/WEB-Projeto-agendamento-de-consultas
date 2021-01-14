@@ -29,7 +29,7 @@ interface SignInFormData {
 }
 
 const CadastroDeClinicas: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
+  // const formRef = useRef<FormHandles>(null);
 
   const [cnpj,setCnpj] = useState("")
   const [razao_social,setRazao_social] = useState("");
@@ -41,8 +41,8 @@ const CadastroDeClinicas: React.FC = () => {
   const history = useHistory();
 
 
-  function handleAddClinicas(event:FormEvent<HTMLFontElement>):void{
-    event.preventDefault();
+  function handleAddClinicas(event:FormEvent<HTMLFormElement>):void{
+    // event.preventDefault();
 
     try {
       api.post('/clinica/',{
@@ -58,41 +58,41 @@ const CadastroDeClinicas: React.FC = () => {
       console.log(err.response.error);
     }
   }
-
-  const handleSubmit = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
-
-      const schema = Yup.object().shape({
-        email: Yup.string().required('E-mail obrigatório').email('Digite um email válido'),
-        password: Yup.string().required('Senha obrigatória'),
-      });
-
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = validationErrors(err);
-
-        formRef.current?.setErrors(errors);
-
-        return;
-      }
-
-      addToast({
-        type: 'error',
-        title: 'Erro na autenticação',
-        description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
-      });
-    }
-  }, [signIn, addToast, history]);
+  //
+  // const handleSubmit = useCallback(async (data: SignInFormData) => {
+  //   try {
+  //     formRef.current?.setErrors({});
+  //
+  //     const schema = Yup.object().shape({
+  //       email: Yup.string().required('E-mail obrigatório').email('Digite um email válido'),
+  //       password: Yup.string().required('Senha obrigatória'),
+  //     });
+  //
+  //     await schema.validate(data, {
+  //       abortEarly: false,
+  //     });
+  //
+  //     // await signIn({
+  //     //   email: data.email,
+  //     //   password: data.password,
+  //     // });
+  //
+  //   } catch (err) {
+  //     if (err instanceof Yup.ValidationError) {
+  //       const errors = validationErrors(err);
+  //
+  //       formRef.current?.setErrors(errors);
+  //
+  //       return;
+  //     }
+  //
+  //     addToast({
+  //       type: 'error',
+  //       title: 'Erro na autenticação',
+  //       description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+  //     });
+  //   }
+  // }, [signIn, addToast, history]);
 
   return (
     <Container>
@@ -100,22 +100,22 @@ const CadastroDeClinicas: React.FC = () => {
       <Content>
         <AnimationContent>
           <img src={logoImg} alt="web-consultas" />
-          <Form ref={formRef} onSubmit={handleAddClinicas}>
+          <Form onSubmit={(e)=> handleAddClinicas(e)}>
             <h1>Cadastre sua clínica</h1>
             <Input
-              value={nome_fantazia} onChange={e=>setNome_fanzatia(e.target.value)}
+              value={nome_fantazia} onChange={(e)=>setNome_fanzatia(e.target.value)}
               name="nomeFantasia" icon={FiClipboard} placeholder="Nome fantasia" />
 
             <Input
-              value={razao_social} onChange={e=> setRazao_social(e.target.value)}
+              value={razao_social} onChange={(e)=> setRazao_social(e.target.value)}
               name="RazãoSocial" icon={FiClipboard} placeholder="Razão social" />
 
             <Input
-              value={cnpj} onChange={e=> setCnpj(e.target.value)}
+              value={cnpj} onChange={(e)=> setCnpj(e.target.value)}
               name="cnpj" icon={FiArchive} placeholder="CNPJ" />
 
             <Input
-              value={endereco} onChange={e=> setEndereco(e.target.value)}
+              value={endereco} onChange={(e)=> setEndereco(e.target.value)}
               name="endereço" icon={FiBriefcase} placeholder="Endereço" />
 
             <Input name="contato" icon={FiBriefcase} placeholder="Contato" />

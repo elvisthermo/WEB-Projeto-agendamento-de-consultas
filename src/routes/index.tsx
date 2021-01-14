@@ -23,6 +23,7 @@ const Routes: React.FC = () => (
     <Route path="/cadastrar/clinicas" exact component={CadastroClinicas} />
     <Route path="/cadastrar/clientes" exact component={CadastroClientes} />
     <Route path="/cadastrar/medicos" exact component={CadastroMedicos} />
+    <Route path="/cadastrar/consultas" exact component={AgendamentoConsultas} />
     <Route path="/pesquisar" exact component={PesquisaClinicas} />
     <Route path="/agendar" exact component={AgendamentoConsultas} />
     <Route path="/listar" exact component={ListaConsultas} />
