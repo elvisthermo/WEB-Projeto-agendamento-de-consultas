@@ -5,6 +5,7 @@ import SignIn from '../pages/SignIn';
 import SignInClinica from '../pages/SignInClinica';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
+import DashboardClinica from '../pages/DashboardClinica';
 import CadastroClinicas from '../pages/CadastroClinicas';
 import CadastroClientes from '../pages/CadastroClientes';
 import CadastroMedicos from '../pages/CadastroMedicos';
@@ -19,10 +20,11 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/signin/clinica" component={SignInClinica} />
-    <Route path="/dashboard" component={Dashboard} />
-    <Route path="/cadastrar/clinicas" exact component={CadastroClinicas} />
-    <Route path="/cadastrar/clientes" exact component={CadastroClientes} />
-    <Route path="/cadastrar/medicos" exact component={CadastroMedicos} />
+    <Route path="/dashboard" exact component={Dashboard} />
+    <Route path="/dashboard/clinica" exact component={DashboardClinica} />
+    <Route path="/cadastrar/clinica" exact component={CadastroClinicas} />
+    <Route path="/cadastrar/cliente" exact component={CadastroClientes} />
+    <Route path="/cadastrar/medico" exact component={CadastroMedicos} />
     <Route path="/pesquisar" exact component={PesquisaClinicas} />
     <Route path="/agendar" exact component={AgendamentoConsultas} />
     <Route path="/listar" exact component={ListaConsultas} />

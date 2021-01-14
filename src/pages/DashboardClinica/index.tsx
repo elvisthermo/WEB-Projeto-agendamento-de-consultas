@@ -1,15 +1,15 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import {FiCalendar, FiList, FiEdit3, FiLogOut, FiSearch} from 'react-icons/fi';
+import {FiCalendar, FiEdit3, FiPlus, FiLogOut, FiSearch, FiUsers} from 'react-icons/fi';
 
-import { Link, } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
 import './styles.css';
 
-const Dashboard: React.FC = () => {
+const DashboardClinica: React.FC = () => {
   return (
     <Container>
       <Helmet>
@@ -26,57 +26,61 @@ const Dashboard: React.FC = () => {
         </TopNavigation>
         <AnimationContent>
           <div className="bem-vindo">
-            <h1>Bem-vindo, {`Usuário!`}</h1>
+            <h1>Bem-vindo, {`Clínica!`}</h1>
             <p>O que você quer fazer?</p>
           </div>
           <div className="cardContainer">
-            <div className="card">
-              <h3 className="title">Agendar consulta</h3>
-              <div className="bar">
-                <div className="emptybar"></div>
-                <div className="filledbar"></div>
-              </div>
-              <div className="circle">
-                <div className="icon"><FiCalendar/></div>
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <circle className="stroke" cx="60" cy="60" r="50"/>
-              </svg>
-              </div>
-            </div>
-            <div className="card">
-              <h3 className="title">Ver consultas marcadas</h3>
+            <a href="/administrarConsultas">
+              <div className="card">
+                <h3 className="title">Administrar consultas marcadas</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
                 </div>
                 <div className="circle">
-                <div className="icon"><FiList/></div>
+                  <div className="icon"><FiCalendar/></div>
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <circle className="stroke" cx="60" cy="60" r="50"/>
+                </svg>
+                </div>
+              </div>
+            </a>
+            <a href="/">
+            <div className="card">
+              <h3 className="title">Editar informações da clínica</h3>
+                <div className="bar">
+                  <div className="emptybar"></div>
+                  <div className="filledbar"></div>
+                </div>
+                <div className="circle">
+                <div className="icon"><FiEdit3/></div>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle className="stroke" cx="60" cy="60" r="50"/>
                   </svg>
                 </div>
             </div>
+            </a>
             <div className="card">
-              <h3 className="title">Editar informações</h3>
+              <h3 className="title">Cadastrar médico</h3>
               <div className="bar">
                 <div className="emptybar"></div>
                 <div className="filledbar"></div>
               </div>
               <div className="circle">
-                <div className="icon"><FiEdit3/></div>
+                <div className="icon"><FiPlus/></div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <circle className="stroke" cx="60" cy="60" r="50"/>
                 </svg>
               </div>
             </div>
             <div className="card">
-              <h3 className="title">??</h3>
+              <h3 className="title">Ver médicos cadastrados</h3>
               <div className="bar">
                 <div className="emptybar"></div>
                 <div className="filledbar"></div>
               </div>
               <div className="circle">
-                <div className="icon"><FiCalendar/></div>
+                <div className="icon"><FiUsers/></div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <circle className="stroke" cx="60" cy="60" r="50">
                   </circle>
@@ -92,4 +96,4 @@ const Dashboard: React.FC = () => {
   )
 };
 
-export default Dashboard;
+export default DashboardClinica;
