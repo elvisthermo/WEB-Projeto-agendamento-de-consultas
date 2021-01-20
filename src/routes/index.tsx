@@ -5,6 +5,7 @@ import SignIn from '../pages/SignIn';
 import SignInClinica from '../pages/SignInClinica';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
+import DashboardClinica from '../pages/DashboardClinica';
 import CadastroClinicas from '../pages/CadastroClinicas';
 import CadastroClientes from '../pages/CadastroClientes';
 import CadastroMedicos from '../pages/CadastroMedicos';

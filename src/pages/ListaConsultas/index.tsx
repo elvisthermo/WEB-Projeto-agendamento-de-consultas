@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
-import {FiCalendar, FiList, FiUser, FiLogOut, FiSearch} from 'react-icons/fi';
+import {FiCalendar, FiList, FiUser, FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
@@ -40,7 +40,8 @@ const ListaConsultas: React.FC = () => {
   ];
 
   const data = [
-    {especialidade: 'puta', clinica: "clinica das puta", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"}
+    {especialidade: 'puta', clinica: "clinica das puta", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"},
+    {especialidade: 'puta2', clinica: "clinica das puta2", medico:"tio picles2", modalidade:"teleconsulta2", horario:"horario2"}
   ].map((d, id) => ({ ...d, id }));
 
   return (
@@ -65,20 +66,27 @@ const ListaConsultas: React.FC = () => {
             <table className="table">
               <thead className="table-head">
                 <tr>
-                  <th>Especialidade</th>
-                  <th>Clínica</th>
-                  <th>Médico</th>
-                  <th>Modalidade</th>
-                  <th>Horário</th>
+                  <th>Especialidade<FiChevronDown/></th>
+                  <th>Clínica<FiChevronDown/></th>
+                  <th>Médico<FiChevronDown/></th>
+                  <th>Modalidade<FiChevronDown/></th>
+                  <th>Horário<FiChevronDown/></th>
                 </tr>
               </thead>
               <tbody className="table-body">
                 <tr className="table-row">
-                  <td>{data[0].especialidade}</td>
-                  <td>{data[0].clinica}</td>
-                  <td>{data[0].medico}</td>
-                  <td>{data[0].modalidade}</td>
-                  <td>{data[0].horario}</td>
+                  <td className="especialidade">{data[0].especialidade}</td>
+                  <td className="clinica">{data[0].clinica}</td>
+                  <td className="medico">{data[0].medico}</td>
+                  <td className="modalidade">{data[0].modalidade}</td>
+                  <td className="horario">{data[0].horario}</td>
+                </tr>
+                <tr className="table-row">
+                <td className="especialidade">{data[1].especialidade}</td>
+                  <td className="clinica">{data[1].clinica}</td>
+                  <td className="medico">{data[1].medico}</td>
+                  <td className="modalidade">{data[1].modalidade}</td>
+                  <td className="horario">{data[1].horario}</td>
                 </tr>
               </tbody>
             </table>
