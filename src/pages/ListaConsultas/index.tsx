@@ -81,7 +81,6 @@ const ListaConsultas: React.FC = () => {
               )
               }
               </tbody>
-
             </table>
           </div>
         </AnimationContent>

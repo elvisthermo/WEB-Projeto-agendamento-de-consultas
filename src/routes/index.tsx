@@ -17,17 +17,19 @@ import Route from './Route';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={SignIn} />
+    <Route path="/signin/clinica" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/signin/clinica" component={SignInClinica} />
-    <Route path="/dashboard" component={Dashboard} />
-    <Route path="/cadastrar/clinicas" exact component={CadastroClinicas} />
-    <Route path="/cadastrar/clientes" exact component={CadastroClientes} />
-    <Route path="/cadastrar/medicos" exact component={CadastroMedicos} />
-    <Route path="/cadastrar/consultas" exact component={AgendamentoConsultas} />
+    <Route path="/dashboard" exact component={Dashboard} />
+    <Route path="/dashboard/clinica" exact component={DashboardClinica} />
+    <Route path="/cadastrar/clinica" exact component={CadastroClinicas} />
+    <Route path="/cadastrar/cliente" exact component={CadastroClientes} />
+    <Route path="/cadastrar/medico" exact component={CadastroMedicos} />
     <Route path="/pesquisar" exact component={PesquisaClinicas} />
     <Route path="/agendar" exact component={AgendamentoConsultas} />
-    <Route path="/listar" exact component={ListaConsultas} />
+    <Route path="/listar/consultas" exact component={ListaConsultas} />
+    <Route path="/listar/clinicas" exact component={ListaClinicas} />
+    <Route path="/listar/pacientes" exact component={ListaPacientes} />
 
   </Switch>
 );
