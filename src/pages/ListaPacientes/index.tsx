@@ -9,7 +9,7 @@ import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
 import './styles.css';
 
-const ListaConsultas: React.FC = () => {
+const ListaPacientes: React.FC = () => {
   const meta = [
     {
       key: 'nome',
@@ -39,15 +39,15 @@ const ListaConsultas: React.FC = () => {
   ];
 
   const data = [
-    {especialidade: 'puta', clinica: "clinica das puta", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"},
-    {especialidade: 'puta2', clinica: "clinica das puta2", medico:"tio picles2", modalidade:"teleconsulta2", horario:"horario2"}
+    {nome: 'elvis', especialidade: "nutricionista", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"},
+    {nome: 'viniboy', especialidade: "cardiologia", medico:"tio picles2", modalidade: "a domiciolio", horario:"15/2, 4:20"}
   ].map((d, id) => ({ ...d, id }));
 
   return (
     <Container>
       <Helmet>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-        <title>Bem-vindo!</title>
+        <title>Gerenciar consultas</title>
         <meta content="" name=""></meta>
       </Helmet>
       <Content>
@@ -58,15 +58,15 @@ const ListaConsultas: React.FC = () => {
             </div>
         </TopNavigation>
         <div id="welcome-text">
-          <h1>Suas consultas</h1>
+          <h1>Seus pacientes</h1>
         </div>
         <AnimationContent>
           <div id="table-container">
             <table className="table">
               <thead className="table-head">
                 <tr>
+                  <th>Nome<FiChevronDown/></th>
                   <th>Especialidade<FiChevronDown/></th>
-                  <th>Clínica<FiChevronDown/></th>
                   <th>Médico<FiChevronDown/></th>
                   <th>Modalidade<FiChevronDown/></th>
                   <th>Horário<FiChevronDown/></th>
@@ -74,16 +74,16 @@ const ListaConsultas: React.FC = () => {
               </thead>
               <tbody className="table-body">
                 <tr className="table-row">
+                  <td className="nome">{data[0].nome}</td>
                   <td className="especialidade">{data[0].especialidade}</td>
-                  <td className="clinica">{data[0].clinica}</td>
                   <td className="medico">{data[0].medico}</td>
                   <td className="modalidade">{data[0].modalidade}</td>
                   <td className="horario">{data[0].horario}</td>
-                  <button className="myButton">Desmarcar</button>
+                  <button className="myButton">Remover</button>
                 </tr>
                 <tr className="table-row">
-                <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="clinica">{data[1].clinica}</td>
+                  <td className="nome">{data[1].nome}</td>
+                  <td className="especialidade">{data[1].especialidade}</td>
                   <td className="medico">{data[1].medico}</td>
                   <td className="modalidade">{data[1].modalidade}</td>
                   <td className="horario">{data[1].horario}</td>
@@ -98,4 +98,4 @@ const ListaConsultas: React.FC = () => {
   )
 };
 
-export default ListaConsultas;
+export default ListaPacientes;
