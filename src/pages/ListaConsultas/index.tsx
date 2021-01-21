@@ -8,41 +8,34 @@ import { Link, } from 'react-router-dom';
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
 import './styles.css';
+import api from "../../services/api";
+
+interface Consultas {
+  id: number,
+  numero_consulta: String,
+  // "data_hora": String,
+  tipo_consulta: String,
+  cliente_cpf: String,
+  medico_crm: String,
+  clinica_cnpj: String,
+  modalidade:String
+
+}
 
 
 const ListaConsultas: React.FC = () => {
-  const meta = [
-    {
-      key: 'especialidade',
-      text: 'Especialidade',
-      sort: true,
-    },
-    {
-      key: 'clinica',
-      text: 'Clínica',
-      sort: true,
-    },
-    {
-      key: 'medico',
-      text: 'Médico',
-      sort: true,
-    },
-    {
-      key: 'modalidade',
-      text: 'Modalidade',
-      sort: true,
-    },
-    {
-      key: 'horario',
-      text: 'Horário',
-      sort: true,
-    }
-  ];
 
-  const data = [
-    {especialidade: 'puta', clinica: "clinica das puta", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"},
-    {especialidade: 'puta2', clinica: "clinica das puta2", medico:"tio picles2", modalidade:"teleconsulta2", horario:"horario2"}
-  ].map((d, id) => ({ ...d, id }));
+  const [consultas,setConsultas] = useState();
+
+  useEffect(()=>{
+
+    api.get('/consulta/').then((response) => {
+      const consultasResponse = response.data;
+
+      console.log(consultasResponse)
+      setConsultas(consultasResponse);
+    });
+  },[]);
 
   return (
     <Container>
@@ -74,21 +67,21 @@ const ListaConsultas: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="table-body">
-                <tr className="table-row">
-                  <td className="especialidade">{data[0].especialidade}</td>
-                  <td className="clinica">{data[0].clinica}</td>
-                  <td className="medico">{data[0].medico}</td>
-                  <td className="modalidade">{data[0].modalidade}</td>
-                  <td className="horario">{data[0].horario}</td>
-                </tr>
-                <tr className="table-row">
-                <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="clinica">{data[1].clinica}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                </tr>
+              {consultas &&
+              consultas.map(consulta =>
+                (
+                  <tr key={consulta.id} className="table-row">
+                    <td className="especialidade">consulta.especialida</td>
+                    <td className="clinica">consulta.clinica</td>
+                    <td className="medico">consulta.medico</td>
+                    <td className="modalidade">consulta.</td>
+                    <td className="horario"></td>
+                  </tr>
+                )
+              )
+              }
               </tbody>
+
             </table>
           </div>
         </AnimationContent>
