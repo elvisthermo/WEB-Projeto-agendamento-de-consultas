@@ -7,11 +7,10 @@ body {
 }
 
 .cardContainer {
-
   height: 300px;
   width: 600px;
-  top: 60px;
-  left: calc(100% - 300px);
+  top: 50%;
+  left: calc(100% - 30px);
   display: flex;
 }
 
