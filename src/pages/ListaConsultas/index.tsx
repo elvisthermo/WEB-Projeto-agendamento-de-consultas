@@ -18,6 +18,8 @@ interface Consultas {
   cliente_cpf: String,
   medico_crm: String,
   clinica_cnpj: String,
+  especialidade:String
+
 
 }
 
@@ -34,6 +36,23 @@ const ListaConsultas: React.FC = () => {
       setConsultas(consultasResponse);
     });
   },[]);
+
+  function handleRemoveConsulta(id){
+    api.delete(`/consulta/${id}/`).then(response=>{
+      console.log(response);
+
+
+      const consultaArrayRemove = [...consultas];
+      const findById = consultaArrayRemove.findIndex(item=> item.id === id);
+
+      consultaArrayRemove.splice(findById,1);
+      console.log(consultaArrayRemove)
+
+      setConsultas(consultaArrayRemove);
+      alert("Consulta cancelada");
+
+    })
+  }
 
   return (
     <Container>
@@ -69,12 +88,12 @@ const ListaConsultas: React.FC = () => {
               consultas.map(consulta =>
                 (
                   <tr key={consulta.id} className="table-row">
-                    <td className="especialidade">{consulta.especialidade}</td>
+                    <td className="especialidade">{consulta.especialidade?consulta.especialidade:"especialidade teste"}</td>
                     <td className="clinica">{consulta.clinica_cnpj}</td>
                     <td className="medico">{consulta.medico_crm}</td>
                     <td className="modalidade">{consulta.tipo_consulta}</td>
                     <td className="horario">{consulta.data_hora}</td>
-                    <button className="myButton" >Desmarcar</button>
+                    <button className="myButton" onClick={() => handleRemoveConsulta(consulta.id)} >Desmarcar</button>
                   </tr>
                 )
               )
