@@ -10,34 +10,6 @@ import { Container, Content, AnimationContent, TopNavigation} from './styles';
 import './styles.css';
 
 const ListaClinicas: React.FC = () => {
-  const meta = [
-    {
-      key: 'especialidade',
-      text: 'Especialidade',
-      sort: true,
-    },
-    {
-      key: 'clinica',
-      text: 'Clínica',
-      sort: true,
-    },
-    {
-      key: 'endereco',
-      text: 'Endereço',
-      sort: true,
-    },
-    {
-      key: 'modalidade',
-      text: 'Modalidade',
-      sort: true,
-    },
-    {
-      key: 'horario',
-      text: 'Horário',
-      sort: true,
-    }
-  ];
-
   const data = [
     {especialidade: 'puta', clinica: "clinica das puta", endereco:"rua dos bobos, 22", modalidade:"teleconsulta", horario:"horario"},
     {especialidade: 'puta2', clinica: "clinica das puta2", endereco:"rua dos bobos, 22", modalidade:"teleconsulta2", horario:"horario2"}

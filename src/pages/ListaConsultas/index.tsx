@@ -11,17 +11,15 @@ import './styles.css';
 import api from "../../services/api";
 
 interface Consultas {
-  id: number,
+  id: Number,
   numero_consulta: String,
-  // "data_hora": String,
+  data_hora: Date,
   tipo_consulta: String,
   cliente_cpf: String,
   medico_crm: String,
   clinica_cnpj: String,
-  modalidade:String
 
 }
-
 
 const ListaConsultas: React.FC = () => {
 
@@ -71,11 +69,12 @@ const ListaConsultas: React.FC = () => {
               consultas.map(consulta =>
                 (
                   <tr key={consulta.id} className="table-row">
-                    <td className="especialidade">consulta.especialida</td>
-                    <td className="clinica">consulta.clinica</td>
-                    <td className="medico">consulta.medico</td>
-                    <td className="modalidade">consulta.</td>
-                    <td className="horario"></td>
+                    <td className="especialidade">{consulta.especialidade}</td>
+                    <td className="clinica">{consulta.clinica_cnpj}</td>
+                    <td className="medico">{consulta.medico_crm}</td>
+                    <td className="modalidade">{consulta.tipo_consulta}</td>
+                    <td className="horario">{consulta.data_hora}</td>
+                    <button className="myButton" >Desmarcar</button>
                   </tr>
                 )
               )
@@ -89,5 +88,6 @@ const ListaConsultas: React.FC = () => {
 
   )
 };
+
 
 export default ListaConsultas;

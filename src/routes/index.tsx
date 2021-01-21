@@ -13,6 +13,8 @@ import PesquisaClinicas from '../pages/PesquisaClinicas';
 import AgendamentoConsultas from '../pages/AgendamentoConsultas';
 import ListaConsultas from '../pages/ListaConsultas';
 import Route from './Route';
+import ListaClinicas from "../pages/ListaClinicas";
+import ListaPacientes from "../pages/ListaPacientes";
 
 
 const Routes: React.FC = () => (
