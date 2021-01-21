@@ -11,8 +11,8 @@ import './styles.css';
 
 const ListaClinicas: React.FC = () => {
   const data = [
-    {especialidade: 'puta', clinica: "clinica das puta", endereco:"rua dos bobos, 22", modalidade:"teleconsulta", horario:"horario"},
-    {especialidade: 'puta2', clinica: "clinica das puta2", endereco:"rua dos bobos, 22", modalidade:"teleconsulta2", horario:"horario2"}
+    {especialidade: 'cardiologia', clinica: "clinica dos corações", endereco:"rua dos bobos, 22", modalidade:"teleconsulta", contato:"3278-7532"},
+    {especialidade: 'endriconologia', clinica: "bem-star", endereco:"rua dos bobos, 45", modalidade:"teleconsulta2", contato:"3278-7532"}
   ].map((d, id) => ({ ...d, id }));
 
   return (
@@ -30,7 +30,7 @@ const ListaClinicas: React.FC = () => {
             </div>
         </TopNavigation>
         <div id="welcome-text">
-          <h1></h1>
+          <h1>Selecione a clínica desejada</h1>
         </div>
         <AnimationContent>
           <div id="table-container">
@@ -39,17 +39,23 @@ const ListaClinicas: React.FC = () => {
                 <tr>
                   <th>Clínica<FiChevronDown/></th>
                   <th>Endereço<FiChevronDown/></th>
+                  <th>Contato<FiChevronDown/></th>
                 </tr>
               </thead>
               <tbody className="table-body">
+                <button className="selecionar">
                 <tr className="table-row">
                   <td className="clinica">{data[0].clinica}</td>
                   <td className="endereço">{data[0].endereco}</td>
+                  <td className="endereço">{data[0].contato}</td>
                   <button className="myButton">Selecionar</button>
                 </tr>
+                </button>
                 <tr className="table-row">
                   <td className="clinica">{data[1].clinica}</td>
                   <td className="endereço">{data[1].endereco}</td>
+                  <td className="endereço">{data[1].contato}</td>
+                  <button className="myButton">Selecionar</button>
                 </tr>
               </tbody>
             </table>

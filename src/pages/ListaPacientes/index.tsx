@@ -39,8 +39,8 @@ const ListaPacientes: React.FC = () => {
   ];
 
   const data = [
-    {nome: 'elvis', especialidade: "nutricionista", medico:"tio picles", modalidade:"teleconsulta", horario:"horario"},
-    {nome: 'viniboy', especialidade: "cardiologia", medico:"tio picles2", modalidade: "a domiciolio", horario:"15/2, 4:20"}
+    {nome: 'elvis', especialidade: "nutricionista", medico:"emanuel", modalidade:"teleconsulta", horario:"horario"},
+    {nome: 'viniboy', especialidade: "cardiologia", medico:"januario", modalidade: "a domicilio", horario:"15/2, 4:20"}
   ].map((d, id) => ({ ...d, id }));
 
   return (
@@ -87,6 +87,7 @@ const ListaPacientes: React.FC = () => {
                   <td className="medico">{data[1].medico}</td>
                   <td className="modalidade">{data[1].modalidade}</td>
                   <td className="horario">{data[1].horario}</td>
+                  <button className="myButton">Remover</button>
                 </tr>
               </tbody>
             </table>

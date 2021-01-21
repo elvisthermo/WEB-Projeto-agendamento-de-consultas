@@ -16,9 +16,6 @@ body {
   font-weight: 250;
 }
 
-.table-head {
-}
-
 th {
   font-weight: normal;
   padding-bottom: 5px;
@@ -47,11 +44,11 @@ table {
 }
 
 /* the first 'td' within the last 'tr' of the 'tbody': */
-tbody    td:first-child {
+tbody td:first-child {
   border-radius: 1rem 0 0 1rem;
 }
 /* the last 'td' within the last 'tr' of the 'tbody': */
-tbody  td:last-child{
+tbody td:nth-last-child(2){
   border-radius: 0 1rem 1rem 0;
 }
 

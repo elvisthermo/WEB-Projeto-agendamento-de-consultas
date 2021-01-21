@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FiArrowLeft, FiSearch
 } from 'react-icons/fi';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 
-import {Link,} from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 
 
 import {
@@ -18,7 +18,6 @@ import {
 } from '../SignIn/styles';
 
 import './style.css';
-import Button from "../../components/Button";
 import api from "../../services/api";
 
 interface Medicos {
@@ -63,66 +62,88 @@ const AgendamentoConsultas: React.FC = () => {
       //console.log(clinica)
     });
 
-  },[] );
+  }, []);
 
-  console.log(clinica.map((d:Clinica) => {
+  console.log(clinica.map((d: Clinica) => {
     return d.cnpj;
-  } ))
+  }))
   return (
     <Container>
       <Helmet>
         <title>Agendar Consultas</title>
-        <meta charSet="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial scale=1.0"/>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial scale=1.0" />
       </Helmet>
-      <Background/>
+      <Background />
       <Content>
         <TopNavigation>
           <div className="wrapper">
 
-            <div className  ="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
-            <div id="pesquisa"><Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link></div>
+            <div className="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
+            <div id="pesquisa"><Link to="/pesquisar"><FiSearch />Pesquisar Clínicas</Link></div>
           </div>
 
         </TopNavigation>
         <AnimationContainer>
-          <div>{}</div>
-          <h1>Selecione a modalidade{}</h1>
-          <input type="radio" id="male" name="gender" value="male"/>
-          <label htmlFor="male">Teleconsulta</label>
-          <input type="radio" id="female" name="gender" value="female"/>
-          <label htmlFor="female">Domicilio</label>
-          <input type="radio" id="other" name="gender" value="other"/>
-          <label htmlFor="other">Presencial</label>
+          <div>{ }</div>
+          <h1>Selecione a modalidade de consulta abaixo: { }</h1>
+          <div id="radio-container">
+            <ul id="radio-wrapper">
+              <li>
+                <input type="radio" id="f-option" name="selector" />
+                <label htmlFor="f-option">Teleconsulta</label>
 
+                <div className="check"></div>
+              </li>
+              <li>
+                <input type="radio" id="s-option" name="selector" />
+                <label htmlFor="s-option">À domicílio</label>
+                <div className="check"><div className="inside"></div></div>
+              </li>
+              <li>
+                <input type="radio" id="t-option" name="selector" />
+                <label htmlFor="t-option">Presencial</label>
 
-          <h1 title="caso a data esteja indidponivel a clinica ira recomendar uma data disponivel">selecione uma
-            data:</h1>
+                <div className="check"><div className="inside"></div></div>
+              </li>
+            </ul>
+          </div>
+
 
           <form>
 
-            <input type="date"/>
+            <h1 className="selecioneClinica">Selecione a clínica</h1>
+            <div className="div-select">
+              <select>
+                <option>Selecione</option>
+                <option>Primeira opção</option>
+                <option>Segunda opção</option>
+                <option>Terceira opção</option>
+                <option>Quarta opção</option>
+              </select>
+            </div>
 
 
-            <h1>Selecione a clinica {}</h1>
-            <select name="" id="">
-              <option value="">clinica 1</option>
-              <option value="">clinica 2</option>
-            </select>
+            <h1 className="selecioneMedico">Selecione o médico </h1>
+            <div className="div-select">
+              <select>
+                <option>Selecione</option>
+                <option>Primeira opção</option>
+                <option>Segunda opção</option>
+                <option>Terceira opção</option>
+                <option>Quarta opção</option>
+              </select>
+            </div>
 
-
-            <h1>Selecione o medico </h1>
-            <select name="" id="">
-              {clinica && teste.map((t:Medicos)=>(
-                <option value="">{t.nome}</option>
-              ))}
-              <option value="">medico 1</option>
-              <option value="">medico 2</option>
-            </select>
+            <h1 className="selecioneData" title="caso a data esteja indidponivel a clinica ira recomendar uma data disponivel">
+              Selecione uma data
+            </h1>
+            <input type="date" className="dataConsulta" name="dataConsulta"/>
           </form>
-          <Button type="submit">marcar consulta</Button>
-
-
+          <div className="button-container">
+            <button className="agendarButton">Agendar</button>
+            <button className="cancelarButton">Cancelar</button>
+          </div>
         </AnimationContainer>
       </Content>
     </Container>
