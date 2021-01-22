@@ -30,7 +30,7 @@ const DashboardClinica: React.FC = () => {
             <p>O que você quer fazer?</p>
           </div>
           <div className="cardContainer">
-            <a href="/administrarConsultas" className="cardLink">
+            <Link to="/administrarConsultas" className="cardLink">
               <div className="card">
                 <h3 className="title">Administrar consultas marcadas</h3>
                 <div className="bar">
@@ -45,7 +45,7 @@ const DashboardClinica: React.FC = () => {
                 </svg>
                 </div>
               </div>
-            </a>
+            </Link>
             <a href="/" className="cardLink">
             <div className="card">
               <h3 className="title">Editar informações da clínica</h3>
@@ -61,7 +61,7 @@ const DashboardClinica: React.FC = () => {
                 </div>
             </div>
             </a>
-            <a href="/cadastrar/clinica" className="cardLink">
+            <a href="/cadastrar/medico" className="cardLink">
               <div className="card">
                 <h3 className="title">Cadastrar médico</h3>
                 <div className="bar">
@@ -76,7 +76,7 @@ const DashboardClinica: React.FC = () => {
                 </div>
               </div>
             </a>
-            <a href="/" className="cardLink">
+            <a href="/listar/medicos" className="cardLink">
               <div className="card">
                 <h3 className="title">Ver médicos cadastrados</h3>
                 <div className="bar">
