@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  background: linear-gradient(0deg, #94e0ff 0% 35%, #312E38 35%);
+  //background: linear-gradient(0deg, #94e0ff 0% 35%, #312E38 35%);
   height: 100vh;
   align-items: stretch;
   position: relative;
@@ -117,4 +117,59 @@ export const TopNavigation = styled.div`
     }
   }
 `;
+
+export const ContainerList = styled.div`
+  background-color: #969CB2;
+  margin-top: 10px;
+  padding: 20px;
+`;
+
+export const ButtonRemove =styled.td`
+  background-color: darkred;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-radius: 10px;
+  margin:0px 5px 0px 5px;
+  
+  svg{
+    color:#ff6d8a;
+    fill: #fff;
+  }
+
+`;
+
+export const ButtonEdit =styled.td`
+  background-color: darkblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-radius: 10px;
+  margin:0px 5px 0px 5px;
+  
+  
+  svg{
+    color:#fff;
+    fill: #000;
+  }
+
+`;
+
+export const ButtonConfirm =styled.td`
+  background-color: #44c767;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-radius: 10px;
+  margin:0px 5px 0px 5px;
+  
+  svg{
+    color:#fff;
+    fill: #44c767;
+  }
+`;
+
 

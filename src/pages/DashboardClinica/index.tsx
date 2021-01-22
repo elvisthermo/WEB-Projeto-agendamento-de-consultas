@@ -25,15 +25,15 @@ const DashboardClinica: React.FC = () => {
         </TopNavigation>
       <Content>
         {/* <AnimationContent> */}
-        
+
         <ContentMenu className="bem-vindo">
             <h1>Bem-vindo, {`Clínica!`}</h1>
             <p>O que você quer fazer?</p>
           </ContentMenu>
           <CardContainer className="cardContainer">
-            
+
             <Link to="/administrarConsultas" className="cardLink">
-              
+
               <Card className="card">
                 <h3 className="title">Administrar consultas marcadas</h3>
                 <div className="bar">
@@ -47,8 +47,8 @@ const DashboardClinica: React.FC = () => {
                   </svg>
                 </div>
               </Card>
-           
-           
+
+
             </Link>
             <Link to="/" className="cardLink">
             <Card className="card">
@@ -100,11 +100,11 @@ const DashboardClinica: React.FC = () => {
         {/* </AnimationContent> */}
       </Content>
 
-      <Footer>
-        <div>
-           <p>Desenvolvido por Castelo Vigilânte LTDA</p>
-        </div>
-      </Footer>
+      {/*<Footer>*/}
+      {/*  <div>*/}
+      {/*     <p>Desenvolvido por Castelo Vigilânte LTDA</p>*/}
+      {/*  </div>*/}
+      {/*</Footer>*/}
       <Background/>
     </Container>
 
