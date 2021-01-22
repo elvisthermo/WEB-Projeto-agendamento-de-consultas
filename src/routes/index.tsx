@@ -15,7 +15,7 @@ import ListaConsultas from '../pages/ListaConsultas';
 import Route from './Route';
 import ListaClinicas from "../pages/ListaClinicas";
 import ListaPacientes from "../pages/ListaPacientes";
-
+import Profile from '../pages/Profile';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -32,6 +32,7 @@ const Routes: React.FC = () => (
     <Route path="/listar/consultas" exact component={ListaConsultas} />
     <Route path="/listar/clinicas" exact component={ListaClinicas} />
     <Route path="/listar/pacientes" exact component={ListaPacientes} />
+    <Route path="/perfil" exact component={Profile} />
 
   </Switch>
 );

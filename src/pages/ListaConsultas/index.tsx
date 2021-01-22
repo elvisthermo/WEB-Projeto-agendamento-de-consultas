@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
-import {FiCalendar, FiList, FiUser, FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
@@ -19,7 +19,6 @@ interface Consultas {
   medico_crm: String,
   clinica_cnpj: String,
   especialidade:String
-
 
 }
 
