@@ -43,14 +43,12 @@ const ListaClinicas: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="table-body">
-                <button className="selecionar">
                 <tr className="table-row">
                   <td className="clinica">{data[0].clinica}</td>
                   <td className="endereço">{data[0].endereco}</td>
                   <td className="endereço">{data[0].contato}</td>
                   <button className="myButton">Selecionar</button>
                 </tr>
-                </button>
                 <tr className="table-row">
                   <td className="clinica">{data[1].clinica}</td>
                   <td className="endereço">{data[1].endereco}</td>

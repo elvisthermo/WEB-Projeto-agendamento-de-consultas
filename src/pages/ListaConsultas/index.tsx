@@ -19,8 +19,6 @@ interface Consultas {
   medico_crm: String,
   clinica_cnpj: String,
   especialidade:String
-
-
 }
 
 const ListaConsultas: React.FC = () => {
@@ -29,7 +27,7 @@ const ListaConsultas: React.FC = () => {
 
   useEffect(()=>{
 
-    api.get('/consulta/').then((response) => {
+      api.get('/consulta/').then((response) => {
       const consultasResponse = response.data;
 
       console.log(consultasResponse)

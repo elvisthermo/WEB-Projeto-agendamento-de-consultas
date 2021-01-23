@@ -19,7 +19,7 @@ import ListaPacientes from "../pages/ListaPacientes";
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/signin/clinica" exact component={SignIn} />
+    <Route path="/" exact component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/signin/clinica" component={SignInClinica} />
     <Route path="/dashboard" exact component={Dashboard} />
