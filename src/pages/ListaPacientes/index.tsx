@@ -3,23 +3,99 @@ import Helmet from 'react-helmet';
 import {FiLogOut, FiSearch, FiChevronDown,FiEdit,FiTrash2,FiCheckCircle} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
+import { DateLocale } from 'yup';
+import api from '../../services/api';
 
 
 import { Container, Content, AnimationContent, TopNavigation,ContainerList,ButtonRemove,ButtonEdit,ButtonConfirm} from './styles';
 
 // import './styles.css';
 
-const ListaPacientes: React.FC = () => {
+interface Consultas{
+    id: Number,
+    paciente:{
+      nome: String
+    }
+    medico:{
+      nome: String
+    }
+    modalidade: String,
+    data_hora: String,
+    Status: String
+}
 
+const ListaPacientes: React.FC = () => {
+  const [consutas,setConsultas] = useState<Consultas[]>([]);
 
   const data = [
     {nome: 'elvis', especialidade: "nutricionista", medico:"emanuel", modalidade:"teleconsulta", horario:"horario"},
     {nome: 'viniboy', especialidade: "cardiologia", medico:"januario", modalidade: "a domicilio", horario:"15/2, 4:20"}
   ].map((d, id) => ({ ...d, id }));
 
+
+  const jsonTest:Consultas[] =[
+    { 
+    id:1,
+    paciente:{
+      nome: "Elvis"
+    },
+    medico:{
+      nome: "Mfred"
+    },
+      modalidade: "web",
+      data_hora: "25/03/2021",
+      Status: "Pendente",
+  },
+  { 
+    id:2,
+    paciente:{
+      nome: "Elvis"
+    },
+    medico:{
+      nome: "Mfred"
+    },
+      modalidade: "web",
+      data_hora: "25/03/2021",
+      Status: "Pendente",
+  },
+  { 
+    id:3,
+    paciente:{
+      nome: "Elvis"
+    },
+    medico:{
+      nome: "Mfred"
+    },
+      modalidade: "web",
+      data_hora: "25/03/2021",
+      Status: "Pendente",
+  }
+
+]
+
   useEffect(()=>{
+    setConsultas(jsonTest);
+
 
   },[]);
+
+
+  function handleRemoveConsulta(id){
+    // api.delete(`/consulta/${id}/`).then(response=>{
+      // console.log(response);
+
+
+      const consultaArrayRemove = [...consutas];
+      const findById = consultaArrayRemove.findIndex(item=> item.id === id);
+
+      consultaArrayRemove.splice(findById,1);
+      console.log(consultaArrayRemove)
+
+      setConsultas(consultaArrayRemove);
+      alert("Consulta cancelada");
+
+    // })
+  }
 
   return (
     <Container>
@@ -69,113 +145,43 @@ const ListaPacientes: React.FC = () => {
 
         <AnimationContent>
 
-          <ContainerList id="table-container">
-            <table className="table">
-              <thead className="table-head">
+          <ContainerList>
+            <table>
+              <thead>
                 <tr>
                   <th>N consulta:<FiChevronDown/></th>
                   <th>Cliente<FiChevronDown/></th>
                   <th>Médico<FiChevronDown/></th>
-                  <th>Especialidade<FiChevronDown/></th>
                   <th>Modalidade<FiChevronDown/></th>
                   <th>Data<FiChevronDown/></th>
                   <th>Horário<FiChevronDown/></th>
                   <th>Status<FiChevronDown/></th>
+                  <th>Excluir</th>
+                  <th>Editar</th>
+               
                 </tr>
               </thead>
-              <tbody className="table-body">
-                <tr className="table-row">
-                  <td className="nome">{data[0].nome}</td>
-                  <td className="especialidade">{data[0].especialidade}</td>
-                  <td className="medico">{data[0].medico}</td>
-                  <td className="modalidade">{data[0].modalidade}</td>
-                  <td className="modalidade">{data[0].modalidade}</td>
-                  <td className="horario">{data[0].horario}</td>
-                  <td className="Status">{data[0].horario}</td>
+              <tbody>
 
-                  <td><FiTrash2 size={20}/>Remover</td>
+                {consutas && 
+                consutas.map( d=>(
+                  <tr>
+                  <td>{d.id}</td>
+                  <td> {d.paciente.nome}</td>
+                  <td >{d.medico.nome}</td>
+                  <td>{d.modalidade}</td>
+                  <td>{d.data_hora}</td>
+                  <td>{"14:30"}</td>
+                  <td>{d.Status}</td>
+
+                  <td onClick={e=>handleRemoveConsulta(d.id)}><FiTrash2 size={20}/>Remover</td>
                   <td><FiEdit size={20}/>Editar</td>
-                  <td><FiCheckCircle size={20}/>Concluir</td>
+                  {/* <td><FiCheckCircle size={20}/>Concluir</td> */}
+                </tr> 
 
-
-                </tr>
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-
-
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
-
-                <tr className="table-row">
-                  <td className="nome">{data[1].nome}</td>
-                  <td className="especialidade">{data[1].especialidade}</td>
-                  <td className="medico">{data[1].medico}</td>
-                  <td className="modalidade">{data[1].modalidade}</td>
-                  <td className="horario">{data[1].horario}</td>
-                  <button className="myButton">Remover</button>
-                </tr>
+                ))
+                }
+            
               </tbody>
             </table>
           </ContainerList>

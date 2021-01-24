@@ -9,7 +9,6 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-
   flex-direction: column;
   align-items: center;
   place-content: center;
@@ -79,7 +78,7 @@ export const AnimationContent = styled.div`
     svg {
       margin-right: 16px;
     }
-  }
+  } 
 `;
 
 
@@ -121,11 +120,13 @@ export const TopNavigation = styled.div`
 export const ContainerList = styled.div`
   background-color: #969CB2;
   margin-top: 10px;
+  margin-bottom:10px;
   padding: 20px;
+  border-radius:5px;
 `;
 
-export const ButtonRemove =styled.td`
-  background-color: darkred;
+export const ButtonRemove =styled.tr`
+  /* background-color: darkred;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,12 +137,12 @@ export const ButtonRemove =styled.td`
   svg{
     color:#ff6d8a;
     fill: #fff;
-  }
+  } */
 
 `;
 
-export const ButtonEdit =styled.td`
-  background-color: darkblue;
+export const ButtonEdit =styled.tr`
+  /* background-color: darkblue;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,12 +154,12 @@ export const ButtonEdit =styled.td`
   svg{
     color:#fff;
     fill: #000;
-  }
+  } */
 
 `;
 
-export const ButtonConfirm =styled.td`
-  background-color: #44c767;
+export const ButtonConfirm =styled.tr`
+  /* background-color: #44c767;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,7 +170,7 @@ export const ButtonConfirm =styled.td`
   svg{
     color:#fff;
     fill: #44c767;
-  }
+  } */
 `;
 
 

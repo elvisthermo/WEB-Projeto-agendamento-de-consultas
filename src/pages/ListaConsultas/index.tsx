@@ -92,6 +92,7 @@ const ListaConsultas: React.FC = () => {
                     <td className="medico">{consulta.medico_crm}</td>
                     <td className="modalidade">{consulta.tipo_consulta}</td>
                     <td className="horario">{consulta.data_hora}</td>
+                    <td className="modalidade">{consulta.tipo_consulta}</td> 
                     <button className="myButton" onClick={() => handleRemoveConsulta(consulta.id)} >Desmarcar</button>
                   </tr>
                 )
