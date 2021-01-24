@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
 import {FiLogOut, FiSearch, FiChevronDown,FiEdit,FiTrash2,FiCheckCircle} from 'react-icons/fi';
+import {BiDetail} from 'react-icons/bi';
 
 import { Link, } from 'react-router-dom';
 import { DateLocale } from 'yup';
@@ -8,6 +9,7 @@ import api from '../../services/api';
 
 
 import { Container, Content, AnimationContent, TopNavigation,ContainerList,ButtonRemove,ButtonEdit,ButtonConfirm} from './styles';
+import Profile from "../Profile";
 
 // import './styles.css';
 
@@ -34,7 +36,7 @@ const ListaPacientes: React.FC = () => {
 
 
   const jsonTest:Consultas[] =[
-    { 
+    {
     id:1,
     paciente:{
       nome: "Elvis"
@@ -46,7 +48,7 @@ const ListaPacientes: React.FC = () => {
       data_hora: "25/03/2021",
       Status: "Pendente",
   },
-  { 
+  {
     id:2,
     paciente:{
       nome: "Elvis"
@@ -58,7 +60,7 @@ const ListaPacientes: React.FC = () => {
       data_hora: "25/03/2021",
       Status: "Pendente",
   },
-  { 
+  {
     id:3,
     paciente:{
       nome: "Elvis"
@@ -158,30 +160,45 @@ const ListaPacientes: React.FC = () => {
                   <th>Status<FiChevronDown/></th>
                   <th>Excluir</th>
                   <th>Editar</th>
-               
+
                 </tr>
               </thead>
               <tbody>
 
-                {consutas && 
+                {consutas &&
                 consutas.map( d=>(
                   <tr>
                   <td>{d.id}</td>
-                  <td> {d.paciente.nome}</td>
-                  <td >{d.medico.nome}</td>
-                  <td>{d.modalidade}</td>
-                  <td>{d.data_hora}</td>
+                     <td>
+                       <BiDetail size={20}/>
+                       <Link to={'/perfil'}> {d.paciente.nome}
+                       </Link>
+                     </td>
+                  <td >
+                    <td>
+                      <BiDetail size={20}/>
+                      <Link to={'/perfil'}>
+                        {d.medico.nome}
+
+                      </Link>
+                    </td>
+                  </td>
+                  <td>
+                    {d.modalidade}</td>
+                  <td>
+                    {d.data_hora}
+                  </td>
                   <td>{"14:30"}</td>
                   <td>{d.Status}</td>
 
                   <td onClick={e=>handleRemoveConsulta(d.id)}><FiTrash2 size={20}/>Remover</td>
                   <td><FiEdit size={20}/>Editar</td>
-                  {/* <td><FiCheckCircle size={20}/>Concluir</td> */}
-                </tr> 
+                   <td><FiCheckCircle size={20}/>Concluir</td>
+                </tr>
 
                 ))
                 }
-            
+
               </tbody>
             </table>
           </ContainerList>
