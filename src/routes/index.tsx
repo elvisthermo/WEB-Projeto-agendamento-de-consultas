@@ -12,13 +12,10 @@ import CadastroMedicos from '../pages/CadastroMedicos';
 import PesquisaClinicas from '../pages/PesquisaClinicas';
 import AgendamentoConsultas from '../pages/AgendamentoConsultas';
 import ListaConsultas from '../pages/ListaConsultas';
-import ListaMedicos from '../pages/ListaMedicos';
-import ListaPacientes from '../pages/ListaPacientes';
-import ListaClinicas from "../pages/ListaClinicas";
-import AdministrarConsultas from "../pages/AdministrarConsultas";
-import Profile from '../pages/Profile';
-
 import Route from './Route';
+import ListaClinicas from "../pages/ListaClinicas";
+import ListaPacientes from "../pages/ListaPacientes";
+import Profile from '../pages/Profile';
 
 const Routes: React.FC = () => (
   <Switch>

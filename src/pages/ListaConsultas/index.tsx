@@ -7,7 +7,6 @@ import { Link, } from 'react-router-dom';
 
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
-import './styles.css';
 import api from "../../services/api";
 
 interface Consultas {
