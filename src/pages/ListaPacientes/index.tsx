@@ -27,7 +27,7 @@ interface Consultas {
   Status: String
 }
 
-const AdministrarConsultas: React.FC = () => {
+const ListaPacientes: React.FC = () => {
 
   const [modalidade, setModalidade] = useState("");
   const [consutas, setConsultas] = useState<Consultas[]>([]);
@@ -213,7 +213,7 @@ const AdministrarConsultas: React.FC = () => {
 
         <h1>Filtrar consultas</h1>
         <GroupFilters>
-
+      
         <div>
           <h3>Grupo:</h3>
           <select onChange={e => handleRestArray()}>
@@ -342,4 +342,4 @@ const AdministrarConsultas: React.FC = () => {
   )
 };
 
-export default AdministrarConsultas;
+export default ListaPacientes;
