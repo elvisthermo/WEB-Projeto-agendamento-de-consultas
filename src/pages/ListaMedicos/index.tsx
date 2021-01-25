@@ -18,7 +18,7 @@ interface Medico {
 }
 
 
-const ListaConsultas: React.FC = () => {
+const ListaMedicos: React.FC = () => {
 
   const [medicos,setMedicos] = useState();
 
@@ -105,4 +105,4 @@ const ListaConsultas: React.FC = () => {
 };
 
 
-export default ListaConsultas;
+export default ListaMedicos;
