@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
-import {FiCalendar, FiList, FiUser, FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ interface Consultas {
   medico_crm: String,
   clinica_cnpj: String,
   especialidade:String
+
 }
 
 const ListaConsultas: React.FC = () => {
@@ -27,7 +28,7 @@ const ListaConsultas: React.FC = () => {
 
   useEffect(()=>{
 
-      api.get('/consulta/').then((response) => {
+    api.get('/consulta/').then((response) => {
       const consultasResponse = response.data;
 
       console.log(consultasResponse)
@@ -91,6 +92,7 @@ const ListaConsultas: React.FC = () => {
                     <td className="medico">{consulta.medico_crm}</td>
                     <td className="modalidade">{consulta.tipo_consulta}</td>
                     <td className="horario">{consulta.data_hora}</td>
+                    <td className="modalidade">{consulta.tipo_consulta}</td> 
                     <button className="myButton" onClick={() => handleRemoveConsulta(consulta.id)} >Desmarcar</button>
                   </tr>
                 )

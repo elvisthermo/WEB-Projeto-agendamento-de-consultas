@@ -5,7 +5,7 @@ import {FiCalendar, FiEdit3, FiPlus, FiLogOut, FiSearch, FiUsers} from 'react-ic
 import { Link } from 'react-router-dom';
 
 
-import { Container, Content, AnimationContent, TopNavigation} from './styles';
+import { Container, Content, AnimationContent, TopNavigation,ContentMenu,CardContainer,Card,Background,Footer,Icons} from './styles';
 
 import './styles.css';
 
@@ -17,85 +17,95 @@ const DashboardClinica: React.FC = () => {
         <title>Bem-vindo!</title>
         <meta content="" name=""></meta>
       </Helmet>
-      <Content>
       <TopNavigation>
             <div className="wrapper">
               <div id="clinica"> <Link to="/"><FiLogOut/>Sair</Link></div>
               <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
             </div>
         </TopNavigation>
-        <AnimationContent>
-          <div className="bem-vindo">
+      <Content>
+        {/* <AnimationContent> */}
+
+        <ContentMenu className="bem-vindo">
             <h1>Bem-vindo, {`Clínica!`}</h1>
             <p>O que você quer fazer?</p>
-          </div>
-          <div className="cardContainer">
-            <a href="/administrarConsultas" className="cardLink">
-              <div className="card">
+          </ContentMenu>
+          <CardContainer className="cardContainer">
+
+            <Link to="/administrarConsultas" className="cardLink">
+
+              <Card className="card">
                 <h3 className="title">Administrar consultas marcadas</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
                 </div>
                 <div className="circle">
-                  <div className="icon"><FiCalendar/></div>
+                  <Icons className="icon"><FiCalendar /></Icons>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-
-                  <circle className="stroke" cx="60" cy="60" r="50"/>
-                </svg>
+                    <circle className="stroke" cx="60" cy="60" r="50"/>
+                  </svg>
                 </div>
-              </div>
-            </a>
-            <a href="/" className="cardLink">
-            <div className="card">
+              </Card>
+
+
+            </Link>
+            <Link to="/" className="cardLink">
+            <Card className="card">
               <h3 className="title">Editar informações da clínica</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
                 </div>
                 <div className="circle">
-                <div className="icon"><FiEdit3/></div>
+                <Icons className="icon"><FiEdit3/></Icons>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle className="stroke" cx="60" cy="60" r="50"/>
                   </svg>
                 </div>
-            </div>
-            </a>
-            <a href="/cadastrar/clinica" className="cardLink">
-              <div className="card">
+            </Card>
+            </Link>
+            <Link to="/cadastrar/medico" className="cardLink">
+              <Card className="card">
                 <h3 className="title">Cadastrar médico</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
                 </div>
                 <div className="circle">
-                  <div className="icon"><FiPlus/></div>
+                  <Icons className="icon"><FiPlus/></Icons>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle className="stroke" cx="60" cy="60" r="50"/>
                   </svg>
                 </div>
-              </div>
-            </a>
-            <a href="/" className="cardLink">
-              <div className="card">
+              </Card>
+            </Link>
+            <Link to="/listar/medicos" className="cardLink">
+              <Card className="card">
                 <h3 className="title">Ver médicos cadastrados</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
                 </div>
                 <div className="circle">
-                  <div className="icon"><FiUsers/></div>
+                  <Icons className="icon"><FiUsers/></Icons>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle className="stroke" cx="60" cy="60" r="50">
                     </circle>
                   </svg>
                 </div>
-              </div>
-            </a>
-          </div>
-        </AnimationContent>
+              </Card>
+            </Link>
+          </CardContainer>
+        {/* </AnimationContent> */}
       </Content>
 
+      {/*<Footer>*/}
+      {/*  <div>*/}
+      {/*     <p>Desenvolvido por Castelo Vigilânte LTDA</p>*/}
+      {/*  </div>*/}
+      {/*</Footer>*/}
+      <Background/>
     </Container>
 
   )
