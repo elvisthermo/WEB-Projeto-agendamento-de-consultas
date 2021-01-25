@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import AppProvider from './hooks';
 import Routes from './routes';
 import  Footer  from './components/Footer';
+import './styles/main.css';
 
 const App: React.FC = () => (
   <Router>

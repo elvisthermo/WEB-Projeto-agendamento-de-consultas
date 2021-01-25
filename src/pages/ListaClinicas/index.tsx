@@ -7,8 +7,6 @@ import { Link, } from 'react-router-dom';
 
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
-import './styles.css';
-
 const ListaClinicas: React.FC = () => {
   const data = [
     {especialidade: 'cardiologia', clinica: "clinica dos corações", endereco:"rua dos bobos, 22", modalidade:"teleconsulta", contato:"3278-7532"},

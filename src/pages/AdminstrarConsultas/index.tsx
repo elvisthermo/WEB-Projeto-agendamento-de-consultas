@@ -11,8 +11,6 @@ import api from '../../services/api';
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, ButtonRemove, ButtonEdit, ButtonConfirm,GroupFilters } from './styles';
 import Profile from "../Profile";
 
-// import './styles.css';
-
 interface Consultas {
   id: Number,
   paciente: {
@@ -213,7 +211,7 @@ const ListaPacientes: React.FC = () => {
 
         <h1>Filtrar consultas</h1>
         <GroupFilters>
-      
+
         <div>
           <h3>Grupo:</h3>
           <select onChange={e => handleRestArray()}>

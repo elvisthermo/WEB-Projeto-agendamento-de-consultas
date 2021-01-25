@@ -14,7 +14,7 @@ import AgendamentoConsultas from '../pages/AgendamentoConsultas';
 import ListaConsultas from '../pages/ListaConsultas';
 import Route from './Route';
 import ListaClinicas from "../pages/ListaClinicas";
-import ListaPacientes from "../pages/ListaPacientes";
+import ListaPacientes from "../pages/AdminstrarConsultas";
 import Profile from '../pages/Profile';
 
 const Routes: React.FC = () => (

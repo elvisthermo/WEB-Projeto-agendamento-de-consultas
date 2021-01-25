@@ -7,7 +7,6 @@ import { Link, } from 'react-router-dom';
 
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
-import './styles.css';
 import api from "../../services/api";
 
 interface Consultas {
@@ -92,7 +91,7 @@ const ListaConsultas: React.FC = () => {
                     <td className="medico">{consulta.medico_crm}</td>
                     <td className="modalidade">{consulta.tipo_consulta}</td>
                     <td className="horario">{consulta.data_hora}</td>
-                    <td className="modalidade">{consulta.tipo_consulta}</td> 
+                    <td className="modalidade">{consulta.tipo_consulta}</td>
                     <button className="myButton" onClick={() => handleRemoveConsulta(consulta.id)} >Desmarcar</button>
                   </tr>
                 )
