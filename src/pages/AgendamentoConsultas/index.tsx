@@ -17,6 +17,7 @@ import {
   TopNavigation
 } from '../SignIn/styles';
 
+import './style.css';
 import api from "../../services/api";
 
 interface Medico {

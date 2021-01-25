@@ -18,6 +18,8 @@ import {
   TopNavigation
 } from '../SignIn/styles';
 
+import './style.css';
+
 const PesquisaDeClinicas: React.FC = () => {
 
   return (
