@@ -13,8 +13,9 @@ import PesquisaClinicas from '../pages/PesquisaClinicas';
 import AgendamentoConsultas from '../pages/AgendamentoConsultas';
 import ListaConsultas from '../pages/ListaConsultas';
 import ListaMedicos from '../pages/ListaMedicos';
+import ListaPacientes from '../pages/ListaPacientes';
 import ListaClinicas from "../pages/ListaClinicas";
-import ListaPacientes from "../pages/ListaPacientes";
+import AdministrarConsultas from "../pages/AdminstrarConsultas";
 import Profile from '../pages/Profile';
 
 import Route from './Route';
@@ -34,7 +35,8 @@ const Routes: React.FC = () => (
     <Route path="/listar/consultas" exact component={ListaConsultas} />
     <Route path="/listar/clinicas" exact component={ListaClinicas} />
     <Route path="/listar/medicos" exact component={ListaMedicos} />
-    <Route path="/administrarConsultas" exact component={ListaPacientes} />
+    <Route path="/listar/pacientes" exact component={ListaPacientes} />
+    <Route path="/administrarConsultas" exact component={AdministrarConsultas} />
     <Route path="/perfil" exact component={Profile} />
 
   </Switch>
