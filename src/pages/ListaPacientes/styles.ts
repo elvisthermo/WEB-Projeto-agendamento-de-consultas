@@ -126,27 +126,27 @@ export const ContainerList = styled.div`
 `;
 
 export const ButtonRemove =styled.tr`
-  /* background-color: darkred;
+  background-color: darkred;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
   
   svg{
     color:#ff6d8a;
     fill: #fff;
-  } */
+  }
 
 `;
 
 export const ButtonEdit =styled.tr`
-  /* background-color: darkblue;
+  background-color: darkblue;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
   
@@ -154,23 +154,40 @@ export const ButtonEdit =styled.tr`
   svg{
     color:#fff;
     fill: #000;
-  } */
+  }
 
 `;
 
 export const ButtonConfirm =styled.tr`
-  /* background-color: #44c767;
+  background-color: #44c767;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
   
   svg{
     color:#fff;
     fill: #44c767;
-  } */
+  }
+`;
+
+export const GroupFilters = styled.div`
+  display:flex;
+  margin:10px;
+
+  h3{
+    justify-content:center
+  }
+
+  select{
+    margin:20px;
+    height:40px;
+    border-radius:10px;
+  }
+
+
 `;
 
 
