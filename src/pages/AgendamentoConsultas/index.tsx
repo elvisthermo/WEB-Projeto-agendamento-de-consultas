@@ -175,12 +175,12 @@ const AgendamentoConsultas: React.FC = () => {
               </li>
               <li>
                 <input type="radio" id="s-option" name="selector"/>
-                <label htmlFor="s-option">À domicílio</label>
+                <label htmlFor="s-option">Domiciliar</label>
                 <div className="check" id="domicilio"><div className="inside"></div></div>
               </li>
               <li>
                 <input type="radio" id="t-option" name="selector"/>
-                <label htmlFor="t-option">Presencial</label>
+                <label htmlFor="t-option">Na clínica</label>
 
                 <div className="check" id="presencial"><div className="inside"></div></div>
               </li>

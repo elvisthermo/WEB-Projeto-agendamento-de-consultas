@@ -22,7 +22,7 @@ interface Consultas {
 
 }
 
-const ListaConsultas: React.FC = () => {
+const ListaMedicos: React.FC = () => {
 
   const [consultas,setConsultas] = useState();
 
@@ -92,7 +92,7 @@ const ListaConsultas: React.FC = () => {
                     <td className="medico">{consulta.medico_crm}</td>
                     <td className="modalidade">{consulta.tipo_consulta}</td>
                     <td className="horario">{consulta.data_hora}</td>
-                    <td className="modalidade">{consulta.tipo_consulta}</td> 
+                    <td className="modalidade">{consulta.tipo_consulta}</td>
                     <button className="myButton" onClick={() => handleRemoveConsulta(consulta.id)} >Desmarcar</button>
                   </tr>
                 )
@@ -109,4 +109,4 @@ const ListaConsultas: React.FC = () => {
 };
 
 
-export default ListaConsultas;
+export default ListaMedicos;

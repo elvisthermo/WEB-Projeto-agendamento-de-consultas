@@ -29,20 +29,24 @@ const Dashboard: React.FC = () => {
             <h1>Bem-vindo, {`Usuário!`}</h1>
             <p>O que você quer fazer?</p>
           </div>
+
           <div className="cardContainer">
-            <div className="card">
-              <h3 className="title">Agendar consulta</h3>
-              <div className="bar">
-                <div className="emptybar"></div>
-                <div className="filledbar"></div>
+            <a href="/agendar" className="cardLink">
+              <div className="card">
+                <h3 className="title">Agendar Consulta</h3>
+                <div className="bar">
+                  <div className="emptybar"></div>
+                  <div className="filledbar"></div>
+                </div>
+                <div className="circle">
+                  <div className="icon"><FiCalendar/></div>
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+                  <circle className="stroke" cx="60" cy="60" r="50"/>
+                </svg>
+                </div>
               </div>
-              <div className="circle">
-                <div className="icon"><FiCalendar/></div>
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <circle className="stroke" cx="60" cy="60" r="50"/>
-              </svg>
-              </div>
-            </div>
+            </a>
             <div className="card">
               <h3 className="title">Ver consultas marcadas</h3>
                 <div className="bar">
