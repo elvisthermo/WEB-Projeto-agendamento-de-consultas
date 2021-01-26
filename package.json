@@ -24,6 +24,8 @@
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.13.3",
     "sweetalert2-react-content": "^3.2.2",
     "typescript": "~3.7.2",
     "uuidv4": "^6.2.3",

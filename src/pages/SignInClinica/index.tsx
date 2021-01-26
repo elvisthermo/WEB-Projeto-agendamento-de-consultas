@@ -7,11 +7,11 @@ import * as Yup from 'yup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import { Container, Content, Background, AnimationContent, TopNavigation } from './styles';
 import logo from '../../assets/logo.svg';
 import validationErrors from '../../Utils/getValidationErrors';
+
 
 interface SignInFormData {
   email: string;
@@ -21,8 +21,9 @@ interface SignInFormData {
 const SignInClinica: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
-  const { signIn } = useAuth();
   const { addToast } = useToast();
+
+
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -39,12 +40,7 @@ const SignInClinica: React.FC = () => {
           abortEarly: false,
         });
 
-        await signIn({
-          email: data.email,
-          password: data.password,
-        });
-
-        history.push('/dashboard');
+        history.push('/dashboard/clinica');
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error);
@@ -60,8 +56,9 @@ const SignInClinica: React.FC = () => {
         });
       }
     },
-    [signIn, addToast, history],
+    [addToast, history],
   );
+
   return (
     <Container>
 

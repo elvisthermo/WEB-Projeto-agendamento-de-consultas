@@ -9,7 +9,6 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 import validationErrors from '../../Utils/getValidationErrors';
@@ -33,7 +32,6 @@ interface SignInFormData {
 const CadastroDeClientes: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -103,6 +101,8 @@ const CadastroDeClientes: React.FC = () => {
   //     });
   //   }
   // }, [signIn, addToast, history]);
+
+
 
   return (
     <Container>

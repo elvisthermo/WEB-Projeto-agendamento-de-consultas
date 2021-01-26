@@ -83,3 +83,30 @@ tbody td:nth-last-child(2) {
     position: relative;
     top: 1px;
 }
+
+.myButtonRemove{
+  height: inherit;
+  background-color: #c7383c;
+  border-radius: 1rem;
+  border: 1px solid #ff0017;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  margin-left: -2.0rem;
+  font-size: 1.4rem !important;
+  height: 4.0rem;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ff0017;
+}
+
+
+.myButtonRemove:hover{
+  background-color: #c74b66;
+}
+
+.background-table{
+  background-color: #969CB2;
+  padding:15px;
+  border-radius: 10px;
+}

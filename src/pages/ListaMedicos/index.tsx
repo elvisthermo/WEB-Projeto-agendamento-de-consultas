@@ -4,7 +4,7 @@ import { FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
-
+import Swal from 'sweetalert2'
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
 import './styles.css';
@@ -23,13 +23,25 @@ const ListaConsultas: React.FC = () => {
   const [medicos,setMedicos] = useState();
 
   useEffect(()=>{
-
     api.get('/medico/').then((response) => {
       const medicosResponse = response.data;
       console.log(medicosResponse)
       setMedicos(medicosResponse);
     });
   },[]);
+
+
+  async function popUpDeletar(id:String,tipo:String) {
+    const { value: item } = await Swal.fire({
+      titleText: 'Você deseja continuar com a exclusão',
+      title:"sim",
+      showCancelButton: true
+    })
+    if (item) {
+      handleRemoveMedico(id);
+      Swal.fire(`${tipo} Deletado`);
+    }
+  }
 
   function handleRemoveMedico(crm){
     api.delete(`/medico/${crm}/`).then(response=>{
@@ -43,8 +55,6 @@ const ListaConsultas: React.FC = () => {
       console.log(medicoArrayRemove)
 
       setMedicos(medicoArrayRemove);
-      alert("Medico removido");
-
     })
   }
 
@@ -67,7 +77,7 @@ const ListaConsultas: React.FC = () => {
         </div>
         <AnimationContent>
           <div id="table-container">
-            <table className="table">
+            <table className="table background-table">
               <thead className="table-head">
                 <tr>
                   <th>CRM<FiChevronDown/></th>
@@ -78,7 +88,7 @@ const ListaConsultas: React.FC = () => {
                   <th>Contato<FiChevronDown/></th>
                 </tr>
               </thead>
-              <tbody className="table-body">
+              <tbody className="table-body ">
               {medicos &&
               medicos.map(medico =>
                 (
@@ -89,7 +99,9 @@ const ListaConsultas: React.FC = () => {
                     <td className="cpf">{}</td>
                     <td className="email">{}</td>
                     <td className="contato">{}</td>
-                    <button className="myButton" onClick={() => handleRemoveMedico(medico.crm)}>Excluir</button>
+                    {/*<button className="myButton" onClick={() => handleRemoveMedico(medico.crm)}>Excluir</button>*/}
+                    <button className="myButtonRemove" onClick={() => popUpDeletar(medico.crm,"medico")}>Excluir</button>
+
                   </tr>
                 )
               )

@@ -1,31 +1,29 @@
-import React, { useCallback, useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn, FiMail, FiLock, FiSearch } from 'react-icons/fi';
-import { Form } from '@unform/web';
-import { FormHandles } from '@unform/core';
+import React, {useCallback, useRef} from 'react';
+import {Link, useHistory} from 'react-router-dom';
+import {FiLogIn, FiMail, FiLock, FiSearch} from 'react-icons/fi';
+import {Form} from '@unform/web';
+import {FormHandles} from '@unform/core';
 import * as Yup from 'yup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../hooks/auth';
-import { useToast } from '../../hooks/toast';
-import { Container, Content, Background, AnimationContent, TopNavigation } from './styles';
+import {useToast} from '../../hooks/toast';
+import {Container, Content, Background, AnimationContent, TopNavigation} from './styles';
 import logo from '../../assets/logo.svg';
 import validationErrors from '../../Utils/getValidationErrors';
 
-interface SignInFormData {
-  email: string;
-  password: string;
-}
+// interface SignInFormData {
+//   email: string;
+//   password: string;
+// }
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
-  const { signIn } = useAuth();
-  const { addToast } = useToast();
+  const {addToast} = useToast();
 
   const handleSubmit = useCallback(
-    async (data: SignInFormData) => {
+    async (data) => {
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
@@ -37,11 +35,6 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, {
           abortEarly: false,
-        });
-
-        await signIn({
-          email: data.email,
-          password: data.password,
         });
 
         history.push('/dashboard');
@@ -60,19 +53,21 @@ const SignIn: React.FC = () => {
         });
       }
     },
-    [signIn, addToast, history],
+    [addToast, history],
   );
+
+
   return (
     <Container>
       <Content>
         <TopNavigation>
           <div className="wrapper">
-            <div id="clinica"> <Link to="/signin/clinica">Entrar como clínica</Link></div>
-            <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
+            <div id="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
+            <div id="pesquisa"><Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link></div>
           </div>
         </TopNavigation>
         <AnimationContent>
-          <img src={logo} alt="GoBarber" />
+          <img src={logo} alt="GoBarber"/>
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu login</h1>
@@ -92,12 +87,12 @@ const SignIn: React.FC = () => {
             <a href="forgot">Esqueci minha senha</a>
           </Form>
           <Link to="/signup">
-            <FiLogIn />
+            <FiLogIn/>
             Criar conta
           </Link>
         </AnimationContent>
       </Content>
-      <Background />
+      <Background/>
     </Container>
   );
 };

@@ -11,9 +11,7 @@ import  Footer  from './components/Footer';
 
 const App: React.FC = () => (
   <Router>
-    <AppProvider>
       <Routes />
-    </AppProvider>
     <GlobalStyle />
   </Router>
 );

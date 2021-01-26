@@ -5,7 +5,6 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 import validationErrors from '../../Utils/getValidationErrors';
@@ -36,7 +35,6 @@ const CadastroDeClinicas: React.FC = () => {
   const [nome_fantazia,setNome_fanzatia] = useState("");
   const [endereco,setEndereco] = useState("");
 
-  const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
 

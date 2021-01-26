@@ -9,7 +9,6 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 import validationErrors from '../../Utils/getValidationErrors';
@@ -39,7 +38,6 @@ const CadastroDeMedicos: React.FC = () => {
   const [cpf,setCpf] = useState("");
   const [area_atuacao,setArea_atuacao] = useState("");
 
-  const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -73,10 +71,10 @@ const CadastroDeMedicos: React.FC = () => {
         abortEarly: false,
       });
 
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
+      // await signIn({
+      //   email: data.email,
+      //   password: data.password,
+      // });
 
       history.push('/dashboard');
     } catch (err) {
@@ -94,7 +92,7 @@ const CadastroDeMedicos: React.FC = () => {
         description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
       });
     }
-  }, [signIn, addToast, history]);
+  }, [addToast, history]);
 
   return (
     <Container>
