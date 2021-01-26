@@ -10,6 +10,7 @@ import api from '../../services/api';
 
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, ButtonRemove, ButtonEdit, ButtonConfirm,GroupFilters } from './styles';
 import Profile from "../Profile";
+import Swal from "sweetalert2";
 
 interface Consultas {
   id: Number,
@@ -27,14 +28,7 @@ interface Consultas {
 
 const ListaPacientes: React.FC = () => {
 
-  const [modalidade, setModalidade] = useState("");
   const [consutas, setConsultas] = useState<Consultas[]>([]);
-
-  const data = [
-    { nome: 'elvis', especialidade: "nutricionista", medico: "emanuel", modalidade: "teleconsulta", horario: "horario" },
-    { nome: 'viniboy', especialidade: "cardiologia", medico: "januario", modalidade: "a domicilio", horario: "15/2, 4:20" }
-  ].map((d, id) => ({ ...d, id }));
-
 
   const jsonTest: Consultas[] = [
     {
@@ -121,16 +115,24 @@ const ListaPacientes: React.FC = () => {
 
   useEffect(() => {
     setConsultas(jsonTest);
-
-
   }, []);
 
+
+  async function popUpDeletar(id,tipo:String) {
+    const { value: item } = await Swal.fire({
+      titleText: 'Você deseja continuar com a exclusão',
+      title:"sim",
+      showCancelButton: true
+    })
+    if (item) {
+      handleRemoveConsulta(id);
+      Swal.fire(`${tipo} Cancelada`);
+    }
+  }
 
   function handleRemoveConsulta(id) {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
-
-
     const consultaArrayRemove = [...consutas];
     const findById = consultaArrayRemove.findIndex(item => item.id === id);
 
@@ -138,13 +140,8 @@ const ListaPacientes: React.FC = () => {
     console.log(consultaArrayRemove)
 
     setConsultas(consultaArrayRemove);
-    alert("Consulta cancelada");
-
     // })
   }
-
-
-
   function handleFilterGroup(value) {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
@@ -189,7 +186,6 @@ const ListaPacientes: React.FC = () => {
 
   }
 
-
   return (
     <Container>
       <Helmet>
@@ -214,7 +210,7 @@ const ListaPacientes: React.FC = () => {
 
         <div>
           <h3>Grupo:</h3>
-          <select onChange={e => handleRestArray()}>
+          <select id="selectClinica" onChange={e => handleRestArray()}>
             <option onClick={e => handleRestArray()}>
               Todos
           </option>
@@ -289,8 +285,10 @@ const ListaPacientes: React.FC = () => {
                   <th>Data<FiChevronDown /></th>
                   <th>Horário<FiChevronDown /></th>
                   <th>Status<FiChevronDown /></th>
+                  <th>Urgência<FiChevronDown /></th>
                   <th>Excluir</th>
                   <th>Editar</th>
+                  <th>Concluir</th>
 
                 </tr>
               </thead>
@@ -321,10 +319,11 @@ const ListaPacientes: React.FC = () => {
                       </td>
                       <td>{"14:30"}</td>
                       <td>{d.Status}</td>
+                      <td>{}</td>
 
-                      <ButtonRemove onClick={e => handleRemoveConsulta(d.id)}><FiTrash2 size={20} />Remover</ButtonRemove>
-                      <ButtonEdit><FiEdit size={20} />Editar</ButtonEdit>
-                      <ButtonConfirm><FiCheckCircle size={20} />Concluir</ButtonConfirm>
+                      <td className="myButton" onClick={e => popUpDeletar(d.id,'Consulta')}><FiTrash2 size={20} />Remover</td>
+                      <td className="myButton"><FiEdit size={20} />Editar</td>
+                      <td className="myButton" ><FiCheckCircle size={20} />Concluir</td>
                     </tr>
 
                   ))

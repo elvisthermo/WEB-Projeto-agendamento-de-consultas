@@ -204,7 +204,6 @@ const AgendamentoConsultas: React.FC = () => {
               </select>
             </div>
 
-
             <h1 className="selecioneMedico">Selecione o médico </h1>
             <div className="div-select">
               <select id="selectMedico">
