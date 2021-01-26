@@ -16,7 +16,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
 `;
 
 const appearFromTop = keyframes`
@@ -82,6 +82,40 @@ export const AnimationContainer = styled.div`
         }
   }
 `;
+
+export const TopNavigation = styled.div`
+  display: flex;
+  align-self: start;
+  width: 100%;
+  max-width: 900px;
+
+
+  .wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a{
+    color: #94e0ff;
+    display: block;
+    margin: 24px;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    display: flex;
+    align-items: center;
+
+    svg{
+      margin-right: 16px;
+    }
+
+    &:hover{
+      color: ${shade(0.2, '#94e0ff')};
+    }
+  }
+`;
+
 
 export const Background = styled.div`
   flex: 1;
