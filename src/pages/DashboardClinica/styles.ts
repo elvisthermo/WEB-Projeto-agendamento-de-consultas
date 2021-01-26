@@ -4,7 +4,7 @@ import { shade } from 'polished';
 export const Background = styled.div`
   flex: 1;
   background-image: linear-gradient(0deg, #94e0ff 0% 35%, #312E38 35%);
-  
+
   background-size: cover;
 `;
 
@@ -121,7 +121,7 @@ export const CardContainer = styled.div`
   align-items:center;
 
   // a:{
-  //   color: inherit;    
+  //   color: inherit;
   // }
 `;
 
@@ -132,7 +132,7 @@ export const Icons = styled.div`
   }
 `;
 
-export const Footer = styled.div`  
+export const Footer = styled.div`
     /* align-items: center; */
     /* position:relative; */
     background-color: #28262e;
@@ -158,11 +158,11 @@ export const Footer = styled.div`
         line,polyline {
         stroke: ${shade(0.1, '#9ed3ff')};
       } */
-      
-    } 
+
+    }
 `;
 
-export const Card = styled.div`  
+export const Card = styled.div`
   /* height: 280px; */
   width: 350;
   flex: 1 0;
@@ -177,12 +177,12 @@ export const Card = styled.div`
 
 
 
-  svg {
+  .circle svg {
       fill: #17141d;
       stroke-width: 2px;
       margin-right: 16px;
   }
-  
+
 
   // h3:{
   //   color: white;
@@ -207,7 +207,7 @@ export const Card = styled.div`
   //     width: 100%;
   //     height: 100%;
   //   }
-    
+
   //   .filledbar {
   //     position: absolute;
   //     top: 0px;
@@ -223,7 +223,7 @@ export const Card = styled.div`
   //     transition: 0.4s ease-out;
 
   //   }
-  
+
   // }
 
   `;
