@@ -1,91 +1,149 @@
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 body {
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }
 
+
+/*CSS DAS LISTAS */
+
 #welcome-text {
-  width: 400px;
+    /* width: 400px; */
 }
 
 #welcome-text h1 {
-  margin: 125px 150px 100px 100px;
-  font-size: 6.0rem;
-  font-weight: 250;
+    margin: 50px 150px 100px 50px;
+    font-size: 6.0rem;
+    font-weight: 250;
 }
 
 th {
-  font-weight: normal;
-  padding-bottom: 5px;
+    font-weight: normal;
+    padding-bottom: 5px;
+}
+
+tr {
+    height: 50px;
 }
 
 td {
-  border: 1px solid #ffff;
-  color: #312E38;
-  height: 40px;
-  background-color: #ffff;
+    border: 1px solid #ffff;
+    color: #312E38;
+    background-color: #ffff;
 }
 
 table {
-  font-size: 1.6rem;
-  width: 100%;
-  border-spacing: 0px 20px;
-  text-align: center;
+    font-size: 1.6rem;
+    width: 100%;
+    border-spacing: 0px 20px;
+    text-align: center;
 }
 
-.modalidade,
-.horario,
-.medico {
-  color: #969CB2;
-}
-
-.clinica {
-  color: #12A454;
-}
 
 /* the first 'td' within the last 'tr' of the 'tbody': */
 
 tbody td:first-child {
-  border-radius: 1rem 0 0 1rem;
+    border-radius: 1rem 0 0 1rem;
 }
 
 
 /* the last 'td' within the last 'tr' of the 'tbody': */
 
 tbody td:nth-last-child(2) {
-  border-radius: 0 1rem 1rem 0;
+    border-radius: 0 1rem 1rem 0;
 }
 
 .myButton {
-  height: inherit;
-  background-color: #44c767;
-  border-radius: 1rem;
-  border: 1px solid #18ab29;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  margin-left: -2.0rem;
-  font-size: 1.4rem !important;
-  height: 4.0rem;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #2f6627;
+    height: inherit;
+    background-color: #44c767;
+    border-radius: 1rem;
+    border: 1px solid #18ab29;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
 }
 
 .myButton:hover {
-  background-color: #5cbf2a;
+    background-color: #5cbf2a;
 }
 
 .myButton:active {
-  position: relative;
-  top: 1px;
+    position: relative;
+    top: 1px;
 }
 
 
-.background-table{
-  background-color: #969CB2;
-  padding:15px;
-  border-radius: 10px;
+/* FIM CSS DAS LISTAS */
+
+
+/* ADMINISTRAR CONSULTAS */
+
+.filtro-content {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buttons {
+    height: inherit;
+    padding-left: 10px;
+    justify-content: space-between;
+}
+
+#confirm {
+    width: 50px;
+}
+
+#remove {
+    height: inherit;
+    width: 50px;
+    background-color: #c74444;
+    border-radius: 1rem;
+    border: 1px solid #ab1818;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #662727;
+}
+
+#remove:hover {
+    background-color: #bf2a2a;
+}
+
+#edit {
+    height: inherit;
+    width: 50px;
+    background-color: #4451c7;
+    border-radius: 1rem;
+    border: 1px solid #181aab;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #272d66;
+}
+
+#edit:hover {
+    background-color: #2a34bf;
+}
+
+.myButton .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.myButton:hover .tooltip-text {
+    visibility: visible;
 }

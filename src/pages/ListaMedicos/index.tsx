@@ -96,9 +96,9 @@ const ListaMedicos: React.FC = () => {
                     <td className="crm">{medico.crm?medico.crm:"crm teste"}</td>
                     <td className="nome">{medico.nome}</td>
                     <td className="area_atuacao">{medico.area_atuacao}</td>
-                    <td className="cpf">{}</td>
-                    <td className="email">{}</td>
-                    <td className="contato">{}</td>
+                    <td className="cpf">{medico.cpf}</td>
+                    <td className="email">{medico.email}</td>
+                    <td className="contato">{medico.contato}</td>
                     {/*<button className="myButton" onClick={() => handleRemoveMedico(medico.crm)}>Excluir</button>*/}
                     <button className="myButtonRemove" onClick={() => popUpDeletar(medico.crm,"medico")}>Excluir</button>
 

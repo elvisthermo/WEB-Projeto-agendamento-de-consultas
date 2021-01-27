@@ -11,6 +11,7 @@ const ClinicasLista = ({clinicasLista}) => {
             <tr key={data.cnpj} className="table-row">
               <td className="clinica">{data.nome_fantasia}</td>
               <td className="endereço">{data.endereco}</td>
+              <td className="contato">{data.telefone}</td>
               <td className="cnpj">{data.cnpj}</td>
               <button className="myButton">Selecionar</button>
             </tr>

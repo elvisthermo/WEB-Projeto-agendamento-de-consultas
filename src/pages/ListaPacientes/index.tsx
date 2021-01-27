@@ -73,14 +73,14 @@ const ListaPacientes: React.FC = () => {
               {clientes &&
               clientes.map(cliente =>
                 (
-                  <tr key={cliente.crm} className="table-row">
+                  <tr key={cliente.cpf} className="table-row">
                     <td className="nome">{cliente.nome}</td>
                     <td className="cpf">{cliente.cpf}</td>
                     <td className="data_de_nascimento">{cliente.idade}</td>
                     <td className="grupo_de_risco">{cliente.grupo_de_risco}</td>
-                    <td className="email">{}</td>
-                    <td className="contato">{}</td>
-                    <button className="myButton" onClick={() => handleRemovecliente(cliente.crm)}>Excluir</button>
+                    <td className="email">{cliente.email}</td>
+                    <td className="contato">{cliente.telefone}</td>
+                    <button className="myButton" onClick={() => handleRemovecliente(cliente.cpf)}>Excluir</button>
                   </tr>
                 )
               )

@@ -78,7 +78,7 @@ export const AnimationContent = styled.div`
     svg {
       margin-right: 16px;
     }
-  } 
+  }
 `;
 
 
@@ -118,7 +118,7 @@ export const TopNavigation = styled.div`
 `;
 
 export const ContainerList = styled.div`
-  background-color: #969CB2;
+  //background-color: #969CB2;
   margin-top: 10px;
   margin-bottom:10px;
   padding: 20px;
@@ -133,7 +133,7 @@ export const ButtonRemove =styled.tr`
   height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
-  
+
   svg{
     color:#ff6d8a;
     fill: #fff;
@@ -149,8 +149,8 @@ export const ButtonEdit =styled.tr`
   height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
-  
-  
+
+
   svg{
     color:#fff;
     fill: #000;
@@ -166,7 +166,7 @@ export const ButtonConfirm =styled.tr`
   height: 50px;
   border-radius: 10px;
   margin:0px 5px 0px 5px;
-  
+
   svg{
     color:#fff;
     fill: #44c767;

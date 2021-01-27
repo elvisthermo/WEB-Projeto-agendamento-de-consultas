@@ -55,7 +55,7 @@ button {
     transition: 0.5s ease all;
 }
 
-button span {
+.td button span {
     position: absolute;
     top: 6.8rem;
     left: 4.3rem;
@@ -68,8 +68,8 @@ button span {
     transition: 0.5s ease all;
 }
 
-button span:before,
-button span:after {
+.td button span:before,
+.td button span:after {
     content: '';
     position: absolute;
     bottom: 0;

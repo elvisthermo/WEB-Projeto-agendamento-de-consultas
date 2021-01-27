@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { FiLogOut, FiSearch, FiChevronDown, FiEdit, FiTrash2, FiCheckCircle } from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiChevronDown, FiEdit, FiTrash2, FiCheckCircle, FiColumns } from 'react-icons/fi';
 import { BiDetail } from 'react-icons/bi';
 
 import { Link, } from 'react-router-dom';
 import { DateLocale } from 'yup';
 import api from '../../services/api';
-
 
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, ButtonRemove, ButtonEdit, ButtonConfirm,GroupFilters } from './styles';
 import Profile from "../Profile";
@@ -200,11 +199,12 @@ const ListaPacientes: React.FC = () => {
             <div id="pesquisa"> <Link to="/pesquisar"><FiSearch />Pesquisar Clínicas</Link> </div>
           </div>
         </TopNavigation>
+        <div className="second-header" style={{display: 'flex'}}>
         <div id="welcome-text">
-          <h1>Gerenciar Consultas Marcadas</h1>
+          <h1>Consultas marcadas</h1>
         </div>
 
-
+        <div className="filtro-content" style={{ display:' flex'}} >
         <h1>Filtrar consultas</h1>
         <GroupFilters>
 
@@ -271,14 +271,15 @@ const ListaPacientes: React.FC = () => {
           </select>
           </div>
         </GroupFilters>
-
+        </div>
+        </div>
         <AnimationContent>
 
           <ContainerList>
             <table>
-              <thead>
-                <tr>
-                  <th>N consulta:<FiChevronDown /></th>
+              <thead className="table-head">
+                <tr className="table-row">
+                  <th>Nconsulta:<FiChevronDown /></th>
                   <th>Cliente<FiChevronDown /></th>
                   <th>Médico<FiChevronDown /></th>
                   <th>Modalidade<FiChevronDown /></th>
@@ -286,31 +287,27 @@ const ListaPacientes: React.FC = () => {
                   <th>Horário<FiChevronDown /></th>
                   <th>Status<FiChevronDown /></th>
                   <th>Urgência<FiChevronDown /></th>
-                  <th>Excluir</th>
-                  <th>Editar</th>
-                  <th>Concluir</th>
-
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="table-body">
 
                 {consutas &&
                   consutas.map(d => (
-                    <tr>
+                    <tr className="table-row">
                       <td>{d.id}</td>
-                      <td>
+                      <td >
                         <BiDetail size={20} />
                         <Link to={'/perfil'}> {d.paciente.nome}
                         </Link>
                       </td>
                       <td >
-                        <td>
+
                           <BiDetail size={20} />
                           <Link to={'/perfil'}>
                             {d.medico.nome}
 
                           </Link>
-                        </td>
+
                       </td>
                       <td>
                         {d.modalidade}</td>
@@ -320,10 +317,12 @@ const ListaPacientes: React.FC = () => {
                       <td>{"14:30"}</td>
                       <td>{d.Status}</td>
                       <td>{}</td>
+                      <div className="buttons" style={{display: 'flex'}}>
+                      <button className="myButton" id="remove" onClick={e => popUpDeletar(d.id,'Consulta')}><FiTrash2 size={20} /><span className="tooltip-text">Remover</span></button>
+                      <button className="myButton" id="edit" onClick={e => popUpDeletar(d.id,'Consulta')}><FiEdit size={20} /><span className="tooltip-text">Editar</span></button>
+                      <button className="myButton" id="confirm" onClick={e => popUpDeletar(d.id,'Consulta')}><FiCheckCircle size={20} /><span className="tooltip-text">Concluir</span></button>
+                      </div>
 
-                      <td className="myButton" onClick={e => popUpDeletar(d.id,'Consulta')}><FiTrash2 size={20} />Remover</td>
-                      <td className="myButton"><FiEdit size={20} />Editar</td>
-                      <td className="myButton" ><FiCheckCircle size={20} />Concluir</td>
                     </tr>
 
                   ))

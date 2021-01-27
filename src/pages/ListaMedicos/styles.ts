@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  background: linear-gradient(0deg, #94e0ff 0% 35%, #312E38 35%);
+  //  background: linear-gradient(0deg, #94e0ff 0% 35%, #312E38 35%);
   height: 100vh;
   align-items: stretch;
   position: relative;
