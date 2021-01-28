@@ -11,111 +11,195 @@ import { Container, Content, AnimationContent, TopNavigation, ContainerList, Gro
 import Profile from "../Profile";
 import Swal from "sweetalert2";
 
+
 interface Consultas {
-  id: Number,
-  paciente: {
-    nome: String,
-    grupo_de_risco: Boolean
-  }
-  medico: {
-    nome: String
-  }
-  modalidade: String,
-  data_hora: String,
-  Status: String
+  numero_consulta: String,
+  data: String,
+  hora: String,
+  tipo_consulta: String,
+  cliente_cpf: String,
+  medico_crm: String,
+  clinica_cnpj: String
 }
 
 const ListaPacientes: React.FC = () => {
 
-  const [consutas, setConsultas] = useState<Consultas[]>([]);
+  // const [consutas, setConsultas] = useState<Consultas[]>([]);
 
-  const jsonTest: Consultas[] = [
-    {
-      id: 1,
-      paciente: {
-        nome: "Elvis",
-        grupo_de_risco: false
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Teleconsulta",
-      data_hora: "25/03/2021",
-      Status: "Pendente",
-    },
-    {
-      id: 2,
-      paciente: {
-        nome: "Elvis",
-        grupo_de_risco: false
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Teleconsulta",
-      data_hora: "25/03/2021",
-      Status: "Pendente",
-    },
-    {
-      id: 3,
-      paciente: {
-        nome: "Elvis",
-        grupo_de_risco: false
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Teleconsulta",
-      data_hora: "25/03/2021",
-      Status: "Pendente",
-    },
-    {
-      id: 5,
-      paciente: {
-        nome: "Elvis",
-        grupo_de_risco: false
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Presencial",
-      data_hora: "25/03/2021",
-      Status: "Concluída",
-    },
-    {
-      id: 6,
-      paciente: {
-        nome: "Elvis",
-        grupo_de_risco: false
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Presencial",
-      data_hora: "25/03/2021",
-      Status: "Pendente",
-    },
-    {
-      id: 7,
-      paciente: {
-        nome: "MElvis",
-        grupo_de_risco: true
+    const [medicos, setMedicos] = useState();
+    const [consultas, setConsultas] = useState<Consultas[]>([]);
+    const [clinicas, setClinicas] = useState();
+    const [especialidades, setEspecialidades] = useState();
+    const [clientes, setClientes] = useState();
 
-      },
-      medico: {
-        nome: "Mfred"
-      },
-      modalidade: "Domicílio",
-      data_hora: "25/03/2021",
-      Status: "Pendente",
+  
+    useEffect(() => {
+  
+      api.get('/consulta/').then((response) => {
+        const consultasResponse = response.data;
+  
+        console.log(consultasResponse)
+        setConsultas(consultasResponse);
+      });
+  
+      api.get('/clinica/').then((response) => {
+        const clinicaResponse = response.data;
+        console.log(clinicaResponse)
+        setClinicas(clinicaResponse);
+      });
+  
+      api.get('/medico/').then((response) => {
+        const medicoResponse = response.data;
+        console.log(medicoResponse)
+        setMedicos(medicoResponse);
+      });
+  
+      api.get('/especialidade/').then((response) => {
+        const especialidadesResponse = response.data;
+        console.log(especialidadesResponse)
+        setEspecialidades(especialidadesResponse);
+      });
+
+      api.get('/cliente/').then((response) => {
+        const clienteResponse = response.data;
+        console.log(clienteResponse)
+        setClientes(clienteResponse);
+      });
+  
+    }, []);
+  
+  
+    function getClinicaNome(cnpj) {
+      const clinicaNome = clinicas && clinicas.map(clinica => {
+        if (clinica.cnpj === cnpj) {
+          return clinica.razao_social;
+        }
+      });
+      return clinicaNome;
+    }
+  
+    function getEspecialidade(crm) {
+      const especialidade = medicos && medicos.map(medico => {
+        if (medico.crm === crm) {
+          return getEspecialidadeNome(medico.especialidade);
+        }
+      });
+      return especialidade;
+    }
+  
+    function getEspecialidadeNome(id) {
+      const especialidadeNome = especialidades && especialidades.map(especialidade => {
+        if (especialidade.id === id) {
+          return especialidade.tipo;
+        }
+      });
+      return especialidadeNome
+    }
+  
+    function getMedicoNome(crm) {
+      const medicoNome = medicos && medicos.map(medico => {
+        if (medico.crm === crm) {
+          return medico.nome;
+        }
+      })
+      return medicoNome;
     }
 
-  ]
+    function getClienteNome(cpf) {
+      const clienteNome = clientes && clientes.map(cliente => {
+        if (cliente.cpf === cpf) {
+          return cliente.nome;
+        }
+      })
+      return clienteNome;
+    }
+  
+  // const jsonTest: Consultas[] = [
+  //   {
+  //     id: 1,
+  //     paciente: {
+  //       nome: "Elvis",
+  //       grupo_de_risco: false
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Teleconsulta",
+  //     data_hora: "25/03/2021",
+  //     Status: "Pendente",
+  //   },
+  //   {
+  //     id: 2,
+  //     paciente: {
+  //       nome: "Elvis",
+  //       grupo_de_risco: false
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Teleconsulta",
+  //     data_hora: "25/03/2021",
+  //     Status: "Pendente",
+  //   },
+  //   {
+  //     id: 3,
+  //     paciente: {
+  //       nome: "Elvis",
+  //       grupo_de_risco: false
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Teleconsulta",
+  //     data_hora: "25/03/2021",
+  //     Status: "Pendente",
+  //   },
+  //   {
+  //     id: 5,
+  //     paciente: {
+  //       nome: "Elvis",
+  //       grupo_de_risco: false
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Presencial",
+  //     data_hora: "25/03/2021",
+  //     Status: "Concluída",
+  //   },
+  //   {
+  //     id: 6,
+  //     paciente: {
+  //       nome: "Elvis",
+  //       grupo_de_risco: false
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Presencial",
+  //     data_hora: "25/03/2021",
+  //     Status: "Pendente",
+  //   },
+  //   {
+  //     id: 7,
+  //     paciente: {
+  //       nome: "MElvis",
+  //       grupo_de_risco: true
 
-  useEffect(() => {
-    setConsultas(jsonTest);
-  }, []);
+  //     },
+  //     medico: {
+  //       nome: "Mfred"
+  //     },
+  //     modalidade: "Domicílio",
+  //     data_hora: "25/03/2021",
+  //     Status: "Pendente",
+  //   }
 
+  // ]
+
+  // useEffect(() => {
+  //   setConsultas(jsonTest);
+  // }, []);
 
   async function popUpDeletar(id,tipo:String) {
     const { value: item } = await Swal.fire({
@@ -132,56 +216,56 @@ const ListaPacientes: React.FC = () => {
   function handleRemoveConsulta(id) {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
-    const consultaArrayRemove = [...consutas];
-    const findById = consultaArrayRemove.findIndex(item => item.id === id);
+    // const consultaArrayRemove = [...consutas];
+    // const findById = consultaArrayRemove.findIndex(item => item.id === id);
 
-    consultaArrayRemove.splice(findById, 1);
-    console.log(consultaArrayRemove)
+    // consultaArrayRemove.splice(findById, 1);
+    // console.log(consultaArrayRemove)
 
-    setConsultas(consultaArrayRemove);
+    // setConsultas(consultaArrayRemove);
     // })
   }
   function handleFilterGroup(value) {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
 
-    const consultasFilter = consutas.filter(d => {
-      console.log("valor", value);
-      console.log(d.paciente.grupo_de_risco);
-      if (d.paciente.grupo_de_risco == value) {
+    // const consultasFilter = consutas.filter(d => {
+    //   console.log("valor", value);
+    //   console.log(d.paciente.grupo_de_risco);
+    //   if (d.paciente.grupo_de_risco == value) {
 
-        return d;
-      };
-    })
+    //     return d;
+    //   };
+    // })
 
-    console.log(consultasFilter);
+    // console.log(consultasFilter);
 
-    return setConsultas(consultasFilter);
+    // return setConsultas(consultasFilter);
   }
 
   function handleFilterType(value) {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
 
-    const consultasFilter = consutas.filter(d => {
-      console.log(value);
-      console.log(d);
-      if (d.modalidade === value) {
+    // const consultasFilter = consutas.filter(d => {
+    //   console.log(value);
+    //   console.log(d);
+    //   if (d.modalidade === value) {
 
-        return d;
-      };
-    })
+    //     return d;
+    //   };
+    // })
 
-    console.log(consultasFilter);
+    // console.log(consultasFilter);
 
-    return setConsultas(consultasFilter);
+    // return setConsultas(consultasFilter);
   }
 
   function handleRestArray() {
     // api.delete(`/consulta/${id}/`).then(response=>{
     // console.log(response);
-    console.log("reset:", jsonTest);
-    return setConsultas(jsonTest);
+    // console.log("reset:", jsonTest);
+    // return setConsultas(jsonTest);
 
   }
 
@@ -285,42 +369,40 @@ const ListaPacientes: React.FC = () => {
                   <th>Modalidade<FiChevronDown /></th>
                   <th>Data<FiChevronDown /></th>
                   <th>Horário<FiChevronDown /></th>
-                  <th>Status<FiChevronDown /></th>
-                  <th>Urgência<FiChevronDown /></th>
+                  {/* <th>Status<FiChevronDown /></th>
+                  <th>Urgência<FiChevronDown /></th> */}
                 </tr>
               </thead>
               <tbody className="table-body">
 
-                {consutas &&
-                  consutas.map(d => (
+                {consultas &&
+                  consultas.map(d => (
                     <tr className="table-row">
-                      <td>{d.id}</td>
+                      <td>{d.numero_consulta}</td>
                       <td >
                         <BiDetail size={20} />
-                        <Link to={'/perfil'}> {d.paciente.nome}
+                        <Link to={'/perfil'}> {getClienteNome(d.cliente_cpf)}
                         </Link>
                       </td>
                       <td >
 
                           <BiDetail size={20} />
                           <Link to={'/perfil'}>
-                            {d.medico.nome}
+                            {getMedicoNome(d.medico_crm)}
 
                           </Link>
 
                       </td>
                       <td>
-                        {d.modalidade}</td>
+                        {d.tipo_consulta}</td>
                       <td>
-                        {d.data_hora}
+                        {d.data}
                       </td>
-                      <td>{"14:30"}</td>
-                      <td>{d.Status}</td>
-                      <td>{}</td>
+                      <td>{d.hora}</td>
                       <div className="buttons" style={{display: 'flex'}}>
-                      <button className="myButton" id="remove" onClick={e => popUpDeletar(d.id,'Consulta')}><FiTrash2 size={20} /><span className="tooltip-text">Remover</span></button>
-                      <button className="myButton" id="edit" onClick={e => popUpDeletar(d.id,'Consulta')}><FiEdit size={20} /><span className="tooltip-text">Editar</span></button>
-                      <button className="myButton" id="confirm" onClick={e => popUpDeletar(d.id,'Consulta')}><FiCheckCircle size={20} /><span className="tooltip-text">Concluir</span></button>
+                      <button className="myButton" id="remove" onClick={e => popUpDeletar(d.numero_consulta,'Consulta')}><FiTrash2 size={20} /><span className="tooltip-text">Remover</span></button>
+                      <button className="myButton" id="edit" onClick={e => popUpDeletar(d.numero_consulta,'Consulta')}><FiEdit size={20} /><span className="tooltip-text">Editar</span></button>
+                      <button className="myButton" id="confirm" onClick={e => popUpDeletar(d.numero_consulta,'Consulta')}><FiCheckCircle size={20} /><span className="tooltip-text">Concluir</span></button>
                       </div>
                     </tr>
                   ))
