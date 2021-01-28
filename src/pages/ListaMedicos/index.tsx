@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
-import { FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiChevronDown, FiTrash2, FiEdit} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
@@ -99,9 +99,9 @@ const ListaMedicos: React.FC = () => {
                     <td className="cpf">{medico.cpf}</td>
                     <td className="email">{medico.email}</td>
                     <td className="contato">{medico.contato}</td>
-                    {/*<button className="myButton" onClick={() => handleRemoveMedico(medico.crm)}>Excluir</button>*/}
-                    <button className="myButtonRemove" onClick={() => popUpDeletar(medico.crm,"medico")}>Excluir</button>
-
+                    <div className="buttons" style={{display: 'flex'}}>
+                      <button className="myButton" id="remove" onClick={e => popUpDeletar(medico.crm,'CRM')}><FiTrash2 size={20} /><span className="tooltip-text">Remover</span></button>
+                    </div>
                   </tr>
                 )
               )

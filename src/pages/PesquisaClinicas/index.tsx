@@ -131,10 +131,10 @@ const PesquisaDeClinicas: React.FC = () => {
               <table className="table" style={{display: "none"}}>
                 <thead className="table-head">
                   <tr>
-                    <th>Clínica<FiChevronDown /></th>
-                    <th>Endereço<FiChevronDown /></th>
-                    <th>CNPJ<FiChevronDown /></th>
-                    <th>Contato<FiChevronDown /></th>
+                    <th>Clínica</th>
+                    <th>Endereço</th>
+                    <th>CNPJ</th>
+                    <th>Contato</th>
                   </tr>
                 </thead>
                 <tbody className="table-body">

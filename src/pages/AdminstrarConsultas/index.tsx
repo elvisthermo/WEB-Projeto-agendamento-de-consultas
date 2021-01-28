@@ -7,7 +7,7 @@ import { Link, } from 'react-router-dom';
 import { DateLocale } from 'yup';
 import api from '../../services/api';
 
-import { Container, Content, AnimationContent, TopNavigation, ContainerList, ButtonRemove, ButtonEdit, ButtonConfirm,GroupFilters } from './styles';
+import { Container, Content, AnimationContent, TopNavigation, ContainerList, GroupFilters } from './styles';
 import Profile from "../Profile";
 import Swal from "sweetalert2";
 
@@ -322,9 +322,7 @@ const ListaPacientes: React.FC = () => {
                       <button className="myButton" id="edit" onClick={e => popUpDeletar(d.id,'Consulta')}><FiEdit size={20} /><span className="tooltip-text">Editar</span></button>
                       <button className="myButton" id="confirm" onClick={e => popUpDeletar(d.id,'Consulta')}><FiCheckCircle size={20} /><span className="tooltip-text">Concluir</span></button>
                       </div>
-
                     </tr>
-
                   ))
                 }
 

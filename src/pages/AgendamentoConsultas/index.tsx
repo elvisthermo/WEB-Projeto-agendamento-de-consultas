@@ -218,7 +218,7 @@ const AgendamentoConsultas: React.FC = () => {
               </select>
             </div>
 
-            <h1 className="selecioneData" title="caso a data esteja indidponivel a clinica ira recomendar uma data disponivel">
+            <h1 className="selecioneData" title="Caso a data esteja indisponível a clínica ira recomendar uma data disponível">
               Selecione uma data
             </h1>
             <input type="datetime-local" id="dataConsulta" name="dataConsulta"/>

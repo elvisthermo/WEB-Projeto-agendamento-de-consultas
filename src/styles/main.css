@@ -90,7 +90,7 @@ tbody td:nth-last-child(2) {
 .buttons {
     height: inherit;
     padding-left: 10px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 #confirm {

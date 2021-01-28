@@ -98,7 +98,7 @@ input[type=radio]:checked~label {
 }
 
 .div-select select {
-    background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-select.gif) no-repeat #354880;
+    background: #354880;
     /* Imagem de fundo (Seta) */
     background-position: 205px center;
     /*Posição da imagem do background*/

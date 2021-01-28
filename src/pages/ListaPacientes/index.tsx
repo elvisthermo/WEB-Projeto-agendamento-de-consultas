@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Helmet from 'react-helmet';
-import { FiLogOut, FiSearch, FiChevronDown} from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiChevronDown, FiTrash2, FiEdit} from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 
@@ -8,6 +8,8 @@ import { Link, } from 'react-router-dom';
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
 import api from "../../services/api";
+
+import Swal from "sweetalert2";
 
 const ListaPacientes: React.FC = () => {
 
@@ -22,7 +24,25 @@ const ListaPacientes: React.FC = () => {
     });
   },[]);
 
-  function handleRemovecliente(cpf){
+  async function popUpDeletar(id,tipo:String) {
+    const { value: item } = await Swal.fire({
+      titleText: 'Você deseja continuar com a exclusão',
+      title:"sim",
+      showCancelButton: true
+    })
+    if (item) {
+      handleRemoveCliente(id);
+      Swal.fire(`${tipo} Cancelada`);
+    }
+  }
+
+  function grupoRisco(boleano){
+    if(boleano){
+      return 'Sim'
+    } else return 'Não'
+  }
+
+  function handleRemoveCliente(cpf){
     api.delete(`/cliente/${cpf}/`).then(response=>{
       console.log(response);
 
@@ -61,12 +81,12 @@ const ListaPacientes: React.FC = () => {
             <table className="table">
               <thead className="table-head">
               <tr>
-                <th>Nome<FiChevronDown/></th>
-                <th>CPF<FiChevronDown/></th>
-                <th>Data de Nascimento<FiChevronDown/></th>
-                <th>Grupo de risco?<FiChevronDown/></th>
-                <th>E-mail<FiChevronDown/></th>
-                <th>Contato<FiChevronDown/></th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Data de Nascimento</th>
+                <th>Grupo de risco?</th>
+                <th>E-mail</th>
+                <th>Contato</th>
               </tr>
               </thead>
               <tbody className="table-body">
@@ -76,11 +96,13 @@ const ListaPacientes: React.FC = () => {
                   <tr key={cliente.cpf} className="table-row">
                     <td className="nome">{cliente.nome}</td>
                     <td className="cpf">{cliente.cpf}</td>
-                    <td className="data_de_nascimento">{cliente.idade}</td>
-                    <td className="grupo_de_risco">{cliente.grupo_de_risco}</td>
+                    <td className="data_de_nascimento">{cliente.data_nascimento}</td>
+                    <td className="grupo_de_risco">{grupoRisco(cliente.grupo_de_risco)}</td>
                     <td className="email">{cliente.email}</td>
                     <td className="contato">{cliente.telefone}</td>
-                    <button className="myButton" onClick={() => handleRemovecliente(cliente.cpf)}>Excluir</button>
+                    <div className="buttons" style={{display: 'flex'}}>
+                      <button className="myButton" id="remove" onClick={e => popUpDeletar(cliente.cpf,'CPF')}><FiTrash2 size={20} /><span className="tooltip-text">Remover</span></button>
+                    </div>
                   </tr>
                 )
               )
