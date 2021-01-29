@@ -381,13 +381,13 @@ const ListaPacientes: React.FC = () => {
                       <td>{d.numero_consulta}</td>
                       <td >
                         <BiDetail size={20} />
-                        <Link to={'/perfil'}> {getClienteNome(d.cliente_cpf)}
+                        <Link to={'/perfil/cliente'}> {getClienteNome(d.cliente_cpf)}
                         </Link>
                       </td>
                       <td >
 
                           <BiDetail size={20} />
-                          <Link to={'/perfil'}>
+                          <Link  to={'/perfil/medico'}>
                             {getMedicoNome(d.medico_crm)}
 
                           </Link>
