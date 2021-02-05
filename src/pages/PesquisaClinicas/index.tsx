@@ -15,8 +15,6 @@ import {
   Container, Content, AnimationContainer, Background, Background2, TopNavigation
 } from './styles';
 
-
-import './style.css';
 import api from "../../services/api";
 
 const PesquisaDeClinicas: React.FC = () => {

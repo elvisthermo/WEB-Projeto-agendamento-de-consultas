@@ -4,25 +4,13 @@ import { FiLogOut, FiSearch, FiChevronDown, FiTrash2, FiEdit } from 'react-icons
 
 import { Link, } from 'react-router-dom';
 
-
 import { Container, Content, AnimationContent, TopNavigation } from './styles';
 
-import './styles.css';
 import api from "../../services/api";
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
-interface Consultas {
-  id: Number,
-  numero_consulta: String,
-  data_hora: Date,
-  tipo_consulta: String,
-  cliente_cpf: String,
-  medico_crm: String,
-  clinica_cnpj: String,
-  especialidade: String
-
-}
+import {getEspecialidade,getClinicaNome,getMedicoNome} from '../../Utils/Utils';
 
 const ListaMedicos: React.FC = () => {
 
@@ -60,44 +48,6 @@ const ListaMedicos: React.FC = () => {
 
   }, []);
 
-
-  function getClinicaNome(cnpj) {
-    const clinicaNome = clinicas && clinicas.map(clinica => {
-      if (clinica.cnpj === cnpj) {
-        return clinica.razao_social;
-      }
-    });
-    return clinicaNome;
-  }
-
-  function getEspecialidade(crm) {
-    const especialidade = medicos && medicos.map(medico => {
-      if (medico.crm === crm) {
-        return getEspecialidadeNome(medico.especialidade);
-      }
-    });
-    return especialidade;
-  }
-
-  function getEspecialidadeNome(id) {
-    const especialidadeNome = especialidades && especialidades.map(especialidade => {
-      if (especialidade.id === id) {
-        return especialidade.tipo;
-      }
-    });
-    return especialidadeNome
-  }
-
-
-  function getMedicoNome(crm) {
-    const medicoNome = medicos && medicos.map(medico => {
-      if (medico.crm === crm) {
-        return medico.nome;
-      }
-    })
-    return medicoNome;
-  }
-
   async function popUpDeletar(id: String, tipo: String) {
     const { value: item } = await Swal.fire({
       titleText: 'Você deseja continuar com a exclusão',
@@ -113,7 +63,6 @@ const ListaMedicos: React.FC = () => {
   function handleRemoveConsulta(id) {
     api.delete(`/consulta/${id}/`).then(response => {
       console.log(response);
-
 
       const consultaArrayRemove = [...consultas];
       const findById = consultaArrayRemove.findIndex(item => item.id === id);
@@ -162,9 +111,9 @@ const ListaMedicos: React.FC = () => {
                   consultas.map(consulta =>
                   (
                     <tr key={consulta.id} className="table-row">
-                      <td className="especialidade">{getEspecialidade(consulta.medico_crm)}</td>
-                      <td className="clinica">{getClinicaNome(consulta.clinica_cnpj)}</td>
-                      <td className="medico">{getMedicoNome(consulta.medico_crm)}</td>
+                      <td className="especialidade">{getEspecialidade(consulta.medico_crm,especialidades)}</td>
+                      <td className="clinica">{getClinicaNome(consulta.clinica_cnpj,clinicas)}</td>
+                      <td className="medico">{getMedicoNome(consulta.medico_crm,medicos)}</td>
                       <td className="modalidade">{consulta.tipo_consulta}</td>
                       <td className="horario">{consulta.data}</td>
                       <td className="horario">{consulta.hora}</td>

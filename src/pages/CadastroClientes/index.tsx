@@ -24,10 +24,6 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import api from "../../services/api";
 
-interface SignInFormData {
-  email: string;
-  password: string;
-}
 
 const CadastroDeClientes: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

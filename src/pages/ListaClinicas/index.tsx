@@ -7,7 +7,6 @@ import { Link, } from 'react-router-dom';
 
 import { Container, Content, AnimationContent, TopNavigation} from './styles';
 
-import './styles.css';
 
 const ListaClinicas: React.FC = () => {
   const data = [

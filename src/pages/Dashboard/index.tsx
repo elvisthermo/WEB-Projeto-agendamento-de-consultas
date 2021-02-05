@@ -7,7 +7,6 @@ import { Link, } from 'react-router-dom';
 
 import { Container, Content, AnimationContent, TopNavigation,ContentMenu,CardContainer,Card,Background,Footer,Icons} from './styles';
 
-import './styles.css';
 
 const Dashboard: React.FC = () => {
   return (

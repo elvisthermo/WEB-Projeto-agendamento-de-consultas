@@ -10,21 +10,11 @@ import api from '../../services/api';
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, GroupFilters } from './styles';
 import Profile from "../Profile";
 import Swal from "sweetalert2";
+import {Consultas}  from '../../Interfaces/Consultas';
+import {getClienteNome,getClinicaNome,getEspecialidade,getMedicoNome,getEspecialidadeNome} from '../../Utils/Utils';
 
-
-interface Consultas {
-  numero_consulta: String,
-  data: String,
-  hora: String,
-  tipo_consulta: String,
-  cliente_cpf: String,
-  medico_crm: String,
-  clinica_cnpj: String
-}
 
 const ListaPacientes: React.FC = () => {
-
-  // const [consutas, setConsultas] = useState<Consultas[]>([]);
 
     const [medicos, setMedicos] = useState();
     const [consultas, setConsultas] = useState<Consultas[]>([]);
@@ -67,140 +57,8 @@ const ListaPacientes: React.FC = () => {
       });
   
     }, []);
+   
   
-  
-    function getClinicaNome(cnpj) {
-      const clinicaNome = clinicas && clinicas.map(clinica => {
-        if (clinica.cnpj === cnpj) {
-          return clinica.razao_social;
-        }
-      });
-      return clinicaNome;
-    }
-  
-    function getEspecialidade(crm) {
-      const especialidade = medicos && medicos.map(medico => {
-        if (medico.crm === crm) {
-          return getEspecialidadeNome(medico.especialidade);
-        }
-      });
-      return especialidade;
-    }
-  
-    function getEspecialidadeNome(id) {
-      const especialidadeNome = especialidades && especialidades.map(especialidade => {
-        if (especialidade.id === id) {
-          return especialidade.tipo;
-        }
-      });
-      return especialidadeNome
-    }
-  
-    function getMedicoNome(crm) {
-      const medicoNome = medicos && medicos.map(medico => {
-        if (medico.crm === crm) {
-          return medico.nome;
-        }
-      })
-      return medicoNome;
-    }
-
-    function getClienteNome(cpf) {
-      const clienteNome = clientes && clientes.map(cliente => {
-        if (cliente.cpf === cpf) {
-          return cliente.nome;
-        }
-      })
-      return clienteNome;
-    }
-  
-  // const jsonTest: Consultas[] = [
-  //   {
-  //     id: 1,
-  //     paciente: {
-  //       nome: "Elvis",
-  //       grupo_de_risco: false
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Teleconsulta",
-  //     data_hora: "25/03/2021",
-  //     Status: "Pendente",
-  //   },
-  //   {
-  //     id: 2,
-  //     paciente: {
-  //       nome: "Elvis",
-  //       grupo_de_risco: false
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Teleconsulta",
-  //     data_hora: "25/03/2021",
-  //     Status: "Pendente",
-  //   },
-  //   {
-  //     id: 3,
-  //     paciente: {
-  //       nome: "Elvis",
-  //       grupo_de_risco: false
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Teleconsulta",
-  //     data_hora: "25/03/2021",
-  //     Status: "Pendente",
-  //   },
-  //   {
-  //     id: 5,
-  //     paciente: {
-  //       nome: "Elvis",
-  //       grupo_de_risco: false
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Presencial",
-  //     data_hora: "25/03/2021",
-  //     Status: "Concluída",
-  //   },
-  //   {
-  //     id: 6,
-  //     paciente: {
-  //       nome: "Elvis",
-  //       grupo_de_risco: false
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Presencial",
-  //     data_hora: "25/03/2021",
-  //     Status: "Pendente",
-  //   },
-  //   {
-  //     id: 7,
-  //     paciente: {
-  //       nome: "MElvis",
-  //       grupo_de_risco: true
-
-  //     },
-  //     medico: {
-  //       nome: "Mfred"
-  //     },
-  //     modalidade: "Domicílio",
-  //     data_hora: "25/03/2021",
-  //     Status: "Pendente",
-  //   }
-
-  // ]
-
-  // useEffect(() => {
-  //   setConsultas(jsonTest);
-  // }, []);
-
   async function popUpDeletar(id,tipo:String) {
     const { value: item } = await Swal.fire({
       titleText: 'Você deseja continuar com a exclusão',
@@ -381,14 +239,14 @@ const ListaPacientes: React.FC = () => {
                       <td>{d.numero_consulta}</td>
                       <td >
                         <BiDetail size={20} />
-                        <Link to={'/perfil/cliente'}> {getClienteNome(d.cliente_cpf)}
+                        <Link to={'/perfil/cliente'}> {getClienteNome(d.cliente_cpf,clientes)}
                         </Link>
                       </td>
                       <td >
 
                           <BiDetail size={20} />
                           <Link  to={'/perfil/medico'}>
-                            {getMedicoNome(d.medico_crm)}
+                            {getMedicoNome(d.medico_crm,medicos)}
 
                           </Link>
 
