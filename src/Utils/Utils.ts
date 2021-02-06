@@ -43,4 +43,3 @@ export const getClinicaNome = (cnpj:String,clinicas:any)=> {
     })
     return medicoNome;
   }
-  

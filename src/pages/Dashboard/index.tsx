@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
         {/* <AnimationContent> */}
 
         <ContentMenu className="bem-vindo">
-            <h1>Bem-vindo, {`Usuário!`}</h1>
+            <h1>Bem-vindo, {localStorage.getItem('Name')}</h1>
             <p>O que você quer fazer?</p>
           </ContentMenu>
           <CardContainer className="cardContainer">
