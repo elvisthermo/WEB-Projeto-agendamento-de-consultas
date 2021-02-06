@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { FiLogOut, FiSearch, FiChevronDown, FiTrash2, FiEdit } from 'react-icons/fi';
+import { FiLogOut, FiSearch, FiTrash2 } from 'react-icons/fi';
 
 import { Link, } from 'react-router-dom';
 

@@ -183,7 +183,7 @@ export const GroupFilters = styled.div`
 
   select{
     margin:20px;
-    height:40px;
+    height:48px;
     border-radius:10px;
   }
 

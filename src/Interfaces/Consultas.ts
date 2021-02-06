@@ -1,4 +1,5 @@
 export interface Consultas {
+    id:number,
     numero_consulta: String,
     data: String,
     hora: String,
