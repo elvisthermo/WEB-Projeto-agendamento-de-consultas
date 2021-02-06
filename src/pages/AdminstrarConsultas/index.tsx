@@ -16,51 +16,43 @@ import Modal, {
   ModalFooter,
   useModal
 } from '../../components/Modal';
-import Input from '../../components/Input';
-
+import { Medico } from '../../Interfaces/Medicos';
+import {loadCliente,loadConsultas,loadClinicas,loadEspecialidades, loadMedicos} from '../../services/requisicoes';
+import { Especialidade } from '../../Interfaces/Especialidade';
+import { Cliente } from '../../Interfaces/Clientes';
 const ListaPacientes: React.FC = () => {
 
-  const [medicos, setMedicos] = useState();
+  const [medicos, setMedicos] = useState<Medico[]>([]);
   const [consultas, setConsultas] = useState<Consultas[]>([]);
-  const [clinicas, setClinicas] = useState();
-  const [especialidades, setEspecialidades] = useState();
-  const [clientes, setClientes] = useState();
+  const [clinicas, setClinicas] = useState<Consultas[]>([]);
+  const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
+  const [clientes, setClientes] = useState<Cliente[]>([]);
   const { isShowing, toggle } = useModal();
 
 
   useEffect(() => {
-    api.get('/consulta/').then((response) => {
-      const consultasResponse = response.data;
+    async function loadApi() {
+      const consultasList = await loadConsultas();
+      const medicosList = await loadMedicos();
+      const especialidadesList = await loadEspecialidades();
+      const clientesList = await loadCliente();
+      const clinicasList = await loadClinicas();
+      
 
-      console.log(consultasResponse)
-      setConsultas(consultasResponse);
-    });
+      setClinicas(clientesList);
+      setConsultas(consultasList);
+      setEspecialidades(especialidadesList);
+      setMedicos(medicosList);
+      setClientes(clientesList);
 
-    api.get('/clinica/').then((response) => {
-      const clinicaResponse = response.data;
-      console.log(clinicaResponse)
-      setClinicas(clinicaResponse);
-    });
 
-    api.get('/medico/').then((response) => {
-      const medicoResponse = response.data;
-      console.log(medicoResponse)
-      setMedicos(medicoResponse);
-    });
-
-    api.get('/especialidade/').then((response) => {
-      const especialidadesResponse = response.data;
-      console.log(especialidadesResponse)
-      setEspecialidades(especialidadesResponse);
-    });
-
-    api.get('/cliente/').then((response) => {
-      const clienteResponse = response.data;
-      console.log(clienteResponse)
-      setClientes(clienteResponse);
-    });
-
+    }
+    loadApi();
+  
   }, []);
+
+  {console.log(consultas)}
+
 
   const med = {
     medico: "med",
@@ -294,7 +286,7 @@ const ListaPacientes: React.FC = () => {
               <tbody className="table-body">
 
                 {consultas &&
-                  consultas.map(d => (
+                  consultas.map((d:Consultas) => (
                     <tr className="table-row">
                       <td>{d.numero_consulta}</td>
                       <td >
@@ -330,8 +322,7 @@ const ListaPacientes: React.FC = () => {
                             <ModalHeader {...{ toggle }}>
                               <h1>Atualizar dados da consulta</h1>
                             </ModalHeader>
-                            <ModalBody>
-
+                            <ModalBody consulta={d} medicos={medicos}>
 
                             </ModalBody>
                             <ModalFooter>

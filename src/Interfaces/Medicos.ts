@@ -1,6 +1,6 @@
 export interface Medico {
-    crm: String,
-    nome: String,
-    cpf: String,
-    area_atuacao: String
+    crm: string,
+    nome: string,
+    cpf: string,
+    area_atuacao: string
   }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ReactDom from 'react-dom'
-import Button from '../Button'
-import Input from '../Input'
-
+import { Consultas } from '../../Interfaces/Consultas'
+import { updateConsulta } from '../../services/requisicoes'
 import './styles.css'
+import { Medico } from '../../Interfaces/Medicos'
+import { Link, useHistory } from 'react-router-dom'
 
 interface ModalProps {
   isShowing: boolean;
@@ -46,6 +47,7 @@ interface ModalHeaderProps {
   toggle: () => void;
 }
 
+
 export const ModalHeader: React.FC<ModalHeaderProps> = ({ toggle, children }) => (
   <div className="modal-header">
     {children || 'Title'}
@@ -60,33 +62,67 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({ toggle, children }) =>
   </div>
 )
 
-export const ModalBody: React.FC = ({ children }) => (
-  <div className="modal-body">
-    {children}
+interface ConstasProps {
+  consulta: Consultas;
+  medicos: Medico[];
+}
 
-    <br />
+
+export const ModalBody: React.FC<ConstasProps> = ({ consulta, medicos, children }) => {
+  const [medicoSelecionado, setMedicoSelecionado] = useState("");
+  const [updateData, setUpdateData] = useState("")
+  const [updateHora, setUpdateHora] = useState("")
+
+  const history = useHistory()
+
+
+  async function handleUpdateConsulta() {
+    consulta.medico_crm = medicoSelecionado;
+    consulta.hora = updateHora;
+    consulta.data = updateData;
+    
+    await updateConsulta(consulta);
+
+    // alert("Consulta atualizada");
+    // history.push('/dashboard/clinica');
+
+  }
+
+  return (
+    <div className="modal-body">
+      <br />
         Alterar Medico
-    <div className="div-select">
+      <div className="div-select">
 
-      <select name="" id="selectClinica" >
-        <option>MED2</option>
-        <option>MED3</option>
-        <option>MED4</option>
+        <select id="selectClinica" 
+        onChange={(e) => setMedicoSelecionado(e.target.value)}>
+          {
+            medicos && medicos.map((d, i) => (
+              <option value={d.crm} key={d.nome}>{d.nome}</option>
+            ))
+          }
+        </select>
+      </div>
 
-      </select>
+      <label htmlFor="">Alterar Data:</label>
+      <input
+        value={updateData} onChange={(e) => setUpdateData(e.target.value)}
+        id="date" className="modal-button" type="date"></input>
+
+      <label htmlFor="">Alterar Horario da consulta</label>
+      <input
+        value={updateHora} onChange={(e) => setUpdateHora(e.target.value)}
+        type="time" className="modal-button" id="time"
+        min="09:00" max="18:00" required></input>
+
+
+      <button
+        onClick={() => handleUpdateConsulta()}
+        className="modal-button agendarButton" type="submit">Atualizar</button>
     </div>
+  )
+}
 
-    <label htmlFor="">Alterar Data:</label>
-    <input id="date" className="modal-button" type="date"></input>
-
-    <label htmlFor="">Alterar Horario da consulta</label>
-    <input type="time" className="modal-button" id="time"
-      min="09:00" max="18:00" required></input>
-
-
-    <button className="modal-button agendarButton" type="submit">ok</button>
-  </div>
-)
 
 export const ModalFooter: React.FC = ({ children }) => (
   <div className="modal-footer">
