@@ -98,7 +98,6 @@ const ListaMedicos: React.FC = () => {
             <table className="table">
               <thead className="table-head">
                 <tr>
-                  <th>Especialidade</th>
                   <th>Clínica</th>
                   <th>Médico</th>
                   <th>Modalidade</th>
@@ -111,7 +110,6 @@ const ListaMedicos: React.FC = () => {
                   consultas.map(consulta =>
                   (
                     <tr key={consulta.id} className="table-row">
-                      <td className="especialidade">{getEspecialidade(consulta.medico_crm,especialidades)}</td>
                       <td className="clinica">{getClinicaNome(consulta.clinica_cnpj,clinicas)}</td>
                       <td className="medico">{getMedicoNome(consulta.medico_crm,medicos)}</td>
                       <td className="modalidade">{consulta.tipo_consulta}</td>

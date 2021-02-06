@@ -1,3 +1,4 @@
 export interface Especialidade {
-    name:String
+    id:string,
+    tipo:string
 }

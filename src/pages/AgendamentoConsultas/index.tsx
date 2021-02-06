@@ -18,136 +18,76 @@ import {
 } from '../SignIn/styles';
 
 import api from "../../services/api";
-
-interface Medico {
-  crm: String,
-  nome: String,
-  cpf: String,
-  area_atuacao: String
-}
-
-interface Consulta {
-  id: Number,
-  numero_consulta: String,
-  data_hora: Date,
-  tipo_consulta: String,
-  cliente_cpf: String,
-  medico_crm: String,
-  clinica_cnpj: String,
-  especialidade:String
-}
+import { loadCliente, loadClinicas, loadConsultas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
+import { Medico } from '../../Interfaces/Medicos';
+import { Consultas } from '../../Interfaces/Consultas';
+import { Especialidade } from '../../Interfaces/Especialidade';
+import { Clinicas } from '../../Interfaces/Clinicas';
+import {useHistory} from 'react-router-dom';
 
 const AgendamentoConsultas: React.FC = () => {
+  const history = useHistory();
 
-  const [cliente,setCliente] = useState();
+  const [clientes, setClientes] = useState();
   const [medico, setMedicos] = useState<Medico[]>([]);
-  const [consulta, setConsulta] = useState<Consulta[]>([]);
-  const [clinica,setClinica] = useState();
+  const [consulta, setConsulta] = useState<Consultas[]>([]);
+  const [clinicas, setClinicas] = useState<Clinicas[]>([]);
+  const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
+
+  const [selectTime, setSelectTime] = useState("");
+  const [selectdata, setSelectData] = useState("");
+  const [selectClinica, setSelectClinca] = useState("");
+  const [selectMedico, setSelecMedico] = useState("");
+  const [selectModalidade, setSelecModalidae] = useState("");
+
 
   useEffect(() => {
+    async function loadApi() {
+      const medicosList = await loadMedicos();
+      const clientesList = await loadCliente();
+      const clinicasList = await loadClinicas();
+      const especialidadesList = await loadEspecialidades();
 
-    api.get('/consulta/').then((response) => {
-      const consultaResponse = response.data;
-      console.log(consultaResponse)
-      setConsulta(consultaResponse);
+      setClinicas(clientesList);
+      setMedicos(medicosList);
+      setClientes(clientesList);
+      setClinicas(clinicasList);
+      setEspecialidades(especialidadesList);
 
-    });
+    }
+    loadApi();
 
-    api.get('/clinica/').then((response) => {
-      const clinicaResponse = response.data;
-      console.log(clinicaResponse)
-      setClinica(clinicaResponse);
-    });
-
-    api.get('/medico/').then((response) => {
-      const medicoResponse = response.data;
-      console.log(medicoResponse)
-      setMedicos(medicoResponse);
-    });
-
-    api.get('/cliente/').then((response) => {
-      const clienteResponse = response.data;
-      console.log(clienteResponse)
-      setCliente(clienteResponse);
-    });
   }, []);
 
+
   async function handlerAgendarConsulta() {
-    const dataHora = (document.getElementById("dataConsulta") as HTMLInputElement).value
-    const modalidade = () => {
-      const first = (document.getElementById("f-option") as HTMLInputElement);
-      const second = (document.getElementById("s-option") as HTMLInputElement);
-      const third = (document.getElementById("t-option") as HTMLInputElement);
-
-      if ( first.checked ){
-        return "teleconsulta";
-      } else  if ( second.checked ){
-        return "à domicílio";
-      } else  if ( third.checked ){
-        return "presencial";
-      }
-    }
-
-    const clinicaNome = () => {
-      const e = (document.getElementById("selectClinica") as HTMLSelectElement);
-      const clinicaStr = e.options[e.selectedIndex].text
-
-      return clinicaStr;
-    }
-
-    const clinicaCnpj = () => {
-      const cnpjStr = clinica.map (clinica => {
-        if (clinicaNome() === clinica.nome_fantasia){
-          //console.log(clinica);
-          return clinica.cnpj;
-        } else console.log('não achou o cnpj');
-      })
-      const e = cnpjStr.filter((el) => {
-        return el != null;
-      });
-      return e[0];
-    }
-
-
-    const medicoNome = () => {
-      const e = (document.getElementById("selectMedico") as HTMLSelectElement);
-      const medicoStr = e.options[e.selectedIndex].text
-      //console.log(medicoStr)
-      return medicoStr;
-    }
-
-    const medicoCrm = () => {
-      const crmStr = medico.map (medico => {
-        if (medicoNome() === medico.nome){
-          //console.log(medico)
-          return medico.crm;
-        } else console.log('não achou');
-      })
-      const e = crmStr.filter((el) => {
-        return el != null;
-      });
-      return e[0];
-    }
-
     const clienteCpf = () => {
       return localStorage.getItem('CPF');
     }
 
-    console.log(dataHora, modalidade(), clinicaNome(), clinicaCnpj(), medicoNome(), medicoCrm());
+    const selectCpf = clienteCpf();
+    console.log(
+       "id"+Math.floor(Math.random() * 10000),
+       "cpf"+selectCpf,
+       "clinica"+selectClinica,
+       "medico"+selectMedico,
+       "modalidade"+selectModalidade,
+       "data e hora"+selectTime,selectdata);
 
-    localStorage.setItem("nome","a")
-
-    const newConsulta = await api.post('/consulta/', {
-      numero_consulta: "123",
-      data_hora: dataHora,
-      tipo_consulta: {modalidade},
-      cliente_cpf: {clienteCpf} ,
-      medico_crm: {medicoCrm} ,
-      clinica_cnpj: {clinicaCnpj}
+    await api.post('/consulta/', {
+      "numero_consulta": Math.floor(Math.random() * 10000),
+      "data": selectdata,
+      "hora": selectTime,
+      "tipo_consulta": selectModalidade,
+      "cliente_cpf": selectCpf,
+      "medico_crm": selectMedico,
+      "clinica_cnpj": selectClinica
     })
-    .then((response) => {
-      console.log(response);
-    });
+      .then((response) => {
+        console.log(response);
+        alert("Agendamento Concluido");
+        history.push('/dashboard');
+      });
   };
 
   return (
@@ -162,8 +102,8 @@ const AgendamentoConsultas: React.FC = () => {
         <TopNavigation>
           <div className="wrapper">
 
-            <div className="clinica"><Link to="/signin/clinica">Entrar como clínica</Link></div>
-            <div id="pesquisa"><Link to="/pesquisar"><FiSearch />Pesquisar Clínicas</Link></div>
+            <div className="clinica"><Link to="/dashboard/">voltar</Link></div>
+            <div id="pesquisa"><Link to="/"><FiSearch />sair</Link></div>
           </div>
 
         </TopNavigation>
@@ -173,65 +113,102 @@ const AgendamentoConsultas: React.FC = () => {
           <div id="radio-container">
             <ul id="radio-wrapper">
               <li>
-                <input type="radio" id="f-option" name="selector"/>
-                <label htmlFor="f-option">Teleconsulta</label>
+                <input
+                  value="ONLINE"
+                  onClick={(e) => setSelecModalidae("ONLINE")}
+                  type="radio" id="f-option"
+                  name="selector" />
+                <label htmlFor="f-option">ONLINE</label>
 
-                <div className="check" id="teleconsulta"></div>
+                <div className="check" id="ONLINE"></div>
               </li>
               <li>
-                <input type="radio" id="s-option" name="selector"/>
-                <label htmlFor="s-option">Domiciliar</label>
-                <div className="check" id="domicilio"><div className="inside"></div></div>
+                <input type="radio"
+                  value="DOMICILIO"
+                  onClick={(e) => setSelecModalidae("DOMICILIO")}
+                  id="s-option" name="selector" />
+                <label htmlFor="s-option">DOMICILIO</label>
+                <div className="check" id="DOMICILIO"><div className="inside"></div></div>
               </li>
               <li>
-                <input type="radio" id="t-option" name="selector"/>
-                <label htmlFor="t-option">Na clínica</label>
+                <input
+                  value="PRESENCIAL"
+                  onClick={(e) => setSelecModalidae("PRESENCIAL")}
+                  type="radio" id="t-option" name="selector" />
+                <label htmlFor="t-option">PRESENCIAL</label>
 
-                <div className="check" id="presencial"><div className="inside"></div></div>
+                <div className="check" id="PRESENCIAL"><div className="inside"></div></div>
               </li>
             </ul>
           </div>
 
 
           <form>
+            <div>
+              <h1 className="selecioneClinica">Selecione a clínica</h1>
+              <div className="div-select">
+                <select onChange={(e) => setSelectClinca(e.target.value)} id="selectClinica">
+                  <option value="0">Selecione...</option>
+                  {clinicas &&
+                    clinicas.map(clinica =>
+                    (
+                      <option value={clinica.cnpj}>{clinica.nome_fantasia}</option>
+                    )
+                    )
+                  }
+                </select>
+              </div>
 
-            <h1 className="selecioneClinica">Selecione a clínica</h1>
-            <div className="div-select">
-              <select id="selectClinica">
-                <option value="0">Selecione...</option>
-                {clinica &&
-                clinica.map (clinica =>
-                  (
-                    <option>{clinica.nome_fantasia}</option>
-                  )
-                )
-                }
-              </select>
-            </div>
+              <h1 className="selecioneMedico">Selecione a Especialidade</h1>
+              <div className="div-select">
+                <select id="selectMedico">
+                  <option value="0">Selecione...</option>
+                  {especialidades &&
+                    especialidades.map(d =>
+                    (
+                      <option>{d.tipo}</option>
+                    )
+                    )
+                  }
+                </select>
+              </div>
 
-            <h1 className="selecioneMedico">Selecione o médico </h1>
-            <div className="div-select">
-              <select id="selectMedico">
-              <option value="0">Selecione...</option>
-                {medico &&
-                medico.map (medico =>
-                  (
-                    <option>{medico.nome}</option>
-                  )
-                )
-                }
-              </select>
-            </div>
+              <h1 className="selecioneMedico">Selecione o médico </h1>
+              <div className="div-select">
+                <select onChange={(e) => setSelecMedico(e.target.value)} id="selectMedico">
+                  <option value="0">Selecione...</option>
+                  {medico &&
+                    medico.map(medico =>
+                    (
+                      <option value={medico.crm} >{medico.nome}</option>
+                    )
+                    )
+                  }
+                </select>
+              </div>
 
-            <h1 className="selecioneData" title="Caso a data esteja indisponível a clínica ira recomendar uma data disponível">
-              Selecione uma data
+              <h1 className="selecioneData" title="Caso a data esteja indisponível a clínica ira recomendar uma data disponível">
+                Selecione uma data
             </h1>
-            <input type="datetime-local" id="dataConsulta" name="dataConsulta"/>
+              <input
+                value={selectdata} onChange={(e) => setSelectData(e.target.value)}
+                type="date" id="dataConsulta" name="dataConsulta" required />
+
+              <h1 className="selecioneData"
+                title="Caso a data esteja indisponível a clínica ira recomendar um horário disponível">
+                Selecione uma Hora
+            </h1>
+              <input
+                value={selectTime} onChange={(e) => setSelectTime(e.target.value)}
+                type="time" id="dataConsulta" name="dataConsulta" required />
+            </div>
+
           </form>
           <div className="button-container">
-            <button className="agendarButton" onClick={() => {handlerAgendarConsulta()}}>Agendar</button>
-            <button className="cancelarButton">Cancelar</button>
+            <button className="agendarButton" onClick={() => { handlerAgendarConsulta() }}>Agendar</button>
           </div>
+
+
         </AnimationContainer>
       </Content>
     </Container>

@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { FiLogOut, FiSearch, FiChevronDown, FiEdit, FiTrash2, FiCheckCircle, FiColumns } from 'react-icons/fi';
 import { BiDetail } from 'react-icons/bi';
 
-import { Link, } from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import api from '../../services/api';
 
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, GroupFilters } from './styles';
@@ -20,6 +20,7 @@ import { Medico } from '../../Interfaces/Medicos';
 import { loadCliente, loadConsultas, loadClinicas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Cliente } from '../../Interfaces/Clientes';
+
 const ListaPacientes: React.FC = () => {
 
   const [medicos, setMedicos] = useState<Medico[]>([]);
