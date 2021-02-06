@@ -17,7 +17,7 @@ import Modal, {
   useModal
 } from '../../components/Modal';
 import { Medico } from '../../Interfaces/Medicos';
-import {loadCliente,loadConsultas,loadClinicas,loadEspecialidades, loadMedicos} from '../../services/requisicoes';
+import { loadCliente, loadConsultas, loadClinicas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Cliente } from '../../Interfaces/Clientes';
 const ListaPacientes: React.FC = () => {
@@ -37,7 +37,7 @@ const ListaPacientes: React.FC = () => {
       const especialidadesList = await loadEspecialidades();
       const clientesList = await loadCliente();
       const clinicasList = await loadClinicas();
-      
+
 
       setClinicas(clientesList);
       setConsultas(consultasList);
@@ -48,57 +48,10 @@ const ListaPacientes: React.FC = () => {
 
     }
     loadApi();
-  
+
   }, []);
 
-  {console.log(consultas)}
-
-
-  const med = {
-    medico: "med",
-    medico_: "nome",
-
-  }
-
-  async function atualizarRegistro(id, tipo: String) {
-    const { value: fruit } = await Swal.fire({
-
-      title: 'Alterar Médico',
-      input: 'select',
-      inputOptions: {
-        med
-      },
-      inputPlaceholder: 'Alterar médico',
-      showCancelButton: true,
-
-
-      inputValidator: (value) => {
-        return new Promise((resolve) => {
-          if (value === 'oranges') {
-            resolve()
-          } else {
-            resolve('You need to select oranges :)')
-          }
-        })
-      }
-    },
-
-    )
-
-    if (fruit) {
-      Swal.fire(`You selected: ${fruit}`)
-    }
-
-    // const { value: item } = await Swal.fire({
-    //   titleText: 'Você deseja Atualizar as Informações da consulta',
-    //   title: "sim",
-    //   showCancelButton: true
-    // })
-    // if (item) {
-    //   handleAtualizarConsulta(id);
-    //   Swal.fire(`${tipo} Cancelada`);
-    // }
-  }
+  { console.log(consultas) }
 
   async function popUpDeletar(id, tipo: String) {
     const { value: item } = await Swal.fire({
@@ -112,17 +65,16 @@ const ListaPacientes: React.FC = () => {
     }
   }
 
-  async function handleAtualizarConsulta(id) {
-    api.delete(`/consulta/${id}/`).then(response => {
-      console.log(response);
-      const consultaArrayRemove = [...consultas];
-      const findById = consultaArrayRemove.findIndex(item => item.id === id);
-
-      consultaArrayRemove.splice(findById, 1);
-      console.log(consultaArrayRemove)
-
-      setConsultas(consultaArrayRemove);
+  async function popUpConcluir(id, tipo: String) {
+    const { value: item } = await Swal.fire({
+      titleText: 'Você deseja concluir a consulta',
+      title: "sim",
+      showCancelButton: true
     })
+    if (item) {
+      handleRemoveConsulta(id);
+      Swal.fire(`${tipo} Cancelada`);
+    }
   }
 
   function handleRemoveConsulta(id) {
@@ -138,47 +90,11 @@ const ListaPacientes: React.FC = () => {
     })
   }
 
-  function handleFilterGroup(value) {
-    // api.delete(`/consulta/${id}/`).then(response=>{
-    // console.log(response);
-
-    // const consultasFilter = consutas.filter(d => {
-    //   console.log("valor", value);
-    //   console.log(d.paciente.grupo_de_risco);
-    //   if (d.paciente.grupo_de_risco == value) {
-
-    //     return d;
-    //   };
-    // })
-
-    // console.log(consultasFilter);
-
-    // return setConsultas(consultasFilter);
-  }
-
-  function handleFilterType(value) {
-    // api.delete(`/consulta/${id}/`).then(response=>{
-    // console.log(response);
-
-    // const consultasFilter = consultas.filter(d => {
-    //   console.log(value);
-    //   console.log(d);
-    //   if (d.modalidade === value) {
-
-    //     return d;
-    //   };
-    // })
-
-    // console.log(consultasFilter);
-
-    // return setConsultas(consultasFilter);
-  }
 
   function handleRestArray() {
-    // api.delete(`/consulta/${id}/`).then(response=>{
-    // console.log(response);
-    // console.log("reset:", jsonTest);
-    // return setConsultas(jsonTest);
+    consultas.filter((d)=>{
+      if(d.tipo_consulta){}
+    })
 
   }
 
@@ -210,10 +126,10 @@ const ListaPacientes: React.FC = () => {
                   <option onClick={e => handleRestArray()}>
                     ...
           </option>
-                  <option onClick={e => handleFilterGroup(true)}>
+                  <option>
                     Grupo de risco
           </option>
-                  <option onClick={e => handleFilterGroup(false)}>
+                  <option>
                     Fora do risco
           </option>
                 </select>
@@ -222,15 +138,15 @@ const ListaPacientes: React.FC = () => {
                 <h3>Modalidade:</h3>
                 <select onChange={e => handleRestArray()}>
                   <option onClick={e => handleRestArray()}>
-                    ... 
+                    ...
             </option>
-                  <option onClick={e => handleFilterType("Teleconsulta")}>
+                  <option>
                     Teleconsulta
             </option>
-                  <option onClick={e => handleFilterType("Domicílio")}>
+                  <option>
                     Domicílio
             </option>
-                  <option onClick={e => handleFilterType("Presencial")}>
+                  <option>
                     Presencial
             </option>
                 </select>
@@ -238,31 +154,18 @@ const ListaPacientes: React.FC = () => {
               <div className="div-select">
                 <h3>Urgência:</h3>
                 <select onChange={e => handleRestArray()}>
-                  <option onClick={e => handleFilterType("Teleconsulta")}>
+                  <option>
                     ...
             </option>
-                  <option onClick={e => handleFilterType("Domicílio")}>
+                  <option>
                     Sim
             </option>
-                  <option onClick={e => handleFilterType("Presencial")}>
+                  <option>
                     Não
             </option>
                 </select>
               </div>
               <div className="div-select">
-
-                <h3>Status:</h3>
-                <select onChange={e => handleRestArray()}>
-                  <option onClick={e => handleFilterType("Teleconsulta")}>
-                    ...
-            </option>
-                  <option onClick={e => handleFilterType("Domicílio")}>
-                    Pendente
-            </option>
-                  <option onClick={e => handleFilterType("Presencial")}>
-                    Concluido
-            </option>
-                </select>
               </div>
             </GroupFilters>
           </div>
@@ -286,7 +189,7 @@ const ListaPacientes: React.FC = () => {
               <tbody className="table-body">
 
                 {consultas &&
-                  consultas.map((d:Consultas) => (
+                  consultas.map((d: Consultas) => (
                     <tr className="table-row">
                       <td>{d.numero_consulta}</td>
                       <td >
@@ -311,11 +214,11 @@ const ListaPacientes: React.FC = () => {
                       <td>{d.hora}</td>
                       <div className="buttons" style={{ display: 'flex' }}>
                         <button className="myButton" id="remove" onClick={e => popUpDeletar(d.numero_consulta, 'Consulta')}><FiTrash2 size={20} />
-                        <span className="tooltip-text">Remover</span>
+                          <span className="tooltip-text">Remover</span>
                         </button>
 
                         <button className="myButton" id="edit" onClick={toggle}><FiEdit size={20} />
-                        <span className="tooltip-text">Editar</span>
+                          <span className="tooltip-text">Editar</span>
                         </button>
                         <div>
                           <Modal {...{ isShowing, toggle }}>
@@ -331,10 +234,10 @@ const ListaPacientes: React.FC = () => {
                               </button>
                             </ModalFooter>
                           </Modal>
-                          </div>
+                        </div>
                         <button className="myButton"
-                    
-                        id="confirm" onClick={e => popUpDeletar(d.numero_consulta, 'Consulta')}>
+
+                          id="confirm" onClick={e => popUpConcluir(d.numero_consulta, 'Consulta')}>
                           <FiCheckCircle size={20} />
                           <span className="tooltip-text">Concluir</span>
                         </button>

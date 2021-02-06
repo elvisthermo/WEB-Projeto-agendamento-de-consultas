@@ -38,6 +38,7 @@ export function updateConsulta(consulta:Consultas) {
 
         }).then((response) => {
             const reponseConsulta = response.data;
+            console.log(reponseConsulta);
             return reponseConsulta;
         });
     } catch (err) {

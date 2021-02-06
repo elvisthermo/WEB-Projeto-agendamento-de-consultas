@@ -105,7 +105,7 @@ const CadastroDeClinicas: React.FC = () => {
               name="nomeFantasia" icon={FiClipboard} placeholder="Nome fantasia" />
 
             <Input
-              value={razao_social} onChange={(e)=> setRazao_social(e.target.value)}
+              
               name="RazãoSocial" icon={FiClipboard} placeholder="Razão social" />
 
             <Input

@@ -83,8 +83,8 @@ export const ModalBody: React.FC<ConstasProps> = ({ consulta, medicos, children 
     
     await updateConsulta(consulta);
 
-    // alert("Consulta atualizada");
-    // history.push('/dashboard/clinica');
+    alert("Consulta atualizada");
+    history.push('/dashboard/clinica');
 
   }
 
