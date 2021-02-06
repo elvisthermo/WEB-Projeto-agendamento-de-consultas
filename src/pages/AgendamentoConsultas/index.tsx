@@ -68,7 +68,7 @@ const AgendamentoConsultas: React.FC = () => {
     api.get('/cliente/').then((response) => {
       const clienteResponse = response.data;
       console.log(clienteResponse)
-      setConsulta(clienteResponse);
+      setCliente(clienteResponse);
     });
   }, []);
 
@@ -129,13 +129,19 @@ const AgendamentoConsultas: React.FC = () => {
       return e[0];
     }
 
+    const clienteCpf = () => {
+      return localStorage.getItem('CPF');
+    }
+
     console.log(dataHora, modalidade(), clinicaNome(), clinicaCnpj(), medicoNome(), medicoCrm());
+
+    localStorage.setItem("nome","a")
 
     const newConsulta = await api.post('/consulta/', {
       numero_consulta: "123",
       data_hora: dataHora,
       tipo_consulta: {modalidade},
-      cliente_cpf: "123123",
+      cliente_cpf: {clienteCpf} ,
       medico_crm: {medicoCrm} ,
       clinica_cnpj: {clinicaCnpj}
     })
