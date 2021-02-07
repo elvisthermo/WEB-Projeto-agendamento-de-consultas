@@ -59,7 +59,6 @@ const AgendamentoConsultas: React.FC = () => {
 
   }, []);
 
-
   async function handlerAgendarConsulta() {
     const clienteCpf = () => {
       return localStorage.getItem('CPF');
