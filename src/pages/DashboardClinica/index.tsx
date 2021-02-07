@@ -98,7 +98,7 @@ const DashboardClinica: React.FC = () => {
             </Card>
           </Link>
 
-          <Link to="/" className="cardLink">
+          <Link to="/cadastrar/clinica" className="cardLink">
             <Card className="card">
               <h3 className="title">Editar informações da clínica</h3>
               <div className="bar">
@@ -114,7 +114,7 @@ const DashboardClinica: React.FC = () => {
             </Card>
           </Link>
 
-          <Link to="/" className="cardLink">
+          <Link to="/cadastrar/especialidade" className="cardLink">
             <Card className="card">
               <h3 className="title">Cadastras Especialidade</h3>
               <div className="bar">

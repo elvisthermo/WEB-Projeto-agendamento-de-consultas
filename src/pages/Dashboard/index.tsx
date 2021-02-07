@@ -64,9 +64,9 @@ const Dashboard: React.FC = () => {
                 </div>
             </Card>
             </Link>
-            <Link to="/perifl" className="cardLink">
+            <Link to="/listar/Clinicas" className="cardLink">
               <Card className="card">
-                <h3 className="title">Ver perfil</h3>
+                <h3 className="title">Ver Clinicas</h3>
                 <div className="bar">
                   <div className="emptybar"></div>
                   <div className="filledbar"></div>
@@ -79,7 +79,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </Card>
             </Link>
-            <Link to="/listar/medicos" className="cardLink">
+            <Link to="/cadastrar/cliente" className="cardLink">
               <Card className="card">
                 <h3 className="title">Editar informações</h3>
                 <div className="bar">

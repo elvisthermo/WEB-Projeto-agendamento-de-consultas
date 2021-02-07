@@ -20,7 +20,6 @@ import {
 import api from "../../services/api";
 import { loadCliente, loadClinicas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
 import { Medico } from '../../Interfaces/Medicos';
-import { Consultas } from '../../Interfaces/Consultas';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Clinicas } from '../../Interfaces/Clinicas';
 import {useHistory} from 'react-router-dom';
@@ -30,7 +29,6 @@ const AgendamentoConsultas: React.FC = () => {
 
   const [clientes, setClientes] = useState();
   const [medico, setMedicos] = useState<Medico[]>([]);
-  //const [consulta, setConsulta] = useState<Consultas[]>([]);
   const [clinicas, setClinicas] = useState<Clinicas[]>([]);
   const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
 

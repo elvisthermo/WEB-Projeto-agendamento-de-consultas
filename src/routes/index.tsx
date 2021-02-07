@@ -18,6 +18,7 @@ import ListaClinicas from "../pages/ListaClinicas";
 import AdministrarConsultas from "../pages/AdminstrarConsultas";
 import ProfileDetailCliente from '../pages/ProfileDetailCliente';
 import ProfileDetailMedico from '../pages/ProfileDetailMedico';
+import   CadastrarEspecialidade from '../pages/cadastrarEspecialidade';
 
 import Route from './Route';
 
@@ -40,6 +41,8 @@ const Routes: React.FC = () => (
     <Route path="/administrarConsultas" exact component={AdministrarConsultas} />
     <Route path="/perfil/cliente" exact component={ProfileDetailCliente} />
     <Route path="/perfil/medico" exact component={ProfileDetailMedico} />
+    <Route path="/cadastrar/especialidade" exact component={CadastrarEspecialidade} />
+
 
   </Switch>
 );
