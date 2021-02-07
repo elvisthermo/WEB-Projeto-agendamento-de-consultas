@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
       </Helmet>
       <TopNavigation>
             <div className="wrapper">
-              <div id="clinica"> <Link to="/"><FiLogOut/>Sair</Link></div>
+              <div id="clinica"> <Link to="/" onClick={() => {localStorage.clear()}}><FiLogOut/>Sair</Link></div>
               <div id="pesquisa"> <Link to="/pesquisar"><FiSearch/>Pesquisar Clínicas</Link> </div>
             </div>
         </TopNavigation>

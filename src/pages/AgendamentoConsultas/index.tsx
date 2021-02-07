@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FiArrowLeft, FiSearch
+ FiSearch
 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 
@@ -9,7 +9,7 @@ import { Link, } from 'react-router-dom';
 
 
 import {
-  Container, Content, AnimationContainer, Background, Background2
+  Container, Content, AnimationContainer, Background,
 } from './styles';
 
 
@@ -18,7 +18,7 @@ import {
 } from '../SignIn/styles';
 
 import api from "../../services/api";
-import { loadCliente, loadClinicas, loadConsultas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
+import { loadCliente, loadClinicas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
 import { Medico } from '../../Interfaces/Medicos';
 import { Consultas } from '../../Interfaces/Consultas';
 import { Especialidade } from '../../Interfaces/Especialidade';
@@ -30,7 +30,7 @@ const AgendamentoConsultas: React.FC = () => {
 
   const [clientes, setClientes] = useState();
   const [medico, setMedicos] = useState<Medico[]>([]);
-  const [consulta, setConsulta] = useState<Consultas[]>([]);
+  //const [consulta, setConsulta] = useState<Consultas[]>([]);
   const [clinicas, setClinicas] = useState<Clinicas[]>([]);
   const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
 
@@ -39,7 +39,6 @@ const AgendamentoConsultas: React.FC = () => {
   const [selectClinica, setSelectClinca] = useState("");
   const [selectMedico, setSelecMedico] = useState("");
   const [selectModalidade, setSelecModalidae] = useState("");
-
 
   useEffect(() => {
     async function loadApi() {
@@ -102,8 +101,8 @@ const AgendamentoConsultas: React.FC = () => {
         <TopNavigation>
           <div className="wrapper">
 
-            <div className="clinica"><Link to="/dashboard/">voltar</Link></div>
-            <div id="pesquisa"><Link to="/"><FiSearch />sair</Link></div>
+            <div className="clinica"><Link to="/dashboard/">Voltar</Link></div>
+            <div id="pesquisa"><Link to="/" onClick={() => {localStorage.clear()}}><FiSearch />Sair</Link></div>
           </div>
 
         </TopNavigation>
@@ -145,7 +144,7 @@ const AgendamentoConsultas: React.FC = () => {
 
           <form>
             <div>
-              <h1 className="selecioneClinica">Selecione a clínica</h1>
+              <h1 className="selecioneClinica">Selecione a clínica:</h1>
               <div className="div-select">
                 <select onChange={(e) => setSelectClinca(e.target.value)} id="selectClinica">
                   <option value="0">Selecione...</option>
@@ -159,21 +158,23 @@ const AgendamentoConsultas: React.FC = () => {
                 </select>
               </div>
 
-              <h1 className="selecioneMedico">Selecione a Especialidade</h1>
+              <h1 className="selecioneEspecialidade">Selecione a Especialidade</h1>
               <div className="div-select">
-                <select id="selectMedico">
+                <select id="selectEspecialidade" >
                   <option value="0">Selecione...</option>
                   {especialidades &&
                     especialidades.map(d =>
-                    (
-                      <option>{d.tipo}</option>
-                    )
+                      {
+
+                        return <option>{d.tipo}</option>
+                      }
+
                     )
                   }
                 </select>
               </div>
 
-              <h1 className="selecioneMedico">Selecione o médico </h1>
+              <h1 className="selecioneMedico">Selecione o médico:</h1>
               <div className="div-select">
                 <select onChange={(e) => setSelecMedico(e.target.value)} id="selectMedico">
                   <option value="0">Selecione...</option>

@@ -18,7 +18,7 @@ const DashboardClinica: React.FC = () => {
       </Helmet>
       <TopNavigation>
         <div className="wrapper">
-          <div id="clinica"> <Link to="/"><FiLogOut />Sair</Link></div>
+          <div id="clinica"> <Link to="/" onClick={() => {localStorage.clear()}}><FiLogOut />Sair</Link></div>
           <div id="pesquisa"> <Link to="/pesquisar"><FiSearch />Pesquisar Clínicas</Link> </div>
         </div>
       </TopNavigation>
@@ -26,7 +26,7 @@ const DashboardClinica: React.FC = () => {
         {/* <AnimationContent> */}
 
         <ContentMenu className="bem-vindo">
-          <h1>Bem-vindo, {`Clínica!`}</h1>
+          <h1>Bem-vindo, { localStorage.getItem('clinica_nome') }</h1>
           <p>O que você quer fazer?</p>
         </ContentMenu>
         <CardContainer className="cardContainer">

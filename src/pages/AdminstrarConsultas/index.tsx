@@ -109,7 +109,7 @@ const ListaPacientes: React.FC = () => {
       <Content>
         <TopNavigation>
           <div className="wrapper">
-            <div id="clinica"> <Link to="/"><FiLogOut />Sair</Link></div>
+            <div id="clinica"> <Link to="/"><FiLogOut onClick={() => {localStorage.clear()}} />Sair</Link></div>
             <div id="pesquisa"> <Link to="/pesquisar"><FiSearch />Pesquisar Clínicas</Link> </div>
           </div>
         </TopNavigation>
@@ -190,7 +190,7 @@ const ListaPacientes: React.FC = () => {
               <tbody className="table-body">
 
                 {consultas &&
-                  consultas.map((d: Consultas) => (
+                  consultas.map((d: Consultas) => { if (d.clinica_cnpj === localStorage.getItem('CNPJ')) return (
                     <tr className="table-row">
                       <td>{d.numero_consulta}</td>
                       <td >
@@ -244,7 +244,7 @@ const ListaPacientes: React.FC = () => {
                         </button>
                       </div>
                     </tr>
-                  ))
+                  )})
                 }
 
               </tbody>

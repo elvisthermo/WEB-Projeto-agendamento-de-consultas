@@ -36,7 +36,6 @@ const SignIn: React.FC = () => {
   }, []);
 
   const getCliente = () => {
-
     const inputEmail = document.getElementsByTagName('input')
     clientes.map(cliente => {
       //console.log(inputEmail[0].value)

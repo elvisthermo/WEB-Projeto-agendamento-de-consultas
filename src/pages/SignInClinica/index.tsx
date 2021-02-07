@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock, FiSearch } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -11,7 +11,8 @@ import { useToast } from '../../hooks/toast';
 import { Container, Content, Background, AnimationContent, TopNavigation } from './styles';
 import logo from '../../assets/logo.svg';
 import validationErrors from '../../Utils/getValidationErrors';
-
+import { loadClinicas } from '../../services/requisicoes';
+import api from "../../services/api";
 
 interface SignInFormData {
   email: string;
@@ -23,7 +24,29 @@ const SignInClinica: React.FC = () => {
   const history = useHistory();
   const { addToast } = useToast();
 
+  const [clinicas, setClinicas] = useState();
 
+  useEffect(() => {
+    api.get('/clinica/').then((response) => {
+      const clienteResponse = response.data;
+      console.log(response.data)
+      setClinicas(clienteResponse);
+    });
+
+  }, []);
+
+  const getClinica = () => {
+    const inputEmail = document.getElementsByTagName('input')
+    clinicas.map(clinica => {
+      console.log(inputEmail[0].value)
+      if (inputEmail[0].value === clinica.email) {
+        console.log('aio')
+        localStorage.setItem('clinica_nome', clinica.nome_fantasia)
+        localStorage.setItem('CNPJ', clinica.cnpj)
+        return clinica.email;
+      } else return;
+    })
+  }
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -40,6 +63,7 @@ const SignInClinica: React.FC = () => {
           abortEarly: false,
         });
 
+        getClinica();
         history.push('/dashboard/clinica');
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -56,7 +80,7 @@ const SignInClinica: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, clinicas],
   );
 
   return (
