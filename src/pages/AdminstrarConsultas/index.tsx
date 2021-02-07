@@ -9,7 +9,7 @@ import api from '../../services/api';
 import { Container, Content, AnimationContent, TopNavigation, ContainerList, GroupFilters } from './styles';
 import Swal from "sweetalert2";
 import { Consultas } from '../../Interfaces/Consultas';
-import { getClienteNome, getClinicaNome, getEspecialidade, getMedicoNome, getEspecialidadeNome } from '../../Utils/Utils';
+import { getClienteNome, getClinicaNome, getEspecialidade, getMedicoNome, getEspecialidadeNome, getMedico, getCliente } from '../../Utils/Utils';
 import Modal, {
   ModalHeader,
   ModalBody,
@@ -20,6 +20,7 @@ import { Medico } from '../../Interfaces/Medicos';
 import { loadCliente, loadConsultas, loadClinicas, loadEspecialidades, loadMedicos } from '../../services/requisicoes';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Cliente } from '../../Interfaces/Clientes';
+import Button from '../../components/Button';
 
 const ListaPacientes: React.FC = () => {
 
@@ -29,6 +30,7 @@ const ListaPacientes: React.FC = () => {
   const [especialidades, setEspecialidades] = useState<Especialidade[]>([]);
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const { isShowing, toggle } = useModal();
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -38,7 +40,6 @@ const ListaPacientes: React.FC = () => {
       const especialidadesList = await loadEspecialidades();
       const clientesList = await loadCliente();
       const clinicasList = await loadClinicas();
-
 
       setClinicas(clientesList);
       setConsultas(consultasList);
@@ -91,6 +92,33 @@ const ListaPacientes: React.FC = () => {
     })
   }
 
+  function handleViewClienteDetails(detalhes:Cliente){
+    localStorage.setItem('detailNome', detalhes.nome)
+    localStorage.setItem('detailCpf', detalhes.cpf)
+    localStorage.setItem('detailEndereco',detalhes.endereco)
+    localStorage.setItem('detailData_nascimento',detalhes.data_nascimento) 
+    localStorage.setItem('detailGrupo_de_risco',detalhes.grupo_de_risco+"")
+    localStorage.setItem('detailTelefone',detalhes.telefone) 
+    localStorage.setItem('detailUrl_img',detalhes.url_img)
+    localStorage.setItem('detailEmail',detalhes.email)
+    console.log(localStorage.getItem('detailNome'));
+    history.push('/perfil/cliente');
+
+  }
+
+  function handleViewmMedicoDetails(detalhes:Medico){
+    localStorage.setItem('detailNome', detalhes.nome)
+    localStorage.setItem('detailCpf', detalhes.cpf)
+    localStorage.setItem('detailCrm',detalhes.crm)
+    localStorage.setItem('detailData_nascimento',detalhes.data_nascimento) 
+    localStorage.setItem('detailTelefone',detalhes.telefone) 
+    localStorage.setItem('detailUrl_img',detalhes.url_img)
+    localStorage.setItem('detailEmail',detalhes.email)
+    localStorage.setItem('detailEspacialidade',getEspecialidadeNome(detalhes.especialidade,especialidades))
+
+    history.push('/perfil/medico');
+
+  }
 
   function handleRestArray() {
     consultas.filter((d)=>{
@@ -195,16 +223,17 @@ const ListaPacientes: React.FC = () => {
                       <td>{d.numero_consulta}</td>
                       <td >
                         <BiDetail size={20} />
-                        <Link to={'/perfil/cliente'}> {getClienteNome(d.cliente_cpf, clientes)}
-                        </Link>
+                        <div onClick={()=>handleViewClienteDetails(getCliente(d.cliente_cpf, clientes))}>
+                        {getClienteNome(d.cliente_cpf, clientes)}
+                        </div>
                       </td>
-                      <td >
+                      <td>
 
                         <BiDetail size={20} />
-                        <Link to={'/perfil/medico'}>
+                        <div onClick={()=>{handleViewmMedicoDetails(getMedico(d.medico_crm, medicos))}}>
                           {getMedicoNome(d.medico_crm, medicos)}
 
-                        </Link>
+                        </div>
 
                       </td>
                       <td>

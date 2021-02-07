@@ -114,15 +114,26 @@ const DashboardClinica: React.FC = () => {
             </Card>
           </Link>
 
+          <Link to="/" className="cardLink">
+            <Card className="card">
+              <h3 className="title">Cadastras Especialidade</h3>
+              <div className="bar">
+                <div className="emptybar"></div>
+                <div className="filledbar"></div>
+              </div>
+              <div className="circle">
+                <Icons className="icon"><FiEdit3 /></Icons>
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <circle className="stroke" cx="60" cy="60" r="50" />
+                </svg>
+              </div>
+            </Card>
+          </Link>
+
+
         </CardContainer>
         {/* </AnimationContent> */}
       </Content>
-
-      {/*<Footer>*/}
-      {/*  <div>*/}
-      {/*     <p>Desenvolvido por Castelo Vigilânte LTDA</p>*/}
-      {/*  </div>*/}
-      {/*</Footer>*/}
       <Background />
     </Container>
 

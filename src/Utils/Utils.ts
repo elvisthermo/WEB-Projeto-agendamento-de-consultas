@@ -26,9 +26,10 @@ export const getClinicaNome = (cnpj:String,clinicas:any)=> {
   }
 
   export const getEspecialidadeNome= (id,especialidades) => {
-    const especialidadeNome = especialidades && especialidades.map(especialidade => {
+    let especialidadeNome 
+    especialidades.map(especialidade => {
       if (especialidade.id === id) {
-        return especialidade.tipo;
+        especialidadeNome = especialidade.tipo;
       }
     });
     return especialidadeNome
@@ -42,4 +43,27 @@ export const getClinicaNome = (cnpj:String,clinicas:any)=> {
       }
     })
     return medicoNome;
+  }
+
+
+  
+  export const getMedico =(crm,medicos) => {
+    let medicoObject 
+     medicos.map(medico => {
+      if (medico.crm === crm) {
+        medicoObject= medico;
+      }
+    })
+    return medicoObject;
+  }
+
+  export const getCliente =(cpf,cliente) => {
+    let clienteObject; 
+    
+     cliente.map(cliente => {
+      if (cliente.cpf === cpf) {
+        clienteObject = cliente;
+      }
+    })
+    return clienteObject;
   }
