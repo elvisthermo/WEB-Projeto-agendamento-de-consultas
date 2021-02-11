@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
- FiSearch
+  FiSearch
 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 
@@ -22,7 +22,7 @@ import { loadCliente, loadClinicas, loadEspecialidades, loadMedicos } from '../.
 import { Medico } from '../../Interfaces/Medicos';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Clinicas } from '../../Interfaces/Clinicas';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const AgendamentoConsultas: React.FC = () => {
   const history = useHistory();
@@ -37,6 +37,7 @@ const AgendamentoConsultas: React.FC = () => {
   const [selectClinica, setSelectClinca] = useState("");
   const [selectMedico, setSelecMedico] = useState("");
   const [selectModalidade, setSelecModalidae] = useState("");
+  const [selectEspecialidade, setSelecEspecialidade] = useState("");
 
   useEffect(() => {
     async function loadApi() {
@@ -53,8 +54,7 @@ const AgendamentoConsultas: React.FC = () => {
 
     }
     loadApi();
-
-  }, []);
+  }, [selectEspecialidade]);
 
   async function handlerAgendarConsulta() {
     const clienteCpf = () => {
@@ -63,12 +63,12 @@ const AgendamentoConsultas: React.FC = () => {
 
     const selectCpf = clienteCpf();
     console.log(
-       "id"+Math.floor(Math.random() * 10000),
-       "cpf"+selectCpf,
-       "clinica"+selectClinica,
-       "medico"+selectMedico,
-       "modalidade"+selectModalidade,
-       "data e hora"+selectTime,selectdata);
+      "id" + Math.floor(Math.random() * 10000),
+      "cpf" + selectCpf,
+      "clinica" + selectClinica,
+      "medico" + selectMedico,
+      "modalidade" + selectModalidade,
+      "data e hora" + selectTime, selectdata);
 
     await api.post('/consulta/', {
       "numero_consulta": Math.floor(Math.random() * 10000),
@@ -86,6 +86,21 @@ const AgendamentoConsultas: React.FC = () => {
       });
   };
 
+  function filtroEspecialidade(medico) {
+    for (let i = 0; i < especialidades.length; i++) {
+      if (medico.especialidade === especialidades[i].id) {
+        return <option value={especialidades[i].id} >{especialidades[i].tipo}</option>;
+      };
+    }
+  };
+
+  function filtroMedicos(medico) {
+    if (JSON.stringify(medico.especialidade) === selectEspecialidade) {
+      console.log('pinto TICLES')
+      return <option value={medico.crm} >{medico.nome}</option>
+    };
+  };
+
   return (
     <Container>
       <Helmet>
@@ -99,7 +114,7 @@ const AgendamentoConsultas: React.FC = () => {
           <div className="wrapper">
 
             <div className="clinica"><Link to="/dashboard/">Voltar</Link></div>
-            <div id="pesquisa"><Link to="/" onClick={() => {localStorage.clear()}}><FiSearch />Sair</Link></div>
+            <div id="pesquisa"><Link to="/" onClick={() => { localStorage.clear() }}><FiSearch />Sair</Link></div>
           </div>
 
         </TopNavigation>
@@ -114,7 +129,7 @@ const AgendamentoConsultas: React.FC = () => {
                   onClick={(e) => setSelecModalidae("ONLINE")}
                   type="radio" id="f-option"
                   name="selector" />
-                <label htmlFor="f-option">ONLINE</label>
+                <label htmlFor="f-option">Online</label>
 
                 <div className="check" id="ONLINE"></div>
               </li>
@@ -123,7 +138,7 @@ const AgendamentoConsultas: React.FC = () => {
                   value="DOMICILIO"
                   onClick={(e) => setSelecModalidae("DOMICILIO")}
                   id="s-option" name="selector" />
-                <label htmlFor="s-option">DOMICILIO</label>
+                <label htmlFor="s-option">Domicílio</label>
                 <div className="check" id="DOMICILIO"><div className="inside"></div></div>
               </li>
               <li>
@@ -131,7 +146,7 @@ const AgendamentoConsultas: React.FC = () => {
                   value="PRESENCIAL"
                   onClick={(e) => setSelecModalidae("PRESENCIAL")}
                   type="radio" id="t-option" name="selector" />
-                <label htmlFor="t-option">PRESENCIAL</label>
+                <label htmlFor="t-option">Presencial</label>
 
                 <div className="check" id="PRESENCIAL"><div className="inside"></div></div>
               </li>
@@ -155,17 +170,14 @@ const AgendamentoConsultas: React.FC = () => {
                 </select>
               </div>
 
-              <h1 className="selecioneEspecialidade">Selecione a Especialidade</h1>
+              <h1 className="selecioneEspecialidade">Selecione a specialidade:</h1>
               <div className="div-select">
-                <select id="selectEspecialidade" >
+                <select id="selectEspecialidade" onChange={(e) => setSelecEspecialidade(e.target.value)}>
                   <option value="0">Selecione...</option>
-                  {especialidades &&
-                    especialidades.map(d =>
-                      {
-
-                        return <option>{d.tipo}</option>
-                      }
-
+                  {medico &&
+                    medico.map(d => {
+                      return filtroEspecialidade(d);
+                    }
                     )
                   }
                 </select>
@@ -176,17 +188,16 @@ const AgendamentoConsultas: React.FC = () => {
                 <select onChange={(e) => setSelecMedico(e.target.value)} id="selectMedico">
                   <option value="0">Selecione...</option>
                   {medico &&
-                    medico.map(medico =>
-                    (
-                      <option value={medico.crm} >{medico.nome}</option>
-                    )
+                    medico.map(medico => {
+                      return filtroMedicos(medico)
+                    }
                     )
                   }
                 </select>
               </div>
 
               <h1 className="selecioneData" title="Caso a data esteja indisponível a clínica ira recomendar uma data disponível">
-                Selecione uma data
+                Selecione uma data:
             </h1>
               <input
                 value={selectdata} onChange={(e) => setSelectData(e.target.value)}
@@ -194,14 +205,22 @@ const AgendamentoConsultas: React.FC = () => {
 
               <h1 className="selecioneData"
                 title="Caso a data esteja indisponível a clínica ira recomendar um horário disponível">
-                Selecione uma Hora
+                Selecione uma hora:
             </h1>
               <input
                 value={selectTime} onChange={(e) => setSelectTime(e.target.value)}
                 type="time" id="dataConsulta" name="dataConsulta" required />
             </div>
 
+            <div className="label-container">
+              <label className="checkbox-container">CONSULTA DE URGÊNCIA
+             <input type="checkbox" />
+                <span className="checkmark"></span>
+              </label>
+            </div>
+
           </form>
+
           <div className="button-container">
             <button className="agendarButton" onClick={() => { handlerAgendarConsulta() }}>Agendar</button>
           </div>
