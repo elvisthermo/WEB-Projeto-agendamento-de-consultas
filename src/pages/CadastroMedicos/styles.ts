@@ -3,11 +3,9 @@ import { shade } from 'polished';
 
 export const Container = styled.div`
   height: 100vh;
-
   display: flex;
   align-items: stretch;
   width:100%;
-  max-width:700px;
 `;
 
 export const Content = styled.div`
@@ -28,6 +26,17 @@ const appearFromLeft = keyframes`
     opacity: 1;
     transform: translateX(0);
   }
+`;
+
+export const Select = styled.select`
+  font-size: 16px;
+  align-items: center;
+  background: #232129;
+  border-radius: 10px;
+  padding: 16px;
+  width: 100%;
+  color: #666360;
+  border: 2px solid #232129;
 `;
 
 export const AnimationContainer = styled.div`

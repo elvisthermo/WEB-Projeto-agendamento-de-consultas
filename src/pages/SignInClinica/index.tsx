@@ -13,6 +13,7 @@ import logo from '../../assets/logo.svg';
 import validationErrors from '../../Utils/getValidationErrors';
 import { loadClinicas } from '../../services/requisicoes';
 import api from "../../services/api";
+import { Clinicas } from '../../Interfaces/Clinicas';
 
 interface SignInFormData {
   email: string;
@@ -24,7 +25,7 @@ const SignInClinica: React.FC = () => {
   const history = useHistory();
   const { addToast } = useToast();
 
-  const [clinicas, setClinicas] = useState();
+  const [clinicas, setClinicas] = useState<Clinicas[]>([]);
 
   useEffect(() => {
     api.get('/clinica/').then((response) => {
@@ -95,7 +96,7 @@ const SignInClinica: React.FC = () => {
 
       <Content>
         <AnimationContent>
-          <img src={logo} alt="GoBarber" />
+          <img src={logo} alt="" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu login como clínica</h1>

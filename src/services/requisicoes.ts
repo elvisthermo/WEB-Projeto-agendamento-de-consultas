@@ -61,3 +61,18 @@ export function loadCliente() {
     return clienteResponse
 
 }
+
+export function loadClienteById(id) {
+    let clienteResponse = api.get(`/cliente/${id}/`).then((response) => {
+        return clienteResponse = response.data;
+    });
+    return clienteResponse
+
+}
+
+export function  loadClinicasById(id) {
+    let clinicaResponse = api.get(`/clinica/${id}/`).then((response) => {
+        return clinicaResponse = response.data;
+    });
+    return clinicaResponse;
+}

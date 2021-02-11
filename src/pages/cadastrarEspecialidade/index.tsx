@@ -61,7 +61,7 @@ const CadastrarEspecialidade: React.FC = () => {
               placeholder="Digite a nova especialidade"
               required
             />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">Cadastrar</Button>
           </Form>
         </AnimationContent>
       </Content>

@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useState, FormEvent} from 'react';
+import React, { useRef, useState, FormEvent, useEffect } from 'react';
 import {
   FiClipboard, FiArchive, FiFile, FiLock, FiMail, FiArrowLeft
 } from 'react-icons/fi';
@@ -6,12 +6,9 @@ import { FaBirthdayCake } from 'react-icons/fa';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
 import { useToast } from '../../hooks/toast';
-
-import validationErrors from '../../Utils/getValidationErrors';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -23,82 +20,64 @@ import Input from '../../components/Input';
 
 import Button from '../../components/Button';
 import api from "../../services/api";
+import { loadClienteById } from '../../services/requisicoes';
+import { Cliente } from '../../Interfaces/Clientes';
+import { boolean } from 'yup';
 
 
 const CadastroDeClientes: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-
-  const { addToast } = useToast();
   const history = useHistory();
 
-  const [cpf,setCpf] = useState("");
-  const [nome,setNome] = useState("");
-  const [idade,setIdade] = useState("");
-  const [endereco,setEndereco] = useState("");
-  const [grupo_de_risco,setGrupo_de_risco] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [nome, setNome] = useState("");
+  const [data_nascimento, setData_nascimento] = useState("");
+  const [email, setEmail] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [grupo_de_risco, setGrupo_de_risco] = useState(false);
+  const [telefone, setTelefone] = useState("");
+  const [cliente, setCliente] = useState<Cliente>();
 
+  useEffect(() => {
+    async function loadApi() {
+      const storeCpf = localStorage.getItem('CPF')
+      const responseCliente: Cliente = await loadClienteById(storeCpf);
 
+      setCliente(responseCliente);
+      setNome(responseCliente?.nome)
+      setCpf(responseCliente?.cpf)
+      setEndereco(responseCliente?.endereco)
+      setEmail(responseCliente?.email)
+      setGrupo_de_risco(responseCliente.grupo_de_risco)
+      setData_nascimento(responseCliente.data_nascimento)
+      setTelefone(responseCliente.telefone)
 
-  async function handleAddClientes(event:FormEvent<HTMLFormElement>)
-    :Promise<void>{
+    }
+    loadApi();
+  }, [])
+
+  async function handleAddClientes(event: FormEvent<HTMLFormElement>)
+    : Promise<void> {
     // event.preventDefault();
 
     try {
-      api.post('/cliente/',
+      api.put(`/cliente/${cliente?.cpf}/`,
         {
           "cpf": cpf,
           "nome": nome,
-          "idade": idade,
           "endereco": endereco,
-          "grupo_de_risco": grupo_de_risco
+          "grupo_de_risco": grupo_de_risco,
+          "telefone": telefone,
+          "email": email,
         }
-      );
-
-
+      )
+      alert("Perfil Atualizado");
+      history.push('/dashboard/');
 
     } catch (err) {
       console.log(err.response.error);
     }
   }
-
-
-  // const handleSubmit = useCallback(async (data: SignInFormData) => {
-  //   try {
-  //     formRef.current?.setErrors({});
-  //
-  //     const schema = Yup.object().shape({
-  //       email: Yup.string().required('E-mail obrigatório').email('Digite um email válido'),
-  //       password: Yup.string().required('Senha obrigatória'),
-  //     });
-  //
-  //     await schema.validate(data, {
-  //       abortEarly: false,
-  //     });
-  //
-  //     await signIn({
-  //       email: data.email,
-  //       password: data.password,
-  //     });
-  //
-  //     history.push('/dashboard');
-  //   } catch (err) {
-  //     if (err instanceof Yup.ValidationError) {
-  //       const errors = validationErrors(err);
-  //
-  //       formRef.current?.setErrors(errors);
-  //
-  //       return;
-  //     }
-  //
-  //     addToast({
-  //       type: 'error',
-  //       title: 'Erro na autenticação',
-  //       description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
-  //     });
-  //   }
-  // }, [signIn, addToast, history]);
-
-
 
   return (
     <Container>
@@ -106,40 +85,56 @@ const CadastroDeClientes: React.FC = () => {
         <AnimationContainer>
           <img src={logoImg} alt="web-consultas" />
           <Form onSubmit={handleAddClientes}>
-            <h1>Cadastre-se</h1>
+            <h1>Atualizar Perfil</h1>
             <Input
-              value={nome} onChange={(e)=> setNome(e.target.value)}
+              value={nome} onChange={(e) => setNome(e.target.value)}
               name="nome" icon={FiClipboard} placeholder="Digite o Nome completo" />
 
-            <Input name="email" type="email" icon={FiMail} placeholder="Digite seu Email" />
+            <Input
+              value={email} onChange={(e) => setEmail(e.target.value)}
+              name="email" type="email" icon={FiMail} placeholder="Digite seu Email" />
 
             <Input
-              value={idade} onChange={(e)=> setIdade(e.target.value)}
-              name="dataDeNascimento" type="date" icon={FaBirthdayCake} placeholder="Digite sua data de nascimento" />
-
-            <Input
-              value={cpf} onChange={(e)=> setCpf(e.target.value)}
+              value={cpf} onChange={(e) => setCpf(e.target.value)}
               name="cpf" icon={FiArchive} placeholder="Digite o CPF" />
 
-            <Input name="validarIdentidade" type="file" icon={FiFile} placeholder="envie a foto de seu documento de identidade" />
-
             <Input
-              value={endereco} onChange={(e)=> setEndereco(e.target.value)}
+              value={endereco} onChange={(e) => setEndereco(e.target.value)}
               name="endereco"
               icon={FiLock} type="text" placeholder="Digite seu endereço" />
 
-            <Input name="password" icon={FiLock} type="password" placeholder="Digite sua senha" />
-
-            <Input name="passwordConfirmar" icon={FiLock} type="password" placeholder="Digite sua senha" />
-
             <Input
-              value={grupo_de_risco} onChange={(e)=> setGrupo_de_risco(e.target.value)}
-              name="endereco"
-              icon={FiLock} type="text" placeholder="Digite seu endereço" />
+              value={telefone} onChange={(e) => setTelefone(e.target.value)}
+              name="telefone"
+              icon={FiLock} type="text" placeholder="Digite seu Telefone" />
 
-            <Button type="submit">Cadastre se</Button>
-            <Link to="/">
-              <FiArrowLeft/>
+            <h4>Grupo de Risco</h4>
+            <div id="radio-container">
+              <ul id="radio-wrapper">
+                <li>
+                  <input
+                    value={"true"}
+                    onClick={(e) => setGrupo_de_risco(true)}
+                    type="radio" id="f-option"
+                    name="selector" />
+                  <label htmlFor="f-option">Sim</label>
+
+                  <div className="check"></div>
+                </li>
+                <li>
+                  <input type="radio"
+                    value={"false"}
+                    onClick={(e) => setGrupo_de_risco(false)}
+                    id="s-option" name="selector" />
+                  <label htmlFor="s-option">Não</label>
+                  <div className="check"><div className="inside"></div></div>
+                </li>
+              </ul>
+            </div>
+
+            <Button type="submit">Atualizar Perfil</Button>
+            <Link to="/dashboard/">
+              <FiArrowLeft />
               Voltar
             </Link>
           </Form>

@@ -47,7 +47,6 @@ const Dashboard: React.FC = () => {
                 </div>
               </Card>
 
-
             </Link>
             <Link to="/listar/consultas" className="cardLink">
             <Card className="card">

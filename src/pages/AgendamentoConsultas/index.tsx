@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
- FiSearch
+  FiSearch
 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 
@@ -22,7 +22,7 @@ import { loadCliente, loadClinicas, loadEspecialidades, loadMedicos } from '../.
 import { Medico } from '../../Interfaces/Medicos';
 import { Especialidade } from '../../Interfaces/Especialidade';
 import { Clinicas } from '../../Interfaces/Clinicas';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const AgendamentoConsultas: React.FC = () => {
   const history = useHistory();
@@ -63,12 +63,12 @@ const AgendamentoConsultas: React.FC = () => {
 
     const selectCpf = clienteCpf();
     console.log(
-       "id"+Math.floor(Math.random() * 10000),
-       "cpf"+selectCpf,
-       "clinica"+selectClinica,
-       "medico"+selectMedico,
-       "modalidade"+selectModalidade,
-       "data e hora"+selectTime,selectdata);
+      "id" + Math.floor(Math.random() * 10000),
+      "cpf" + selectCpf,
+      "clinica" + selectClinica,
+      "medico" + selectMedico,
+      "modalidade" + selectModalidade,
+      "data e hora" + selectTime, selectdata);
 
     await api.post('/consulta/', {
       "numero_consulta": Math.floor(Math.random() * 10000),
@@ -99,7 +99,7 @@ const AgendamentoConsultas: React.FC = () => {
           <div className="wrapper">
 
             <div className="clinica"><Link to="/dashboard/">Voltar</Link></div>
-            <div id="pesquisa"><Link to="/" onClick={() => {localStorage.clear()}}><FiSearch />Sair</Link></div>
+            <div id="pesquisa"><Link to="/" onClick={() => { localStorage.clear() }}><FiSearch />Sair</Link></div>
           </div>
 
         </TopNavigation>
@@ -160,11 +160,10 @@ const AgendamentoConsultas: React.FC = () => {
                 <select id="selectEspecialidade" >
                   <option value="0">Selecione...</option>
                   {especialidades &&
-                    especialidades.map(d =>
-                      {
+                    especialidades.map(d => {
 
-                        return <option>{d.tipo}</option>
-                      }
+                      return <option>{d.tipo}</option>
+                    }
 
                     )
                   }
